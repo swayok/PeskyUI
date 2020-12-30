@@ -1,0 +1,13 @@
+{
+    "name": "swayok/peskyui",
+    "description": "UI for PeskyCMF and PeskyCMS",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Filippov"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
