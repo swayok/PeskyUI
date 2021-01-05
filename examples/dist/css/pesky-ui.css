@@ -186,8 +186,9 @@ body {
 #left-sidebar ul.sidebar-menu > .nav-item .nav-icon,
 #right-sidebar ul.sidebar-menu > .nav-item .nav-icon {
   margin-left: .05rem;
-  font-size: 1.2rem;
-  margin-right: .2rem;
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+  margin-right: .3rem;
   text-align: center;
   width: 20px;
 }
