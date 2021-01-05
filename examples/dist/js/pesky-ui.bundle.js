@@ -50,7 +50,7 @@
       }
 
       initLeftSidebarMenu(menuId) {
-        $__default['default'](menuId).Treeview();
+        $__default['default'](menuId).NestedMenu();
       }
 
       initRightSidebar() {
@@ -71,9 +71,9 @@
       window.PeskyUI = new PeskyUI(typeof PeskyUIConfig === 'undefined' ? {} : PeskyUIConfig);
     });
 
-    const Treeview = ($ => {
-      const NAME = 'Treeview';
-      const DATA_KEY = 'treeview';
+    const NestedMenu = ($ => {
+      const NAME = 'NestedMenu';
+      const DATA_KEY = 'nested-menu';
       const EVENT_KEY = `.${DATA_KEY}`;
       const JQUERY_NO_CONFLICT = $.fn[NAME];
       const Event = {
@@ -85,19 +85,18 @@
       const Selector = {
         LI: '.nav-item',
         LINK: '.nav-link',
-        TREEVIEW_MENU: '.nav-submenu',
+        NESTED_MENU: '.nav-submenu',
         OPEN: '.menu-open',
-        DATA_WIDGET: '[data-widget="treeview"]'
+        DATA_WIDGET: '[data-widget="nested-menu"]'
       };
       const ClassName = {
         LI: 'nav-item',
         LINK: 'nav-link',
-        TREEVIEW_MENU: 'nav-submenu',
+        NESTED_MENU: 'nav-submenu',
         OPEN: 'menu-open'
       };
       const Default = {
-        trigger: `${Selector.DATA_WIDGET} ${Selector.LINK}`,
-        animationSpeed: 300,
+        animationSpeed: 200,
         accordion: true
       };
       /**
@@ -105,55 +104,56 @@
        * ====================================================
        */
 
-      class Treeview {
+      class NestedMenu {
         constructor(element, config) {
           this._config = config;
           this._element = element;
+          this.init();
         } // Public
 
 
         init() {
-          console.log('treeview init');
-
           this._setupListeners();
+
+          this._initSubmenus();
         }
 
-        expand(treeviewMenu, parentLi) {
+        expand(nestedMenu, parentLi) {
           const expandedEvent = $.Event(Event.EXPANDED);
 
           if (this._config.accordion) {
             const openMenuLi = parentLi.siblings(Selector.OPEN).first();
-            const openTreeview = openMenuLi.find(Selector.TREEVIEW_MENU).first();
-            this.collapse(openTreeview, openMenuLi);
+            const openNestedMenu = openMenuLi.find(Selector.NESTED_MENU).first();
+            this.collapse(openNestedMenu, openMenuLi);
           }
 
-          treeviewMenu.stop().slideDown(this._config.animationSpeed, () => {
-            parentLi.addClass(ClassName.OPEN);
+          parentLi.addClass(ClassName.OPEN);
+          nestedMenu.stop().slideDown(this._config.animationSpeed, () => {
             $(this._element).trigger(expandedEvent);
           });
         }
 
-        collapse(treeviewMenu, parentLi) {
+        collapse(nestedMenu, parentLi) {
           const collapsedEvent = $.Event(Event.COLLAPSED);
-          treeviewMenu.stop().slideUp(this._config.animationSpeed, () => {
-            parentLi.removeClass(ClassName.OPEN);
+          parentLi.removeClass(ClassName.OPEN);
+          nestedMenu.stop().slideUp(this._config.animationSpeed, () => {
             $(this._element).trigger(collapsedEvent);
-            treeviewMenu.find(`${Selector.OPEN} > ${Selector.TREEVIEW_MENU}`).slideUp();
-            treeviewMenu.find(Selector.OPEN).removeClass(ClassName.OPEN);
+            nestedMenu.find(`${Selector.OPEN} > ${Selector.NESTED_MENU}`).slideUp();
+            nestedMenu.find(Selector.OPEN).removeClass(ClassName.OPEN);
           });
         }
 
         toggle(event) {
           const $relativeTarget = $(event.currentTarget);
           const $parent = $relativeTarget.parent();
-          let treeviewMenu = $parent.find('> ' + Selector.TREEVIEW_MENU);
+          let nestedMenu = $parent.find('> ' + Selector.NESTED_MENU);
 
-          if (!treeviewMenu.is(Selector.TREEVIEW_MENU)) {
+          if (!nestedMenu.is(Selector.NESTED_MENU)) {
             if (!$parent.is(Selector.LI)) {
-              treeviewMenu = $parent.parent().find('> ' + Selector.TREEVIEW_MENU);
+              nestedMenu = $parent.parent().find('> ' + Selector.NESTED_MENU);
             }
 
-            if (!treeviewMenu.is(Selector.TREEVIEW_MENU)) {
+            if (!nestedMenu.is(Selector.NESTED_MENU)) {
               return;
             }
           }
@@ -163,17 +163,21 @@
           const isOpen = parentLi.hasClass(ClassName.OPEN);
 
           if (isOpen) {
-            this.collapse($(treeviewMenu), parentLi);
+            this.collapse($(nestedMenu), parentLi);
           } else {
-            this.expand($(treeviewMenu), parentLi);
+            this.expand($(nestedMenu), parentLi);
           }
         } // Private
 
 
         _setupListeners() {
-          $(document).on('click', this._config.trigger, event => {
+          $(this._element).on('click', Selector.LINK, event => {
             this.toggle(event);
           });
+        }
+
+        _initSubmenus() {
+          this._element.find(Selector.NESTED_MENU).slideUp();
         } // Static
 
 
@@ -184,46 +188,32 @@
             const _options = $.extend({}, Default, $(this).data());
 
             if (!data) {
-              data = new Treeview($(this), _options);
+              data = new NestedMenu($(this), _options);
               $(this).data(DATA_KEY, data);
-            }
-
-            if (config === 'init') {
-              data[config]();
             }
           });
         }
 
       }
       /**
-       * Data API
-       * ====================================================
-       */
-
-
-      $(window).on(Event.LOAD_DATA_API, () => {
-        $(Selector.DATA_WIDGET).each(function () {
-          Treeview._jQueryInterface.call($(this), 'init');
-        });
-      });
-      /**
        * jQuery API
        * ====================================================
        */
 
-      $.fn[NAME] = Treeview._jQueryInterface;
-      $.fn[NAME].Constructor = Treeview;
+
+      $.fn[NAME] = NestedMenu._jQueryInterface;
+      $.fn[NAME].Constructor = NestedMenu;
 
       $.fn[NAME].noConflict = function () {
         $.fn[NAME] = JQUERY_NO_CONFLICT;
-        return Treeview._jQueryInterface;
+        return NestedMenu._jQueryInterface;
       };
 
-      return Treeview;
+      return NestedMenu;
     })(jQuery);
 
+    exports.NestedMenu = NestedMenu;
     exports.PeskyUI = PeskyUI;
-    exports.Treeview = Treeview;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

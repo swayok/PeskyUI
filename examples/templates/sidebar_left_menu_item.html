@@ -31,11 +31,9 @@ it = {
                 <i class="nav-icon <%= it.icon_class %>"></i>
             <% } %>
             
-            <%~ it.title %>
-            
-            <% if (hasChildren) { %>
-                <i class="right fas fa-angle-left"></i>
-            <% } %>
+            <div class="nav-link-title">
+                <%~ it.title %>
+            </div>
             
             <% if (it.badge) { %>
                 <% if ($.isPlainObject(it.badge)) { %>
@@ -46,9 +44,13 @@ it = {
                     <%~ it.badge %>
                 <% } %>
             <% } %>
+    
+            <% if (hasChildren) { %>
+                <i class="chevron mdi mdi-chevron-right"></i>
+            <% } %>
         </a>
         <% if (hasChildren) { %>
-            <ul class="nav nav-submenu">
+            <ul class="nav-submenu">
                 <% it.children.forEach(function(menuItem) { %>
                     <%~ include('sidebar-left-menu-item', menuItem); %>
                 <% }); %>

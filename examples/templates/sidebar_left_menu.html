@@ -8,8 +8,8 @@ it = {
 
 <% var menuId = it.id || ('sidebar-menu-' + PeskyUI.uuid4()) %>
 <ul
-    class="sidebar-menu nav-sidebar flex-column <%= it.class || '' %>"
-    data-widget="treeview"
+    class="sidebar-menu flex-column <%= it.class || '' %>"
+    data-widget="nested-menu"
     role="menu"
     id="<%= menuId %>"
 >

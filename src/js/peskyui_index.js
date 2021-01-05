@@ -1,7 +1,7 @@
 import PeskyUI from './pesky-ui'
-import Treeview from './ui/treeview'
+import NestedMenu from './ui/NestedMenu'
 
 export {
-    Treeview,
+    NestedMenu,
     PeskyUI
 }

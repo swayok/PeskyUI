@@ -2,9 +2,6 @@
     <div id="left-sidebar-header">
         Logo Here
     </div>
-    <div class="section-header">
-        MAIN NAVIGATION
-    </div>
     <div class="scrollable">
         <%~ include('sidebar-left-menu', {items: it.menuItems}) %>
     </div>
@@ -13,5 +10,4 @@
 <script type="application/javascript">
     var leftSidebar = $('#left-sidebar');
     leftSidebar.find('.scrollable').SimpleScrollbar();
-    leftSidebar.find('.sidebar-menu');
 </script>

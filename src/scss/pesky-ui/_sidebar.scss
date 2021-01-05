@@ -16,15 +16,6 @@
         overflow: hidden;
     }
 
-    .section-header {
-        min-height: 30px;
-        line-height: 20px;
-        padding: 5px 10px 5px 10px;
-        text-align: center;
-        text-transform: uppercase;
-        font-size: 14px;
-    }
-
     ul.sidebar-menu {
 
         &,
@@ -38,38 +29,34 @@
             position: relative;
 
             > .nav-link {
-                margin-bottom: .2rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                padding-left: 0.5rem;
 
-                .right {
-                    @include transition(transform $transition-fn $transition-speed);
+                .nav-link-title {
+                    flex: 1
+                }
+
+                .chevron {
+                    transition: transform $transition-fn $transition-speed;
+                    margin-left: .5rem;
+                }
+
+                > .right {
+                    i,
+                    span {
+                        margin-left: .5rem;
+                    }
                 }
             }
         }
 
-        .nav-link > .right,
-        .nav-link > p > .right {
-            position: absolute;
-            right: 1rem;
-            top: .7rem;
-
-            i,
-            span {
-                margin-left: .5rem;
-            }
-
-            &:nth-child(2) {
-                right: 2.2rem;
-            }
-        }
-
         .menu-open {
-            > .nav-treeview {
-                display: block;
-            }
-
             > .nav-link {
-                i.right {
-                    transform: rotate(-90deg);
+                .chevron {
+                    transform: rotate(90deg);
                 }
             }
         }
@@ -94,14 +81,10 @@
                     font-size: 1.1rem;
                 }
             }
-
-            .float-right {
-                margin-top: 3px;
-            }
         }
 
         // Tree view menu
-        .nav-treeview {
+        .nav-submenu {
             display: none;
             list-style: none;
             padding: 0;
@@ -115,28 +98,20 @@
             }
         }
 
-        &.nav-child-indent {
-            .nav-treeview {
-                transition: padding $transition-speed $transition-fn;
-                padding-left: 1rem;
-
-                .text-sm & {
-                    padding-left: .5rem;
-                }
-            }
-
-        }
-
         .nav-header {
             font-size: .9rem;
             padding: .5rem;
+            min-height: 30px;
+            line-height: 20px;
+            text-align: center;
+            text-transform: uppercase;
 
             &:not(:first-of-type) {
                 padding: 1.7rem 1rem .5rem;
             }
         }
 
-        .nav-link p {
+        .nav-link-title {
             display: inline-block;
             animation-name: fadeIn;
             animation-duration: $transition-speed;
@@ -156,7 +131,7 @@
     }
 
     &.collapsed {
-        width: #{sidebar-collpased-width};
+        width: #{$sidebar-collpased-width};
     }
 }
 

@@ -4,17 +4,17 @@
         "title": "Dashboard",
         "children": [
             {
-                "icon_class": "far fa-circle",
+                "icon_class": "mdi mdi-circle-outline",
                 "url": "/pages/dashboard1.html",
                 "title": "Dashboard v1"
             },
             {
-                "icon_class": "far fa-circle",
+                "icon_class": "mdi mdi-circle-outline",
                 "url": "/pages/dashboard2.html",
                 "title": "Dashboard v2"
             },
             {
-                "icon_class": "far fa-circle",
+                "icon_class": "mdi mdi-circle-outline",
                 "url": "/pages/dashboard3.html",
                 "title": "Dashboard v3"
             }
@@ -30,7 +30,7 @@
         }
     },
     {
-        "icon_class": "fas fa-copy",
+        "icon_class": "mdi mdi-content-copy",
         "title": "Layout Options",
         "badge": {
             "type": "info",

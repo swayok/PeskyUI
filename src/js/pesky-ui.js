@@ -39,7 +39,7 @@ class PeskyUI {
     }
 
     initLeftSidebarMenu(menuId) {
-        $(menuId).Treeview();
+        $(menuId).NestedMenu();
     }
 
     initRightSidebar() {
