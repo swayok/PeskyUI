@@ -13,17 +13,65 @@
 
     var $__default = /*#__PURE__*/_interopDefaultLegacy($);
 
-    /**
-     * --------------------------------------------
-     * AdminLTE Treeview.js
-     * License MIT
-     * --------------------------------------------
-     */
+    class PeskyUI {
+      static get defaultInitializers() {
+        return ['initLeftSidebar', 'initRightSidebar'];
+      }
+
+      static get defaults() {
+        return {
+          //< array of functions to call in constructor (strings - call PeskyUI methods, functions - call custom methods
+          initializers: PeskyUI.defaultInitializers,
+          leftSidebarSelector: '#left-sidebar',
+          rightSidebarSelector: '#right-sidebar'
+        };
+      }
+
+      constructor(options) {
+        if (options && $__default['default'].isPlainObject(options)) {
+          options = {};
+        }
+
+        this.options = $__default['default'].extend({}, PeskyUI.defaults, options);
+
+        for (let key in this.options.initializers) {
+          let initializer = this.options.initializers[key];
+
+          if (typeof initializer === 'function') {
+            initializer.call(this);
+          } else {
+            this[initializer]();
+          }
+        }
+      }
+
+      initLeftSidebar() {
+        this.$leftSidebar = $__default['default'](this.options.leftSidebarSelector);
+      }
+
+      initLeftSidebarMenu(menuId) {
+        $__default['default'](menuId).Treeview();
+      }
+
+      initRightSidebar() {
+        this.$rightSidebar = $__default['default'](this.options.rightSidebarSelector);
+      }
+
+      uuid4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+          var r = Math.random() * 16 | 0,
+              v = c === 'x' ? r : r & 0x3 | 0x8;
+          return v.toString(16);
+        });
+      }
+
+    }
+
+    $__default['default'](function () {
+      window.PeskyUI = new PeskyUI(typeof PeskyUIConfig === 'undefined' ? {} : PeskyUIConfig);
+    });
+
     const Treeview = ($ => {
-      /**
-       * Constants
-       * ====================================================
-       */
       const NAME = 'Treeview';
       const DATA_KEY = 'treeview';
       const EVENT_KEY = `.${DATA_KEY}`;
@@ -37,23 +85,20 @@
       const Selector = {
         LI: '.nav-item',
         LINK: '.nav-link',
-        TREEVIEW_MENU: '.nav-treeview',
+        TREEVIEW_MENU: '.nav-submenu',
         OPEN: '.menu-open',
         DATA_WIDGET: '[data-widget="treeview"]'
       };
       const ClassName = {
         LI: 'nav-item',
         LINK: 'nav-link',
-        TREEVIEW_MENU: 'nav-treeview',
-        OPEN: 'menu-open',
-        SIDEBAR_COLLAPSED: 'sidebar-collapse'
+        TREEVIEW_MENU: 'nav-submenu',
+        OPEN: 'menu-open'
       };
       const Default = {
         trigger: `${Selector.DATA_WIDGET} ${Selector.LINK}`,
         animationSpeed: 300,
-        accordion: true,
-        expandSidebar: false,
-        sidebarButtonSelector: '[data-widget="pushmenu"]'
+        accordion: true
       };
       /**
        * Class Definition
@@ -86,10 +131,6 @@
             parentLi.addClass(ClassName.OPEN);
             $(this._element).trigger(expandedEvent);
           });
-
-          if (this._config.expandSidebar) {
-            this._expandSidebar();
-          }
         }
 
         collapse(treeviewMenu, parentLi) {
@@ -133,12 +174,6 @@
           $(document).on('click', this._config.trigger, event => {
             this.toggle(event);
           });
-        }
-
-        _expandSidebar() {
-          if ($('body').hasClass(ClassName.SIDEBAR_COLLAPSED)) {
-            $(this._config.sidebarButtonSelector).PushMenu('expand');
-          }
         } // Static
 
 
@@ -187,83 +222,8 @@
       return Treeview;
     })(jQuery);
 
-    class PeskyUI {
-      static get defaultInitializers() {
-        return ['initLeftSidebar', 'initRightSidebar'];
-      }
-
-      static get defaults() {
-        return {
-          //< array of functions to call in constructor (strings - call PeskyUI methods, functions - call custom methods
-          initializers: PeskyUI.defaultInitializers,
-          leftSidebarSelector: '#left-sidebar',
-          rightSidebarSelector: '#right-sidebar',
-          sidebarMenuContainerSelector: '.sidebar-menu',
-          sidebarScrollContainerSelector: '.scrollable'
-        };
-      }
-
-      constructor(options) {
-        if (options && $__default['default'].isPlainObject(options)) {
-          options = {};
-        }
-
-        this.options = $__default['default'].extend({}, PeskyUI.defaults, options);
-
-        for (let key in this.options.initializers) {
-          let initializer = this.options.initializers[key];
-
-          if (typeof initializer === 'function') {
-            initializer.call(this);
-          } else {
-            this[initializer]();
-          }
-        }
-      }
-
-      initLeftSidebar() {
-        this.$leftSidebar = $__default['default'](this.options.leftSidebarSelector);
-
-        if (this.$leftSidebar.length) {
-          console.log(this.$leftSidebar, this.$leftSidebar.find(this.options.sidebarMenuContainerSelector), this.$leftSidebar.find(this.options.sidebarScrollContainerSelector));
-          this.$leftSidebar.find(this.options.sidebarMenuContainerSelector).Treeview();
-          let $scrollable = this.$leftSidebar.find(this.options.sidebarScrollContainerSelector);
-
-          if (!$scrollable.length) {
-            $scrollable = this.$leftSidebar;
-          }
-
-          $scrollable.SimpleScrollbar();
-        }
-      }
-
-      initRightSidebar() {
-        this.$rightSidebar = $__default['default'](this.options.rightSidebarSelector);
-
-        if (this.$rightSidebar.length) {
-          this.$rightSidebar.find(this.options.sidebarMenuContainerSelector).Treeview();
-          let $scrollable = this.$rightSidebar.find(this.options.sidebarScrollContainerSelector);
-
-          if (!$scrollable.length) {
-            $scrollable = this.$rightSidebar;
-          }
-
-          $scrollable.SimpleScrollbar();
-        }
-      }
-
-    }
-
-    $__default['default'](function () {
-      const dataKey = 'pesky-ui';
-
-      if (!$__default['default'](document).data(dataKey)) {
-        const data = new PeskyUI(typeof PeskyUIConfig === 'undefined' ? {} : PeskyUIConfig);
-        $__default['default'](document).data(dataKey, data);
-      }
-    });
-
     exports.PeskyUI = PeskyUI;
+    exports.Treeview = Treeview;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

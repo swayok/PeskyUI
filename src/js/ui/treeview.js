@@ -1,15 +1,4 @@
-/**
- * --------------------------------------------
- * AdminLTE Treeview.js
- * License MIT
- * --------------------------------------------
- */
-
 const Treeview = (($) => {
-    /**
-     * Constants
-     * ====================================================
-     */
 
     const NAME = 'Treeview'
     const DATA_KEY = 'treeview'
@@ -26,7 +15,7 @@ const Treeview = (($) => {
     const Selector = {
         LI: '.nav-item',
         LINK: '.nav-link',
-        TREEVIEW_MENU: '.nav-treeview',
+        TREEVIEW_MENU: '.nav-submenu',
         OPEN: '.menu-open',
         DATA_WIDGET: '[data-widget="treeview"]'
     }
@@ -34,17 +23,14 @@ const Treeview = (($) => {
     const ClassName = {
         LI: 'nav-item',
         LINK: 'nav-link',
-        TREEVIEW_MENU: 'nav-treeview',
+        TREEVIEW_MENU: 'nav-submenu',
         OPEN: 'menu-open',
-        SIDEBAR_COLLAPSED: 'sidebar-collapse'
     }
 
     const Default = {
         trigger: `${Selector.DATA_WIDGET} ${Selector.LINK}`,
         animationSpeed: 300,
         accordion: true,
-        expandSidebar: false,
-        sidebarButtonSelector: '[data-widget="pushmenu"]'
     }
 
     /**
@@ -78,9 +64,6 @@ const Treeview = (($) => {
                 $(this._element).trigger(expandedEvent)
             })
 
-            if (this._config.expandSidebar) {
-                this._expandSidebar()
-            }
         }
 
         collapse(treeviewMenu, parentLi) {
@@ -130,12 +113,6 @@ const Treeview = (($) => {
             $(document).on('click', this._config.trigger, (event) => {
                 this.toggle(event)
             })
-        }
-
-        _expandSidebar() {
-            if ($('body').hasClass(ClassName.SIDEBAR_COLLAPSED)) {
-                $(this._config.sidebarButtonSelector).PushMenu('expand')
-            }
         }
 
         // Static

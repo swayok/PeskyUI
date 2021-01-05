@@ -87,6 +87,9 @@ body {
 }
 
 .ss-grabbed {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
 }
 
@@ -273,8 +276,11 @@ body {
 #left-sidebar ul.sidebar-menu .nav-link p,
 #right-sidebar ul.sidebar-menu .nav-link p {
   display: inline-block;
+  -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
+  -webkit-animation-duration: 0.2s;
   animation-duration: 0.2s;
+  -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   margin: 0;
 }
@@ -299,5 +305,4 @@ body {
 #right-sidebar.collapsed {
   width: 50px;
 }
-
 /*# sourceMappingURL=pesky-ui.css.map */

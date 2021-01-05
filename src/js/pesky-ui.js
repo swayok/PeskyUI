@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import TreeView from './plugins/admin-lte/treeview';
 
 class PeskyUI {
 
@@ -16,8 +15,6 @@ class PeskyUI {
             initializers: PeskyUI.defaultInitializers,
             leftSidebarSelector: '#left-sidebar',
             rightSidebarSelector: '#right-sidebar',
-            sidebarMenuContainerSelector: '.sidebar-menu',
-            sidebarScrollContainerSelector: '.scrollable',
         };
     }
 
@@ -39,37 +36,28 @@ class PeskyUI {
 
     initLeftSidebar() {
         this.$leftSidebar = $(this.options.leftSidebarSelector);
-        if (this.$leftSidebar.length) {
-            console.log(this.$leftSidebar, this.$leftSidebar.find(this.options.sidebarMenuContainerSelector), this.$leftSidebar.find(this.options.sidebarScrollContainerSelector));
-            this.$leftSidebar.find(this.options.sidebarMenuContainerSelector).Treeview();
-            let $scrollable = this.$leftSidebar.find(this.options.sidebarScrollContainerSelector);
-            if (!$scrollable.length) {
-                $scrollable = this.$leftSidebar;
-            }
-            $scrollable.SimpleScrollbar();
-        }
+    }
+
+    initLeftSidebarMenu(menuId) {
+        $(menuId).Treeview();
     }
 
     initRightSidebar() {
         this.$rightSidebar = $(this.options.rightSidebarSelector);
-        if (this.$rightSidebar.length) {
-            this.$rightSidebar.find(this.options.sidebarMenuContainerSelector).Treeview();
-            let $scrollable = this.$rightSidebar.find(this.options.sidebarScrollContainerSelector);
-            if (!$scrollable.length) {
-                $scrollable = this.$rightSidebar;
-            }
-            $scrollable.SimpleScrollbar();
-        }
+    }
+
+    uuid4() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0,
+                v = (c === 'x' ? r : (r & 0x3 | 0x8));
+            return v.toString(16);
+        });
     }
 
 }
 
 $(function () {
-    const dataKey = 'pesky-ui';
-    if (!$(document).data(dataKey)) {
-        const data = new PeskyUI(typeof PeskyUIConfig === 'undefined' ? {} : PeskyUIConfig);
-        $(document).data(dataKey, data);
-    }
+    window.PeskyUI = new PeskyUI(typeof PeskyUIConfig === 'undefined' ? {} : PeskyUIConfig);
 });
 
 export default PeskyUI;

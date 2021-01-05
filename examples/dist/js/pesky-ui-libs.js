@@ -4,15 +4,16 @@
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.libs = {}, global.jQuery, global.Popper));
-}(this, (function (exports, $, Popper) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery'), require('popper.js'), require('moment')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'jquery', 'popper.js', 'moment'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.libs = {}, global.jQuery, global.Popper, global.moment));
+}(this, (function (exports, $, Popper, moment) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
   var $__default = /*#__PURE__*/_interopDefaultLegacy($);
   var Popper__default = /*#__PURE__*/_interopDefaultLegacy(Popper);
+  var moment__default = /*#__PURE__*/_interopDefaultLegacy(moment);
 
   /**
    * --------------------------------------------------------------------------
@@ -4329,6 +4330,12 @@
     }
   });
 
+  Object.defineProperty(exports, 'moment', {
+    enumerable: true,
+    get: function () {
+      return moment__default['default'];
+    }
+  });
   exports.Alert = Alert;
   exports.Button = Button;
   exports.Carousel = Carousel;

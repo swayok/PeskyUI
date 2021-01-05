@@ -1,0 +1,23 @@
+<% /*
+it = {
+    items: Array[MenuItem],
+    class: ?string
+    id: ?string
+}
+*/ %>
+
+<% var menuId = it.id || ('sidebar-menu-' + PeskyUI.uuid4()) %>
+<ul
+    class="sidebar-menu nav-sidebar flex-column <%= it.class || '' %>"
+    data-widget="treeview"
+    role="menu"
+    id="<%= menuId %>"
+>
+    <% it.items.forEach(function (menuItem) { %>
+        <%~ include('sidebar-left-menu-item', menuItem) %>
+    <% }); %>
+</ul>
+
+<script type="application/javascript">
+    PeskyUI.initLeftSidebarMenu('#<%= menuId %>');
+</script>

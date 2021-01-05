@@ -1,0 +1,403 @@
+[
+    {
+        "icon_class": "fas fa-tachometer-alt",
+        "title": "Dashboard",
+        "children": [
+            {
+                "icon_class": "far fa-circle",
+                "url": "/pages/dashboard1.html",
+                "title": "Dashboard v1"
+            },
+            {
+                "icon_class": "far fa-circle",
+                "url": "/pages/dashboard2.html",
+                "title": "Dashboard v2"
+            },
+            {
+                "icon_class": "far fa-circle",
+                "url": "/pages/dashboard3.html",
+                "title": "Dashboard v3"
+            }
+        ]
+    },
+    {
+        "icon_class": "fas fa-th",
+        "url": "/pages/widgets.html",
+        "title": "Widgets",
+        "badge": {
+            "type": "danger",
+            "value": "New"
+        }
+    },
+    {
+        "icon_class": "fas fa-copy",
+        "title": "Layout Options",
+        "badge": {
+            "type": "info",
+            "value": "6"
+        },
+        "children": [
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/top-nav.html",
+                "title": "Top Navigation"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/top-nav-sidebar.html",
+                "title": "Top Navigation + Sidebar"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/boxed.html",
+                "title": "Boxed"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/fixed-sidebar.html",
+                "title": "Fixed Sidebar",
+                "badge": {
+                    "type": "success",
+                    "value": "2"
+                }
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/fixed-topnav.html",
+                "title": "Fixed Navbar"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/fixed-footer.html",
+                "title": "Fixed Footer"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/collapsed-sidebar.html",
+                "title": "Collapsed Sidebar"
+            }
+        ]
+    },
+    {
+        "icon_class": "fas fa-chart-pie",
+        "title": "Charts",
+        "children": [
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/chartjs.html",
+                "title": "ChartJS"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/flot.html",
+                "title": "Flot"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Inline"
+            }
+        ]
+    },
+    {
+        "icon_class": "fas fa-tree",
+        "title": "UI Elements",
+        "children": [
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/chartjs.html",
+                "title": "General"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/flot.html",
+                "title": "Icons"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Buttons"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Sliders"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Modals &amp; Alerts"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Navbar &amp; Tabs"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Timeline"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Ribbons"
+            }
+        ]
+    },
+    {
+        "icon_class": "fas fa-chart-pie",
+        "title": "Forms",
+        "children": [
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/chartjs.html",
+                "title": "General Elements"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/flot.html",
+                "title": "Advanced Elements"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Editors"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Validation"
+            }
+        ]
+    },
+    {
+        "icon_class": "fas fa-table",
+        "title": "Tables",
+        "children": [
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/chartjs.html",
+                "title": "Simple Tables"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/flot.html",
+                "title": "DataTables"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "jsGrid"
+            }
+        ]
+    },
+    {
+        "header": "EXAMPLES"
+    },
+    {
+        "icon_class": "fas fa-calendar-alt",
+        "title": "Calendar",
+        "url": "/pages/calendar.html"
+    },
+    {
+        "icon_class": "fas v",
+        "title": "Gallery",
+        "url": "/pages/gallery.html"
+    },
+    {
+        "icon_class": "fas fa-calendar-alt",
+        "title": "Mailbox",
+        "children": [
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/chartjs.html",
+                "title": "Inbox"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/flot.html",
+                "title": "Compose"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Read"
+            }
+        ]
+    },
+    {
+        "icon_class": "fas fa-book",
+        "title": "Pages",
+        "children": [
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/chartjs.html",
+                "title": "Invoice"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/flot.html",
+                "title": "Profile"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "E-commerce"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Projects"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Project Add"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Project Edit"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Project Detail"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Contacts"
+            }
+        ]
+    },
+    {
+        "icon_class": "fas fa-plus-square",
+        "title": "Extras",
+        "children": [
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/chartjs.html",
+                "title": "Login"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/flot.html",
+                "title": "Register"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Forgot Password"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Recover Password"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Lockscreen"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Legacy User Menu"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Language Menu"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Error 404"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Error 500"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Pace"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Blank Page"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "url": "/pages/inline.html",
+                "title": "Starter Page"
+            }
+        ]
+    },
+    {
+        "header": "MISCELLANEOUS"
+    },
+    {
+        "icon_class": "fas fa-file",
+        "url": "/pages/inline.html",
+        "title": "Documentation"
+    },
+    {
+        "header": "MULTI LEVEL EXAMPLE"
+    },
+    {
+        "icon_class": "fas fa-circle",
+        "title": "Level 1"
+    },
+    {
+        "icon_class": "fas fa-chart-pie",
+        "title": "Level 1",
+        "children": [
+            {
+                "icon_class": "fas fa-circle",
+                "title": "Level 2"
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "title": "Level 2",
+                "children": [
+                    {
+                        "icon_class": "fas fa-dot-circle",
+                        "title": "Level 3"
+                    },
+                    {
+                        "icon_class": "fas fa-dot-circle",
+                        "title": "Level 3"
+                    }
+                ]
+            },
+            {
+                "icon_class": "fas fa-circle",
+                "title": "Level 2"
+            }
+        ]
+    },
+    {
+        "icon_class": "fas fa-circle",
+        "title": "Level 1"
+    },
+    {
+        "header": "LABELS"
+    },
+    {
+        "icon_class": "fas fa-circle text-danger",
+        "title": "Important"
+    },
+    {
+        "icon_class": "fas fa-circle text-warning",
+        "title": "Warning"
+    },
+    {
+        "icon_class": "fas fa-circle text-info",
+        "title": "Informational"
+    }
+]

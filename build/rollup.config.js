@@ -3,6 +3,7 @@
 const path = require('path')
 const babel = require('rollup-plugin-babel')
 const resolve = require('@rollup/plugin-node-resolve')
+const commonjs = require('@rollup/plugin-commonjs')
 const bootstrapBanner = require('./banner.js')
 const peskyUIBanner = require('./peskyui-banner.js')
 const babelHelpers = require('./babel-helpers.js')
@@ -19,7 +20,8 @@ const plugins = [
         exclude: 'node_modules/**',
         // Include only required helpers
         externalHelpersWhitelist: babelHelpers
-    })
+    }),
+    commonjs()
 ]
 const globals = {
     jquery: 'jQuery', // Ensure we use jQuery which is always available even in noConflict mode

@@ -1,9 +1,9 @@
 <div id="flex-layout">
-    <%~ await include('sidebar-left') %>
+    <%~ include('sidebar-left', {menuItems: it.sidebarLeftMenuItems}) %>
     <div id="content-wrapper">
-        <%~ await include('topbar') %>
-        <%~ await include('content') %>
-        <%~ await include('footer') %>
+        <%~ include('topbar') %>
+        <%~ include('content') %>
+        <%~ include('footer') %>
     </div>
-    <%~ await include('sidebar-right') %>
+    <%~ include('sidebar-right') %>
 </div>

@@ -43,13 +43,17 @@
     "style": "dist/css/pesky-ui.css",
     "sass": "src/scss/pesky-ui.scss",
     "main": "dist/js/pesky-ui",
-    "dependencies": {},
+    "dependencies": {
+    },
     "peerDependencies": {
         "jquery": "1.9.1 - 3",
+        "eta": "^1.12.1",
         "popper.js": "^1.16.0",
-        "eta": "^1.12.1"
+        "moment": "^2.29.1"
     },
     "devDependencies": {
+        "moment": "^2.29.1",
+        "eta": "^1.12.1",
         "@babel/cli": "^7.8.4",
         "@babel/core": "^7.9.6",
         "@babel/plugin-proposal-object-rest-spread": "^7.9.6",

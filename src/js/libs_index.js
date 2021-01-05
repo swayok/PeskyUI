@@ -11,6 +11,7 @@ import Toast from './toast'
 import Tooltip from './tooltip'
 import Util from './util'
 import SimpleScrollbar from './plugins/simple-scrollbar/simple-scrollbar'
+import moment from "moment";
 
 export {
     Util,
@@ -26,4 +27,5 @@ export {
     Toast,
     Tooltip,
     SimpleScrollbar,
+    moment
 }
