@@ -20,6 +20,10 @@
     .scrollable {
         flex: 1;
         overflow: hidden;
+
+        .ss-scroll {
+            border-radius: 0;
+        }
     }
 
     ul.sidebar-menu {
@@ -57,11 +61,12 @@
                     margin-left: .5rem;
                 }
 
-                > .right {
-                    i,
-                    span {
-                        margin-left: .5rem;
-                    }
+                .right {
+                    margin-left: .5rem;
+                }
+
+                .badge {
+                    font-size: 80%;
                 }
             }
 
@@ -197,6 +202,18 @@
 
                             &:hover {
                                 background-color: $accent-color;
+                            }
+
+                            @if map-get($ui-is-dark-bg, $bg-color-name) {
+                                @each $theme-color-name, $theme-color in $theme-colors {
+                                    .badge-#{$theme-color-name} {
+                                        background-color: lighten($theme-color, 15%);
+                                    }
+
+                                    .nav-icon.text-#{$theme-color-name} {
+                                        color: lighten($theme-color, 20%) !important;
+                                    }
+                                }
                             }
                         }
 
