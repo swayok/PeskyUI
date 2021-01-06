@@ -14,6 +14,14 @@
     height: auto !important;
 }
 
+.fluid-height {
+    height: 100% !important;
+}
+
+.view-height {
+    height: 100vh !important;
+}
+
 @for $multiplier from 0 through $heights-helpers-5px-steps-max-multiplier {
     .max-h-#{$heights-helpers-5px-steps-min-value + 5 * $multiplier} {
         max-height: #{$heights-helpers-5px-steps-min-value + 5 * $multiplier}px !important;
@@ -75,6 +83,10 @@
 ================================================= */
 .fluid-width {
     width: 100% !important;
+}
+
+.view-width {
+    width: 100vw !important;
 }
 
 @for $multiplier from 0 through $widths-helpers-5px-steps-max-multiplier {

@@ -2,6 +2,95 @@
 #content-with-footer > header,
 #content > header {
     width: 100%;
-    height: #{$header-height};
-    background-color: #CCCCCC;
+    height: $header-height;
+    border-bottom: 1px solid $gray-400;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    $header-item-height: $header-height - 1px;
+
+    .header-button,
+    .header-block,
+    .header-title {
+        line-height: $header-item-height;
+        height: $header-item-height;
+        padding: 0 1rem;
+        overflow: hidden;
+    }
+
+    .header-button {
+        transition: background-color $transition-fn $transition-speed;
+        position: relative;
+
+        &:hover {
+            background-color: $gray-100;
+        }
+
+        &.active:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            width: 100%;
+            background-color: $gray-100;
+        }
+    }
+
+    .header-title {
+        font-size: 1.1rem;
+        overflow: hidden;
+        white-space: nowrap;
+        flex: 1;
+    }
+
+    @mixin header-button-theme($bg-color-name, $accent-color-modified) {
+        .header-button {
+            color: map-get($ui-sidebar-text-colors, $bg-color-name);
+
+            &:hover,
+            &.active:after {
+                background-color: $accent-color-modified;
+            }
+        }
+    }
+
+    @each $bg-color-name, $bg-color in $ui-bg-colors {
+        @each $accent-color-name, $accent-color in $ui-accents {
+
+            $accent-color-modified: $accent-color;
+            @if (map-get($ui-is-dark-bg, $bg-color-name) == false) {
+                $accent-color-modified: map-get($ui-accents-light-bg, $accent-color-name);
+            }
+
+            body.header-#{$bg-color-name}-#{$accent-color-name} & {
+                background-color: $bg-color;
+                color: map-get($ui-sidebar-text-colors, $bg-color-name);
+
+                @if ($bg-color-name == 'white') {
+                    border-color: darken($bg-color, 20%);
+                } @else {
+                    border-color: $bg-color;
+                }
+
+                @include header-button-theme($bg-color-name, $accent-color-modified);
+            }
+
+            body.header-#{$bg-color-name}-#{$accent-color-name}-lighter & {
+                background-color: lighten($bg-color, 10%);
+                color: map-get($ui-sidebar-text-colors, $bg-color-name);
+
+                @include header-button-theme($bg-color-name, $accent-color-modified);
+            }
+
+            body.header-#{$bg-color-name}-#{$accent-color-name}-darker & {
+                background-color: darken($bg-color, 10%);
+                color: map-get($ui-sidebar-text-colors, $bg-color-name);
+
+                @include header-button-theme($bg-color-name, $accent-color-modified);
+            }
+        }
+    }
 }

@@ -1223,6 +1223,9 @@ $left-sidebar-logo-height:          $header-height !default;
 
 // UI elements colors
 
+// NOTE: pick accent colors for dark backgrounds.
+// Accent colors for light backgrounds will be adjusted automatically using lighten().
+
 $ui-accents: (
     "blue":         $blue,
     "indigo":       $indigo,
@@ -1237,6 +1240,22 @@ $ui-accents: (
     "white":        $white,
     "gray":         $gray-600,
     "gray-dark":    $gray-800
+);
+
+$ui-accents-light-bg: (
+    "blue":         lighten($blue, 40%),
+    "indigo":       lighten($indigo, 40%),
+    "purple":       lighten($purple, 40%),
+    "pink":         lighten($pink, 40%),
+    "red":          lighten($red, 40%),
+    "orange":       lighten($orange, 40%),
+    "yellow":       lighten($yellow, 40%),
+    "green":        lighten($green, 40%),
+    "teal":         lighten($teal, 40%),
+    "cyan":         lighten($cyan, 40%),
+    "white":        darken($white, 40%),
+    "gray":         lighten($gray-600, 40%),
+    "gray-dark":    lighten($gray-800, 40%),
 );
 
 $blue-bg: #003F8C;
