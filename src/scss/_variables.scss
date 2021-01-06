@@ -1221,8 +1221,59 @@ $sidebar-icon-width:                20px !default;
 $sidebar-collpased-width:           50px !default;
 $left-sidebar-logo-height:          $header-height !default;
 
-// Simple Scrollbar plugin
+// UI elements colors
 
-// Treeview plugin in scrollbar
+$ui-accents: (
+    "blue":         $blue,
+    "indigo":       $indigo,
+    "purple":       $purple,
+    "pink":         $pink,
+    "red":          $red,
+    "orange":       $orange,
+    "yellow":       $yellow,
+    "green":        $green,
+    "teal":         $teal,
+    "cyan":         $cyan,
+    "white":        $white,
+    "gray":         $gray-600,
+    "gray-dark":    $gray-800
+);
 
+$blue-bg: #003F8C;
+$green-bg: #1B6F2D;
+$cyan-bg: #0B636E;
+$yellow-bg: #765904;
+$red-bg: #7B1825;
 
+$ui-bg-colors: (
+    "blue":         $blue-bg,
+    "green":        $green-bg,
+    "cyan":         $cyan-bg,
+    "yellow":       $yellow-bg,
+    "red":          $red-bg,
+    "white":        $white,
+    "gray":         $gray-600,
+    "gray-dark":    $gray-800
+);
+
+$ui-sidebar-text-colors: (
+    "blue":         $gray-400,
+    "green":        $gray-400,
+    "cyan":         $gray-400,
+    "yellow":       $gray-400,
+    "red":          $gray-400,
+    "white":        $gray-700,
+    "gray":         $gray-300,
+    "gray-dark":    $gray-400
+);
+
+$ui-is-dark-bg: (
+    "blue":         true,
+    "green":        true,
+    "cyan":         true,
+    "yellow":       true,
+    "red":          true,
+    "white":        false,
+    "gray":         true,
+    "gray-dark":    true
+);
