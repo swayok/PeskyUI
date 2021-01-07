@@ -4,6 +4,7 @@
 
 #left-sidebar,
 #right-sidebar {
+    position: relative;
     overflow: hidden;
     height: 100vh;
     z-index: 200;
@@ -19,6 +20,18 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
+    }
+
+    .close-sidebar {
+        position: absolute;
+        top: 0;
+        display: none;
+        font-size: 2rem;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        z-index: 20;
     }
 
     .scrollable {
@@ -164,6 +177,10 @@
 #left-sidebar {
     width: $sidebar-full-width;
 
+    .close-sidebar {
+        right: 0;
+    }
+
     > .sidebar-content {
         width: $sidebar-full-width;
     }
@@ -185,6 +202,10 @@
 #right-sidebar {
     width: $sidebar-full-width;
 
+    .close-sidebar {
+        left: 0;
+    }
+
     #right-sidebar-header {
         height: $right-sidebar-header-height;
         width: 100%;
@@ -198,6 +219,35 @@
         width: 0;
     }
 
+}
+
+@media screen and (max-width: map-get($container-max-widths, 'md')) {
+    #right-sidebar,
+    #left-sidebar {
+        position: fixed;
+        top: 0;
+        width: 0;
+
+        &.opened {
+            width: $sidebar-full-width;
+        }
+
+        .close-sidebar {
+            display: block;
+        }
+
+        .ss-content {
+            width: 100% !important;
+        }
+    }
+
+    #right-sidebar {
+        right: 0;
+    }
+
+    #left-sidebar {
+        left: 0;
+    }
 }
 
 @each $bg-color-name, $bg-color in $ui-bg-colors {
@@ -214,6 +264,10 @@
                 } @else {
                     background-color: rgba(0, 0, 0, 0.2);
                 }
+            }
+
+            .close-sidebar {
+                background-color: $bg-color;
             }
 
             ul.sidebar-menu {
@@ -278,6 +332,11 @@
         body.accent-#{$accent-color-name}.sidebar-#{$bg-color-name} {
             #left-sidebar,
             #right-sidebar {
+
+                .close-sidebar:hover {
+                    background-color: $accent-color-modified;
+                }
+
                 ul.sidebar-menu {
                     .nav-item {
                         > .nav-link:hover {
@@ -295,4 +354,3 @@
         }
     }
 }
-

@@ -1,5 +1,6 @@
 <nav id="left-sidebar">
     <div class="sidebar-content">
+        <div class="close-sidebar">&times;</div>
         <div id="left-sidebar-header">
             Logo Here
         </div>
@@ -10,6 +11,7 @@
 </nav>
 
 <script type="application/javascript">
+    PeskyUI.initLeftSidebar();
     var leftSidebar = $('#left-sidebar');
     leftSidebar.find('.scrollable').SimpleScrollbar();
 </script>

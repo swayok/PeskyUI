@@ -56,7 +56,7 @@ body {
   width: calc(100% + 18px);
   padding: 0 0 0 0;
   position: relative;
-  overflow: auto;
+  overflow-y: scroll;
   box-sizing: border-box;
 }
 
@@ -1627,6 +1627,7 @@ body.accent-gray-dark.header-gray-dark #content-wrapper > header .header-button:
 
 #left-sidebar,
 #right-sidebar {
+  position: relative;
   overflow: hidden;
   height: 100vh;
   z-index: 200;
@@ -1642,6 +1643,19 @@ body.accent-gray-dark.header-gray-dark #content-wrapper > header .header-button:
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+#left-sidebar .close-sidebar,
+#right-sidebar .close-sidebar {
+  position: absolute;
+  top: 0;
+  display: none;
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  z-index: 20;
 }
 
 #left-sidebar .scrollable,
@@ -1792,6 +1806,10 @@ body.accent-gray-dark.header-gray-dark #content-wrapper > header .header-button:
   width: 250px;
 }
 
+#left-sidebar .close-sidebar {
+  right: 0;
+}
+
 #left-sidebar > .sidebar-content {
   width: 250px;
 }
@@ -1813,6 +1831,10 @@ body.accent-gray-dark.header-gray-dark #content-wrapper > header .header-button:
   width: 250px;
 }
 
+#right-sidebar .close-sidebar {
+  left: 0;
+}
+
 #right-sidebar #right-sidebar-header {
   height: 50px;
   width: 100%;
@@ -1826,6 +1848,33 @@ body.accent-gray-dark.header-gray-dark #content-wrapper > header .header-button:
   width: 0;
 }
 
+@media screen and (max-width: 720px) {
+  #right-sidebar,
+  #left-sidebar {
+    position: fixed;
+    top: 0;
+    width: 0;
+  }
+  #right-sidebar.opened,
+  #left-sidebar.opened {
+    width: 250px;
+  }
+  #right-sidebar .close-sidebar,
+  #left-sidebar .close-sidebar {
+    display: block;
+  }
+  #right-sidebar .ss-content,
+  #left-sidebar .ss-content {
+    width: 100% !important;
+  }
+  #right-sidebar {
+    right: 0;
+  }
+  #left-sidebar {
+    left: 0;
+  }
+}
+
 body.sidebar-blue #left-sidebar,
 body.sidebar-blue #right-sidebar {
   background-color: #003F8C;
@@ -1835,6 +1884,11 @@ body.sidebar-blue #right-sidebar {
 body.sidebar-blue #left-sidebar .ss-scroll,
 body.sidebar-blue #right-sidebar .ss-scroll {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+body.sidebar-blue #left-sidebar .close-sidebar,
+body.sidebar-blue #right-sidebar .close-sidebar {
+  background-color: #003F8C;
 }
 
 body.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link,
@@ -1940,6 +1994,11 @@ body.sidebar-blue #right-sidebar {
   border-left-width: 0;
 }
 
+body.accent-blue.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-blue.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #007bff;
+}
+
 body.accent-blue.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-blue.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #007bff;
@@ -1948,6 +2007,11 @@ body.accent-blue.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-blue.sidebar-blue #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-blue.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 0.5) 75%, #007bff 100%);
+}
+
+body.accent-indigo.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-indigo.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #6610f2;
 }
 
 body.accent-indigo.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -1960,6 +2024,11 @@ body.accent-indigo.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(102, 16, 242, 0) 0%, rgba(102, 16, 242, 0.5) 75%, #6610f2 100%);
 }
 
+body.accent-purple.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-purple.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #6f42c1;
+}
+
 body.accent-purple.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-purple.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6f42c1;
@@ -1968,6 +2037,11 @@ body.accent-purple.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-
 body.accent-purple.sidebar-blue #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-purple.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(111, 66, 193, 0) 0%, rgba(111, 66, 193, 0.5) 75%, #6f42c1 100%);
+}
+
+body.accent-pink.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-pink.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #e83e8c;
 }
 
 body.accent-pink.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -1980,6 +2054,11 @@ body.accent-pink.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link:
   background: linear-gradient(90deg, rgba(232, 62, 140, 0) 0%, rgba(232, 62, 140, 0.5) 75%, #e83e8c 100%);
 }
 
+body.accent-red.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-red.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #dc3545;
+}
+
 body.accent-red.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-red.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #dc3545;
@@ -1988,6 +2067,11 @@ body.accent-red.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-lin
 body.accent-red.sidebar-blue #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-red.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(220, 53, 69, 0) 0%, rgba(220, 53, 69, 0.5) 75%, #dc3545 100%);
+}
+
+body.accent-orange.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-orange.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #fd7e14;
 }
 
 body.accent-orange.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2000,6 +2084,11 @@ body.accent-orange.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(253, 126, 20, 0) 0%, rgba(253, 126, 20, 0.5) 75%, #fd7e14 100%);
 }
 
+body.accent-yellow.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-yellow.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #ffc107;
+}
+
 body.accent-yellow.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-yellow.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #ffc107;
@@ -2008,6 +2097,11 @@ body.accent-yellow.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-
 body.accent-yellow.sidebar-blue #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-yellow.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(255, 193, 7, 0) 0%, rgba(255, 193, 7, 0.5) 75%, #ffc107 100%);
+}
+
+body.accent-green.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-green.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #28a745;
 }
 
 body.accent-green.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2020,6 +2114,11 @@ body.accent-green.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(40, 167, 69, 0) 0%, rgba(40, 167, 69, 0.5) 75%, #28a745 100%);
 }
 
+body.accent-teal.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-teal.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #20c997;
+}
+
 body.accent-teal.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-teal.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #20c997;
@@ -2028,6 +2127,11 @@ body.accent-teal.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-teal.sidebar-blue #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-teal.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(32, 201, 151, 0) 0%, rgba(32, 201, 151, 0.5) 75%, #20c997 100%);
+}
+
+body.accent-cyan.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-cyan.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #17a2b8;
 }
 
 body.accent-cyan.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2040,6 +2144,11 @@ body.accent-cyan.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link:
   background: linear-gradient(90deg, rgba(23, 162, 184, 0) 0%, rgba(23, 162, 184, 0.5) 75%, #17a2b8 100%);
 }
 
+body.accent-white.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-white.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #fff;
+}
+
 body.accent-white.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-white.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #fff;
@@ -2050,6 +2159,11 @@ body.accent-white.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 75%, #fff 100%);
 }
 
+body.accent-gray.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-gray.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #6c757d;
+}
+
 body.accent-gray.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-gray.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6c757d;
@@ -2058,6 +2172,11 @@ body.accent-gray.sidebar-blue #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-gray.sidebar-blue #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-gray.sidebar-blue #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(108, 117, 125, 0) 0%, rgba(108, 117, 125, 0.5) 75%, #6c757d 100%);
+}
+
+body.accent-gray-dark.sidebar-blue #left-sidebar .close-sidebar:hover,
+body.accent-gray-dark.sidebar-blue #right-sidebar .close-sidebar:hover {
+  background-color: #343a40;
 }
 
 body.accent-gray-dark.sidebar-blue #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2079,6 +2198,11 @@ body.sidebar-green #right-sidebar {
 body.sidebar-green #left-sidebar .ss-scroll,
 body.sidebar-green #right-sidebar .ss-scroll {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+body.sidebar-green #left-sidebar .close-sidebar,
+body.sidebar-green #right-sidebar .close-sidebar {
+  background-color: #1B6F2D;
 }
 
 body.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link,
@@ -2184,6 +2308,11 @@ body.sidebar-green #right-sidebar {
   border-left-width: 0;
 }
 
+body.accent-blue.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-blue.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #007bff;
+}
+
 body.accent-blue.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-blue.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #007bff;
@@ -2192,6 +2321,11 @@ body.accent-blue.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-l
 body.accent-blue.sidebar-green #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-blue.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 0.5) 75%, #007bff 100%);
+}
+
+body.accent-indigo.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-indigo.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #6610f2;
 }
 
 body.accent-indigo.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2204,6 +2338,11 @@ body.accent-indigo.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-li
   background: linear-gradient(90deg, rgba(102, 16, 242, 0) 0%, rgba(102, 16, 242, 0.5) 75%, #6610f2 100%);
 }
 
+body.accent-purple.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-purple.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #6f42c1;
+}
+
 body.accent-purple.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-purple.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6f42c1;
@@ -2212,6 +2351,11 @@ body.accent-purple.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav
 body.accent-purple.sidebar-green #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-purple.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(111, 66, 193, 0) 0%, rgba(111, 66, 193, 0.5) 75%, #6f42c1 100%);
+}
+
+body.accent-pink.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-pink.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #e83e8c;
 }
 
 body.accent-pink.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2224,6 +2368,11 @@ body.accent-pink.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(232, 62, 140, 0) 0%, rgba(232, 62, 140, 0.5) 75%, #e83e8c 100%);
 }
 
+body.accent-red.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-red.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #dc3545;
+}
+
 body.accent-red.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-red.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #dc3545;
@@ -2232,6 +2381,11 @@ body.accent-red.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-red.sidebar-green #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-red.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(220, 53, 69, 0) 0%, rgba(220, 53, 69, 0.5) 75%, #dc3545 100%);
+}
+
+body.accent-orange.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-orange.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #fd7e14;
 }
 
 body.accent-orange.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2244,6 +2398,11 @@ body.accent-orange.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-li
   background: linear-gradient(90deg, rgba(253, 126, 20, 0) 0%, rgba(253, 126, 20, 0.5) 75%, #fd7e14 100%);
 }
 
+body.accent-yellow.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-yellow.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #ffc107;
+}
+
 body.accent-yellow.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-yellow.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #ffc107;
@@ -2252,6 +2411,11 @@ body.accent-yellow.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav
 body.accent-yellow.sidebar-green #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-yellow.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(255, 193, 7, 0) 0%, rgba(255, 193, 7, 0.5) 75%, #ffc107 100%);
+}
+
+body.accent-green.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-green.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #28a745;
 }
 
 body.accent-green.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2264,6 +2428,11 @@ body.accent-green.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(40, 167, 69, 0) 0%, rgba(40, 167, 69, 0.5) 75%, #28a745 100%);
 }
 
+body.accent-teal.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-teal.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #20c997;
+}
+
 body.accent-teal.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-teal.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #20c997;
@@ -2272,6 +2441,11 @@ body.accent-teal.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-l
 body.accent-teal.sidebar-green #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-teal.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(32, 201, 151, 0) 0%, rgba(32, 201, 151, 0.5) 75%, #20c997 100%);
+}
+
+body.accent-cyan.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-cyan.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #17a2b8;
 }
 
 body.accent-cyan.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2284,6 +2458,11 @@ body.accent-cyan.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(23, 162, 184, 0) 0%, rgba(23, 162, 184, 0.5) 75%, #17a2b8 100%);
 }
 
+body.accent-white.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-white.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #fff;
+}
+
 body.accent-white.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-white.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #fff;
@@ -2294,6 +2473,11 @@ body.accent-white.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 75%, #fff 100%);
 }
 
+body.accent-gray.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-gray.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #6c757d;
+}
+
 body.accent-gray.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-gray.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6c757d;
@@ -2302,6 +2486,11 @@ body.accent-gray.sidebar-green #right-sidebar ul.sidebar-menu .nav-item > .nav-l
 body.accent-gray.sidebar-green #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-gray.sidebar-green #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(108, 117, 125, 0) 0%, rgba(108, 117, 125, 0.5) 75%, #6c757d 100%);
+}
+
+body.accent-gray-dark.sidebar-green #left-sidebar .close-sidebar:hover,
+body.accent-gray-dark.sidebar-green #right-sidebar .close-sidebar:hover {
+  background-color: #343a40;
 }
 
 body.accent-gray-dark.sidebar-green #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2323,6 +2512,11 @@ body.sidebar-cyan #right-sidebar {
 body.sidebar-cyan #left-sidebar .ss-scroll,
 body.sidebar-cyan #right-sidebar .ss-scroll {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+body.sidebar-cyan #left-sidebar .close-sidebar,
+body.sidebar-cyan #right-sidebar .close-sidebar {
+  background-color: #0B636E;
 }
 
 body.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link,
@@ -2428,6 +2622,11 @@ body.sidebar-cyan #right-sidebar {
   border-left-width: 0;
 }
 
+body.accent-blue.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-blue.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #007bff;
+}
+
 body.accent-blue.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-blue.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #007bff;
@@ -2436,6 +2635,11 @@ body.accent-blue.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-blue.sidebar-cyan #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-blue.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 0.5) 75%, #007bff 100%);
+}
+
+body.accent-indigo.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-indigo.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #6610f2;
 }
 
 body.accent-indigo.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2448,6 +2652,11 @@ body.accent-indigo.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(102, 16, 242, 0) 0%, rgba(102, 16, 242, 0.5) 75%, #6610f2 100%);
 }
 
+body.accent-purple.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-purple.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #6f42c1;
+}
+
 body.accent-purple.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-purple.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6f42c1;
@@ -2456,6 +2665,11 @@ body.accent-purple.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-
 body.accent-purple.sidebar-cyan #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-purple.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(111, 66, 193, 0) 0%, rgba(111, 66, 193, 0.5) 75%, #6f42c1 100%);
+}
+
+body.accent-pink.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-pink.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #e83e8c;
 }
 
 body.accent-pink.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2468,6 +2682,11 @@ body.accent-pink.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link:
   background: linear-gradient(90deg, rgba(232, 62, 140, 0) 0%, rgba(232, 62, 140, 0.5) 75%, #e83e8c 100%);
 }
 
+body.accent-red.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-red.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #dc3545;
+}
+
 body.accent-red.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-red.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #dc3545;
@@ -2476,6 +2695,11 @@ body.accent-red.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-lin
 body.accent-red.sidebar-cyan #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-red.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(220, 53, 69, 0) 0%, rgba(220, 53, 69, 0.5) 75%, #dc3545 100%);
+}
+
+body.accent-orange.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-orange.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #fd7e14;
 }
 
 body.accent-orange.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2488,6 +2712,11 @@ body.accent-orange.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(253, 126, 20, 0) 0%, rgba(253, 126, 20, 0.5) 75%, #fd7e14 100%);
 }
 
+body.accent-yellow.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-yellow.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #ffc107;
+}
+
 body.accent-yellow.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-yellow.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #ffc107;
@@ -2496,6 +2725,11 @@ body.accent-yellow.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-
 body.accent-yellow.sidebar-cyan #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-yellow.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(255, 193, 7, 0) 0%, rgba(255, 193, 7, 0.5) 75%, #ffc107 100%);
+}
+
+body.accent-green.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-green.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #28a745;
 }
 
 body.accent-green.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2508,6 +2742,11 @@ body.accent-green.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(40, 167, 69, 0) 0%, rgba(40, 167, 69, 0.5) 75%, #28a745 100%);
 }
 
+body.accent-teal.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-teal.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #20c997;
+}
+
 body.accent-teal.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-teal.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #20c997;
@@ -2516,6 +2755,11 @@ body.accent-teal.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-teal.sidebar-cyan #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-teal.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(32, 201, 151, 0) 0%, rgba(32, 201, 151, 0.5) 75%, #20c997 100%);
+}
+
+body.accent-cyan.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-cyan.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #17a2b8;
 }
 
 body.accent-cyan.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2528,6 +2772,11 @@ body.accent-cyan.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link:
   background: linear-gradient(90deg, rgba(23, 162, 184, 0) 0%, rgba(23, 162, 184, 0.5) 75%, #17a2b8 100%);
 }
 
+body.accent-white.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-white.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #fff;
+}
+
 body.accent-white.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-white.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #fff;
@@ -2538,6 +2787,11 @@ body.accent-white.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 75%, #fff 100%);
 }
 
+body.accent-gray.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-gray.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #6c757d;
+}
+
 body.accent-gray.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-gray.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6c757d;
@@ -2546,6 +2800,11 @@ body.accent-gray.sidebar-cyan #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-gray.sidebar-cyan #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-gray.sidebar-cyan #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(108, 117, 125, 0) 0%, rgba(108, 117, 125, 0.5) 75%, #6c757d 100%);
+}
+
+body.accent-gray-dark.sidebar-cyan #left-sidebar .close-sidebar:hover,
+body.accent-gray-dark.sidebar-cyan #right-sidebar .close-sidebar:hover {
+  background-color: #343a40;
 }
 
 body.accent-gray-dark.sidebar-cyan #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2567,6 +2826,11 @@ body.sidebar-yellow #right-sidebar {
 body.sidebar-yellow #left-sidebar .ss-scroll,
 body.sidebar-yellow #right-sidebar .ss-scroll {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+body.sidebar-yellow #left-sidebar .close-sidebar,
+body.sidebar-yellow #right-sidebar .close-sidebar {
+  background-color: #765904;
 }
 
 body.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link,
@@ -2672,6 +2936,11 @@ body.sidebar-yellow #right-sidebar {
   border-left-width: 0;
 }
 
+body.accent-blue.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-blue.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #007bff;
+}
+
 body.accent-blue.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-blue.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #007bff;
@@ -2680,6 +2949,11 @@ body.accent-blue.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-
 body.accent-blue.sidebar-yellow #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-blue.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 0.5) 75%, #007bff 100%);
+}
+
+body.accent-indigo.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-indigo.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #6610f2;
 }
 
 body.accent-indigo.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2692,6 +2966,11 @@ body.accent-indigo.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-l
   background: linear-gradient(90deg, rgba(102, 16, 242, 0) 0%, rgba(102, 16, 242, 0.5) 75%, #6610f2 100%);
 }
 
+body.accent-purple.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-purple.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #6f42c1;
+}
+
 body.accent-purple.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-purple.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6f42c1;
@@ -2700,6 +2979,11 @@ body.accent-purple.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .na
 body.accent-purple.sidebar-yellow #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-purple.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(111, 66, 193, 0) 0%, rgba(111, 66, 193, 0.5) 75%, #6f42c1 100%);
+}
+
+body.accent-pink.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-pink.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #e83e8c;
 }
 
 body.accent-pink.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2712,6 +2996,11 @@ body.accent-pink.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(232, 62, 140, 0) 0%, rgba(232, 62, 140, 0.5) 75%, #e83e8c 100%);
 }
 
+body.accent-red.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-red.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #dc3545;
+}
+
 body.accent-red.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-red.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #dc3545;
@@ -2720,6 +3009,11 @@ body.accent-red.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-l
 body.accent-red.sidebar-yellow #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-red.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(220, 53, 69, 0) 0%, rgba(220, 53, 69, 0.5) 75%, #dc3545 100%);
+}
+
+body.accent-orange.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-orange.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #fd7e14;
 }
 
 body.accent-orange.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2732,6 +3026,11 @@ body.accent-orange.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-l
   background: linear-gradient(90deg, rgba(253, 126, 20, 0) 0%, rgba(253, 126, 20, 0.5) 75%, #fd7e14 100%);
 }
 
+body.accent-yellow.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-yellow.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #ffc107;
+}
+
 body.accent-yellow.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-yellow.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #ffc107;
@@ -2740,6 +3039,11 @@ body.accent-yellow.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .na
 body.accent-yellow.sidebar-yellow #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-yellow.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(255, 193, 7, 0) 0%, rgba(255, 193, 7, 0.5) 75%, #ffc107 100%);
+}
+
+body.accent-green.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-green.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #28a745;
 }
 
 body.accent-green.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2752,6 +3056,11 @@ body.accent-green.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-li
   background: linear-gradient(90deg, rgba(40, 167, 69, 0) 0%, rgba(40, 167, 69, 0.5) 75%, #28a745 100%);
 }
 
+body.accent-teal.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-teal.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #20c997;
+}
+
 body.accent-teal.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-teal.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #20c997;
@@ -2760,6 +3069,11 @@ body.accent-teal.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-
 body.accent-teal.sidebar-yellow #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-teal.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(32, 201, 151, 0) 0%, rgba(32, 201, 151, 0.5) 75%, #20c997 100%);
+}
+
+body.accent-cyan.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-cyan.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #17a2b8;
 }
 
 body.accent-cyan.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2772,6 +3086,11 @@ body.accent-cyan.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(23, 162, 184, 0) 0%, rgba(23, 162, 184, 0.5) 75%, #17a2b8 100%);
 }
 
+body.accent-white.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-white.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #fff;
+}
+
 body.accent-white.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-white.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #fff;
@@ -2782,6 +3101,11 @@ body.accent-white.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-li
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 75%, #fff 100%);
 }
 
+body.accent-gray.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-gray.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #6c757d;
+}
+
 body.accent-gray.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-gray.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6c757d;
@@ -2790,6 +3114,11 @@ body.accent-gray.sidebar-yellow #right-sidebar ul.sidebar-menu .nav-item > .nav-
 body.accent-gray.sidebar-yellow #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-gray.sidebar-yellow #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(108, 117, 125, 0) 0%, rgba(108, 117, 125, 0.5) 75%, #6c757d 100%);
+}
+
+body.accent-gray-dark.sidebar-yellow #left-sidebar .close-sidebar:hover,
+body.accent-gray-dark.sidebar-yellow #right-sidebar .close-sidebar:hover {
+  background-color: #343a40;
 }
 
 body.accent-gray-dark.sidebar-yellow #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2811,6 +3140,11 @@ body.sidebar-red #right-sidebar {
 body.sidebar-red #left-sidebar .ss-scroll,
 body.sidebar-red #right-sidebar .ss-scroll {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+body.sidebar-red #left-sidebar .close-sidebar,
+body.sidebar-red #right-sidebar .close-sidebar {
+  background-color: #7B1825;
 }
 
 body.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link,
@@ -2916,6 +3250,11 @@ body.sidebar-red #right-sidebar {
   border-left-width: 0;
 }
 
+body.accent-blue.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-blue.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #007bff;
+}
+
 body.accent-blue.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-blue.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #007bff;
@@ -2924,6 +3263,11 @@ body.accent-blue.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-lin
 body.accent-blue.sidebar-red #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-blue.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 0.5) 75%, #007bff 100%);
+}
+
+body.accent-indigo.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-indigo.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #6610f2;
 }
 
 body.accent-indigo.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2936,6 +3280,11 @@ body.accent-indigo.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(102, 16, 242, 0) 0%, rgba(102, 16, 242, 0.5) 75%, #6610f2 100%);
 }
 
+body.accent-purple.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-purple.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #6f42c1;
+}
+
 body.accent-purple.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-purple.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6f42c1;
@@ -2944,6 +3293,11 @@ body.accent-purple.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-l
 body.accent-purple.sidebar-red #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-purple.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(111, 66, 193, 0) 0%, rgba(111, 66, 193, 0.5) 75%, #6f42c1 100%);
+}
+
+body.accent-pink.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-pink.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #e83e8c;
 }
 
 body.accent-pink.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2956,6 +3310,11 @@ body.accent-pink.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:a
   background: linear-gradient(90deg, rgba(232, 62, 140, 0) 0%, rgba(232, 62, 140, 0.5) 75%, #e83e8c 100%);
 }
 
+body.accent-red.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-red.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #dc3545;
+}
+
 body.accent-red.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-red.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #dc3545;
@@ -2964,6 +3323,11 @@ body.accent-red.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-link
 body.accent-red.sidebar-red #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-red.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(220, 53, 69, 0) 0%, rgba(220, 53, 69, 0.5) 75%, #dc3545 100%);
+}
+
+body.accent-orange.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-orange.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #fd7e14;
 }
 
 body.accent-orange.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2976,6 +3340,11 @@ body.accent-orange.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(253, 126, 20, 0) 0%, rgba(253, 126, 20, 0.5) 75%, #fd7e14 100%);
 }
 
+body.accent-yellow.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-yellow.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #ffc107;
+}
+
 body.accent-yellow.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-yellow.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #ffc107;
@@ -2984,6 +3353,11 @@ body.accent-yellow.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-l
 body.accent-yellow.sidebar-red #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-yellow.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(255, 193, 7, 0) 0%, rgba(255, 193, 7, 0.5) 75%, #ffc107 100%);
+}
+
+body.accent-green.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-green.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #28a745;
 }
 
 body.accent-green.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -2996,6 +3370,11 @@ body.accent-green.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:
   background: linear-gradient(90deg, rgba(40, 167, 69, 0) 0%, rgba(40, 167, 69, 0.5) 75%, #28a745 100%);
 }
 
+body.accent-teal.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-teal.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #20c997;
+}
+
 body.accent-teal.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-teal.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #20c997;
@@ -3004,6 +3383,11 @@ body.accent-teal.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-lin
 body.accent-teal.sidebar-red #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-teal.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(32, 201, 151, 0) 0%, rgba(32, 201, 151, 0.5) 75%, #20c997 100%);
+}
+
+body.accent-cyan.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-cyan.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #17a2b8;
 }
 
 body.accent-cyan.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3016,6 +3400,11 @@ body.accent-cyan.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:a
   background: linear-gradient(90deg, rgba(23, 162, 184, 0) 0%, rgba(23, 162, 184, 0.5) 75%, #17a2b8 100%);
 }
 
+body.accent-white.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-white.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #fff;
+}
+
 body.accent-white.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-white.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #fff;
@@ -3026,6 +3415,11 @@ body.accent-white.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 75%, #fff 100%);
 }
 
+body.accent-gray.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-gray.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #6c757d;
+}
+
 body.accent-gray.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-gray.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6c757d;
@@ -3034,6 +3428,11 @@ body.accent-gray.sidebar-red #right-sidebar ul.sidebar-menu .nav-item > .nav-lin
 body.accent-gray.sidebar-red #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-gray.sidebar-red #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(108, 117, 125, 0) 0%, rgba(108, 117, 125, 0.5) 75%, #6c757d 100%);
+}
+
+body.accent-gray-dark.sidebar-red #left-sidebar .close-sidebar:hover,
+body.accent-gray-dark.sidebar-red #right-sidebar .close-sidebar:hover {
+  background-color: #343a40;
 }
 
 body.accent-gray-dark.sidebar-red #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3055,6 +3454,11 @@ body.sidebar-white #right-sidebar {
 body.sidebar-white #left-sidebar .ss-scroll,
 body.sidebar-white #right-sidebar .ss-scroll {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+body.sidebar-white #left-sidebar .close-sidebar,
+body.sidebar-white #right-sidebar .close-sidebar {
+  background-color: #fff;
 }
 
 body.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link,
@@ -3080,6 +3484,11 @@ body.sidebar-white #right-sidebar {
   border-left: 1px solid #cccccc;
 }
 
+body.accent-blue.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-blue.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #cce5ff;
+}
+
 body.accent-blue.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-blue.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #cce5ff;
@@ -3088,6 +3497,11 @@ body.accent-blue.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-l
 body.accent-blue.sidebar-white #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-blue.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(204, 229, 255, 0) 0%, rgba(204, 229, 255, 0.5) 75%, #cce5ff 100%);
+}
+
+body.accent-indigo.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-indigo.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #e2d1fd;
 }
 
 body.accent-indigo.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3100,6 +3514,11 @@ body.accent-indigo.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-li
   background: linear-gradient(90deg, rgba(226, 209, 253, 0) 0%, rgba(226, 209, 253, 0.5) 75%, #e2d1fd 100%);
 }
 
+body.accent-purple.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-purple.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #e4dcf3;
+}
+
 body.accent-purple.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-purple.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #e4dcf3;
@@ -3108,6 +3527,11 @@ body.accent-purple.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav
 body.accent-purple.sidebar-white #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-purple.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(228, 220, 243, 0) 0%, rgba(228, 220, 243, 0.5) 75%, #e4dcf3 100%);
+}
+
+body.accent-pink.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-pink.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #fef4f9;
 }
 
 body.accent-pink.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3120,6 +3544,11 @@ body.accent-pink.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(254, 244, 249, 0) 0%, rgba(254, 244, 249, 0.5) 75%, #fef4f9 100%);
 }
 
+body.accent-red.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-red.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #fae3e5;
+}
+
 body.accent-red.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-red.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #fae3e5;
@@ -3128,6 +3557,11 @@ body.accent-red.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-red.sidebar-white #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-red.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(250, 227, 229, 0) 0%, rgba(250, 227, 229, 0.5) 75%, #fae3e5 100%);
+}
+
+body.accent-orange.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-orange.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #ffedde;
 }
 
 body.accent-orange.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3140,6 +3574,11 @@ body.accent-orange.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-li
   background: linear-gradient(90deg, rgba(255, 237, 222, 0) 0%, rgba(255, 237, 222, 0.5) 75%, #ffedde 100%);
 }
 
+body.accent-yellow.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-yellow.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #fff4d3;
+}
+
 body.accent-yellow.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-yellow.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #fff4d3;
@@ -3148,6 +3587,11 @@ body.accent-yellow.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav
 body.accent-yellow.sidebar-white #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-yellow.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(255, 244, 211, 0) 0%, rgba(255, 244, 211, 0.5) 75%, #fff4d3 100%);
+}
+
+body.accent-green.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-green.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #afecbd;
 }
 
 body.accent-green.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3160,6 +3604,11 @@ body.accent-green.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(175, 236, 189, 0) 0%, rgba(175, 236, 189, 0.5) 75%, #afecbd 100%);
 }
 
+body.accent-teal.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-teal.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #c0f5e5;
+}
+
 body.accent-teal.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-teal.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #c0f5e5;
@@ -3168,6 +3617,11 @@ body.accent-teal.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-l
 body.accent-teal.sidebar-white #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-teal.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(192, 245, 229, 0) 0%, rgba(192, 245, 229, 0.5) 75%, #c0f5e5 100%);
+}
+
+body.accent-cyan.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-cyan.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #a7e9f4;
 }
 
 body.accent-cyan.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3180,6 +3634,11 @@ body.accent-cyan.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(167, 233, 244, 0) 0%, rgba(167, 233, 244, 0.5) 75%, #a7e9f4 100%);
 }
 
+body.accent-white.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-white.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #999999;
+}
+
 body.accent-white.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-white.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #999999;
@@ -3190,6 +3649,11 @@ body.accent-white.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(153, 153, 153, 0) 0%, rgba(153, 153, 153, 0.5) 75%, #999999 100%);
 }
 
+body.accent-gray.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-gray.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #d8dbdd;
+}
+
 body.accent-gray.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-gray.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #d8dbdd;
@@ -3198,6 +3662,11 @@ body.accent-gray.sidebar-white #right-sidebar ul.sidebar-menu .nav-item > .nav-l
 body.accent-gray.sidebar-white #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-gray.sidebar-white #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(216, 219, 221, 0) 0%, rgba(216, 219, 221, 0.5) 75%, #d8dbdd 100%);
+}
+
+body.accent-gray-dark.sidebar-white #left-sidebar .close-sidebar:hover,
+body.accent-gray-dark.sidebar-white #right-sidebar .close-sidebar:hover {
+  background-color: #96a0aa;
 }
 
 body.accent-gray-dark.sidebar-white #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3219,6 +3688,11 @@ body.sidebar-gray #right-sidebar {
 body.sidebar-gray #left-sidebar .ss-scroll,
 body.sidebar-gray #right-sidebar .ss-scroll {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+body.sidebar-gray #left-sidebar .close-sidebar,
+body.sidebar-gray #right-sidebar .close-sidebar {
+  background-color: #6c757d;
 }
 
 body.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link,
@@ -3324,6 +3798,11 @@ body.sidebar-gray #right-sidebar {
   border-left-width: 0;
 }
 
+body.accent-blue.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-blue.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #007bff;
+}
+
 body.accent-blue.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-blue.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #007bff;
@@ -3332,6 +3811,11 @@ body.accent-blue.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-blue.sidebar-gray #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-blue.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 0.5) 75%, #007bff 100%);
+}
+
+body.accent-indigo.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-indigo.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #6610f2;
 }
 
 body.accent-indigo.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3344,6 +3828,11 @@ body.accent-indigo.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(102, 16, 242, 0) 0%, rgba(102, 16, 242, 0.5) 75%, #6610f2 100%);
 }
 
+body.accent-purple.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-purple.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #6f42c1;
+}
+
 body.accent-purple.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-purple.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6f42c1;
@@ -3352,6 +3841,11 @@ body.accent-purple.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-
 body.accent-purple.sidebar-gray #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-purple.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(111, 66, 193, 0) 0%, rgba(111, 66, 193, 0.5) 75%, #6f42c1 100%);
+}
+
+body.accent-pink.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-pink.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #e83e8c;
 }
 
 body.accent-pink.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3364,6 +3858,11 @@ body.accent-pink.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link:
   background: linear-gradient(90deg, rgba(232, 62, 140, 0) 0%, rgba(232, 62, 140, 0.5) 75%, #e83e8c 100%);
 }
 
+body.accent-red.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-red.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #dc3545;
+}
+
 body.accent-red.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-red.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #dc3545;
@@ -3372,6 +3871,11 @@ body.accent-red.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-lin
 body.accent-red.sidebar-gray #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-red.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(220, 53, 69, 0) 0%, rgba(220, 53, 69, 0.5) 75%, #dc3545 100%);
+}
+
+body.accent-orange.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-orange.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #fd7e14;
 }
 
 body.accent-orange.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3384,6 +3888,11 @@ body.accent-orange.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-lin
   background: linear-gradient(90deg, rgba(253, 126, 20, 0) 0%, rgba(253, 126, 20, 0.5) 75%, #fd7e14 100%);
 }
 
+body.accent-yellow.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-yellow.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #ffc107;
+}
+
 body.accent-yellow.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-yellow.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #ffc107;
@@ -3392,6 +3901,11 @@ body.accent-yellow.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-
 body.accent-yellow.sidebar-gray #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-yellow.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(255, 193, 7, 0) 0%, rgba(255, 193, 7, 0.5) 75%, #ffc107 100%);
+}
+
+body.accent-green.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-green.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #28a745;
 }
 
 body.accent-green.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3404,6 +3918,11 @@ body.accent-green.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(40, 167, 69, 0) 0%, rgba(40, 167, 69, 0.5) 75%, #28a745 100%);
 }
 
+body.accent-teal.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-teal.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #20c997;
+}
+
 body.accent-teal.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-teal.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #20c997;
@@ -3412,6 +3931,11 @@ body.accent-teal.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-teal.sidebar-gray #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-teal.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(32, 201, 151, 0) 0%, rgba(32, 201, 151, 0.5) 75%, #20c997 100%);
+}
+
+body.accent-cyan.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-cyan.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #17a2b8;
 }
 
 body.accent-cyan.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3424,6 +3948,11 @@ body.accent-cyan.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link:
   background: linear-gradient(90deg, rgba(23, 162, 184, 0) 0%, rgba(23, 162, 184, 0.5) 75%, #17a2b8 100%);
 }
 
+body.accent-white.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-white.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #fff;
+}
+
 body.accent-white.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-white.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #fff;
@@ -3434,6 +3963,11 @@ body.accent-white.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 75%, #fff 100%);
 }
 
+body.accent-gray.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-gray.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #6c757d;
+}
+
 body.accent-gray.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-gray.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6c757d;
@@ -3442,6 +3976,11 @@ body.accent-gray.sidebar-gray #right-sidebar ul.sidebar-menu .nav-item > .nav-li
 body.accent-gray.sidebar-gray #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-gray.sidebar-gray #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(108, 117, 125, 0) 0%, rgba(108, 117, 125, 0.5) 75%, #6c757d 100%);
+}
+
+body.accent-gray-dark.sidebar-gray #left-sidebar .close-sidebar:hover,
+body.accent-gray-dark.sidebar-gray #right-sidebar .close-sidebar:hover {
+  background-color: #343a40;
 }
 
 body.accent-gray-dark.sidebar-gray #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3463,6 +4002,11 @@ body.sidebar-gray-dark #right-sidebar {
 body.sidebar-gray-dark #left-sidebar .ss-scroll,
 body.sidebar-gray-dark #right-sidebar .ss-scroll {
   background-color: rgba(255, 255, 255, 0.4);
+}
+
+body.sidebar-gray-dark #left-sidebar .close-sidebar,
+body.sidebar-gray-dark #right-sidebar .close-sidebar {
+  background-color: #343a40;
 }
 
 body.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link,
@@ -3568,6 +4112,11 @@ body.sidebar-gray-dark #right-sidebar {
   border-left-width: 0;
 }
 
+body.accent-blue.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-blue.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #007bff;
+}
+
 body.accent-blue.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-blue.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #007bff;
@@ -3576,6 +4125,11 @@ body.accent-blue.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .n
 body.accent-blue.sidebar-gray-dark #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-blue.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(0, 123, 255, 0) 0%, rgba(0, 123, 255, 0.5) 75%, #007bff 100%);
+}
+
+body.accent-indigo.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-indigo.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #6610f2;
 }
 
 body.accent-indigo.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3588,6 +4142,11 @@ body.accent-indigo.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .na
   background: linear-gradient(90deg, rgba(102, 16, 242, 0) 0%, rgba(102, 16, 242, 0.5) 75%, #6610f2 100%);
 }
 
+body.accent-purple.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-purple.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #6f42c1;
+}
+
 body.accent-purple.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-purple.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6f42c1;
@@ -3596,6 +4155,11 @@ body.accent-purple.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > 
 body.accent-purple.sidebar-gray-dark #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-purple.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(111, 66, 193, 0) 0%, rgba(111, 66, 193, 0.5) 75%, #6f42c1 100%);
+}
+
+body.accent-pink.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-pink.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #e83e8c;
 }
 
 body.accent-pink.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3608,6 +4172,11 @@ body.accent-pink.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav-
   background: linear-gradient(90deg, rgba(232, 62, 140, 0) 0%, rgba(232, 62, 140, 0.5) 75%, #e83e8c 100%);
 }
 
+body.accent-red.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-red.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #dc3545;
+}
+
 body.accent-red.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-red.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #dc3545;
@@ -3616,6 +4185,11 @@ body.accent-red.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .na
 body.accent-red.sidebar-gray-dark #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-red.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(220, 53, 69, 0) 0%, rgba(220, 53, 69, 0.5) 75%, #dc3545 100%);
+}
+
+body.accent-orange.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-orange.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #fd7e14;
 }
 
 body.accent-orange.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3628,6 +4202,11 @@ body.accent-orange.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .na
   background: linear-gradient(90deg, rgba(253, 126, 20, 0) 0%, rgba(253, 126, 20, 0.5) 75%, #fd7e14 100%);
 }
 
+body.accent-yellow.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-yellow.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #ffc107;
+}
+
 body.accent-yellow.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-yellow.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #ffc107;
@@ -3636,6 +4215,11 @@ body.accent-yellow.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > 
 body.accent-yellow.sidebar-gray-dark #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-yellow.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(255, 193, 7, 0) 0%, rgba(255, 193, 7, 0.5) 75%, #ffc107 100%);
+}
+
+body.accent-green.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-green.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #28a745;
 }
 
 body.accent-green.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3648,6 +4232,11 @@ body.accent-green.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav
   background: linear-gradient(90deg, rgba(40, 167, 69, 0) 0%, rgba(40, 167, 69, 0.5) 75%, #28a745 100%);
 }
 
+body.accent-teal.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-teal.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #20c997;
+}
+
 body.accent-teal.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-teal.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #20c997;
@@ -3656,6 +4245,11 @@ body.accent-teal.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .n
 body.accent-teal.sidebar-gray-dark #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-teal.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(32, 201, 151, 0) 0%, rgba(32, 201, 151, 0.5) 75%, #20c997 100%);
+}
+
+body.accent-cyan.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-cyan.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #17a2b8;
 }
 
 body.accent-cyan.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
@@ -3668,6 +4262,11 @@ body.accent-cyan.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav-
   background: linear-gradient(90deg, rgba(23, 162, 184, 0) 0%, rgba(23, 162, 184, 0.5) 75%, #17a2b8 100%);
 }
 
+body.accent-white.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-white.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #fff;
+}
+
 body.accent-white.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-white.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #fff;
@@ -3678,6 +4277,11 @@ body.accent-white.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav
   background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 75%, #fff 100%);
 }
 
+body.accent-gray.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-gray.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #6c757d;
+}
+
 body.accent-gray.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,
 body.accent-gray.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .nav-link:hover {
   background-color: #6c757d;
@@ -3686,6 +4290,11 @@ body.accent-gray.sidebar-gray-dark #right-sidebar ul.sidebar-menu .nav-item > .n
 body.accent-gray.sidebar-gray-dark #left-sidebar ul.sidebar-menu.active > .nav-link:after,
 body.accent-gray.sidebar-gray-dark #right-sidebar ul.sidebar-menu.active > .nav-link:after {
   background: linear-gradient(90deg, rgba(108, 117, 125, 0) 0%, rgba(108, 117, 125, 0.5) 75%, #6c757d 100%);
+}
+
+body.accent-gray-dark.sidebar-gray-dark #left-sidebar .close-sidebar:hover,
+body.accent-gray-dark.sidebar-gray-dark #right-sidebar .close-sidebar:hover {
+  background-color: #343a40;
 }
 
 body.accent-gray-dark.sidebar-gray-dark #left-sidebar ul.sidebar-menu .nav-item > .nav-link:hover,

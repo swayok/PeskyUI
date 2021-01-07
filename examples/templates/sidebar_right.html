@@ -1,5 +1,6 @@
 <div id="right-sidebar">
     <div class="sidebar-content">
+        <div class="close-sidebar">&times;</div>
         <div class="scrollable">
             <div class="pb-30">
                 <%~ include('sidebar-right-ui-colors-picker') %>
@@ -9,6 +10,7 @@
 </div>
 
 <script type="application/javascript">
+    PeskyUI.initRightSidebar();
     var leftSidebar = $('#right-sidebar');
     leftSidebar.find('.scrollable').SimpleScrollbar();
 </script>

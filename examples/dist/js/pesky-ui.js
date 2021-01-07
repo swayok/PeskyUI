@@ -14,9 +14,7 @@
     var $__default = /*#__PURE__*/_interopDefaultLegacy($);
 
     class PeskyUI {
-      static get defaultInitializers() {
-        return ['initLeftSidebar', 'initRightSidebar'];
-      }
+      static get defaultInitializers() {}
 
       static get defaults() {
         return {
@@ -52,20 +50,24 @@
       initLeftSidebar() {
         $__default['default'](document.body).on('click', '.sidebar-left-toggle', () => {
           this.toggleLeftSidebar();
+          return false;
+        });
+        this.getLeftSidebar().on('click', '.close-sidebar', () => {
+          this.hideLeftSidebar();
+          return false;
         });
       }
 
       toggleLeftSidebar() {
-        console.log('Toggle left sidebar', this.getLeftSidebar());
-        this.getLeftSidebar().toggleClass('closed');
+        this.getLeftSidebar().toggleClass('closed').toggleClass('opened');
       }
 
       showLeftSidebar() {
-        this.getLeftSidebar().removeClass('closed');
+        this.getLeftSidebar().removeClass('closed').addClass('opened');
       }
 
       hideLeftSidebar() {
-        this.getLeftSidebar().addClass('closed');
+        this.getLeftSidebar().addClass('closed').removeClass('opened');
       }
 
       initLeftSidebarMenu(menuId) {
@@ -79,19 +81,24 @@
       initRightSidebar() {
         $__default['default'](document.body).on('click', '.sidebar-right-toggle', () => {
           this.toggleRightSidebar();
+          return false;
+        });
+        this.getRightSidebar().on('click', '.close-sidebar', () => {
+          this.hideRightSidebar();
+          return false;
         });
       }
 
       toggleRightSidebar() {
-        this.getRightSidebar().toggleClass('closed');
+        this.getRightSidebar().toggleClass('closed opened');
       }
 
       showRightSidebar() {
-        this.getRightSidebar().removeClass('closed');
+        this.getRightSidebar().removeClass('closed').addClass('opened');
       }
 
       hideRightSidebar() {
-        this.getRightSidebar().addClass('closed');
+        this.getRightSidebar().addClass('closed').removeClass('opened');
       }
 
       uuid4() {
