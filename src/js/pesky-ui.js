@@ -34,16 +34,53 @@ class PeskyUI {
         }
     }
 
+    getLeftSidebar() {
+        return $(this.options.leftSidebarSelector);
+    }
+
     initLeftSidebar() {
-        this.$leftSidebar = $(this.options.leftSidebarSelector);
+        $(document.body).on('click', '.sidebar-left-toggle', () => {
+            this.toggleLeftSidebar();
+        });
+    }
+
+    toggleLeftSidebar() {
+        console.log('Toggle left sidebar', this.getLeftSidebar());
+        this.getLeftSidebar().toggleClass('closed');
+    }
+
+    showLeftSidebar() {
+        this.getLeftSidebar().removeClass('closed');
+    }
+
+    hideLeftSidebar() {
+        this.getLeftSidebar().addClass('closed');
     }
 
     initLeftSidebarMenu(menuId) {
         $(menuId).NestedMenu();
     }
 
+    getRightSidebar() {
+        return $(this.options.rightSidebarSelector);
+    }
+
     initRightSidebar() {
-        this.$rightSidebar = $(this.options.rightSidebarSelector);
+        $(document.body).on('click', '.sidebar-right-toggle', () => {
+            this.toggleRightSidebar();
+        });
+    }
+
+    toggleRightSidebar() {
+        this.getRightSidebar().toggleClass('closed');
+    }
+
+    showRightSidebar() {
+        this.getRightSidebar().removeClass('closed');
+    }
+
+    hideRightSidebar() {
+        this.getRightSidebar().addClass('closed');
     }
 
     uuid4() {
@@ -57,7 +94,9 @@ class PeskyUI {
 }
 
 $(function () {
-    window.PeskyUI = new PeskyUI(typeof PeskyUIConfig === 'undefined' ? {} : PeskyUIConfig);
+    if (!window.PeskyUI) {
+        window.PeskyUI = new PeskyUI(typeof PeskyUIConfig === 'undefined' ? {} : PeskyUIConfig);
+    }
 });
 
 export default PeskyUI;

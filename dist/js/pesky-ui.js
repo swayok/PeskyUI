@@ -45,16 +45,53 @@
         }
       }
 
+      getLeftSidebar() {
+        return $__default['default'](this.options.leftSidebarSelector);
+      }
+
       initLeftSidebar() {
-        this.$leftSidebar = $__default['default'](this.options.leftSidebarSelector);
+        $__default['default'](document.body).on('click', '.sidebar-left-toggle', () => {
+          this.toggleLeftSidebar();
+        });
+      }
+
+      toggleLeftSidebar() {
+        console.log('Toggle left sidebar', this.getLeftSidebar());
+        this.getLeftSidebar().toggleClass('closed');
+      }
+
+      showLeftSidebar() {
+        this.getLeftSidebar().removeClass('closed');
+      }
+
+      hideLeftSidebar() {
+        this.getLeftSidebar().addClass('closed');
       }
 
       initLeftSidebarMenu(menuId) {
         $__default['default'](menuId).NestedMenu();
       }
 
+      getRightSidebar() {
+        return $__default['default'](this.options.rightSidebarSelector);
+      }
+
       initRightSidebar() {
-        this.$rightSidebar = $__default['default'](this.options.rightSidebarSelector);
+        $__default['default'](document.body).on('click', '.sidebar-right-toggle', () => {
+          this.toggleRightSidebar();
+        });
+      }
+
+      toggleRightSidebar() {
+        this.getRightSidebar().toggleClass('closed');
+      }
+
+      showRightSidebar() {
+        this.getRightSidebar().removeClass('closed');
+      }
+
+      hideRightSidebar() {
+        this.getRightSidebar().addClass('closed');
       }
 
       uuid4() {
@@ -68,7 +105,9 @@
     }
 
     $__default['default'](function () {
-      window.PeskyUI = new PeskyUI(typeof PeskyUIConfig === 'undefined' ? {} : PeskyUIConfig);
+      if (!window.PeskyUI) {
+        window.PeskyUI = new PeskyUI(typeof PeskyUIConfig === 'undefined' ? {} : PeskyUIConfig);
+      }
     });
 
     const NestedMenu = ($ => {
