@@ -46,18 +46,38 @@
         flex: 1;
     }
 
-    @mixin header-button-theme($bg-color-name, $accent-color-modified) {
-        .header-button {
+    @each $bg-color-name, $bg-color in $ui-bg-colors {
+
+        body.header-#{$bg-color-name} & {
+            background-color: $bg-color;
             color: map-get($ui-sidebar-text-colors, $bg-color-name);
 
-            &:hover,
-            &.active:after {
-                background-color: $accent-color-modified;
+            @if ($bg-color-name == 'white') {
+                border-color: darken($bg-color, 20%);
+            } @else {
+                border-color: $bg-color;
+            }
+
+            .header-button {
+                color: map-get($ui-sidebar-text-colors, $bg-color-name);
             }
         }
-    }
 
-    @each $bg-color-name, $bg-color in $ui-bg-colors {
+        body.header-#{$bg-color-name}.header-lighter & {
+            background-color: lighten($bg-color, 10%);
+
+            @if ($bg-color-name == 'white') {
+                border-color: darken($bg-color, 20%);
+            } @else {
+                border-color: $bg-color;
+            }
+        }
+
+        body.header-#{$bg-color-name}.header-darker & {
+            background-color: darken($bg-color, 10%);
+            border-color: darken($bg-color, 20%);
+        }
+
         @each $accent-color-name, $accent-color in $ui-accents {
 
             $accent-color-modified: $accent-color;
@@ -65,32 +85,15 @@
                 $accent-color-modified: map-get($ui-accents-light-bg, $accent-color-name);
             }
 
-            body.header-#{$bg-color-name}-#{$accent-color-name} & {
-                background-color: $bg-color;
-                color: map-get($ui-sidebar-text-colors, $bg-color-name);
-
-                @if ($bg-color-name == 'white') {
-                    border-color: darken($bg-color, 20%);
-                } @else {
-                    border-color: $bg-color;
+            body.accent-#{$accent-color-name}.header-#{$bg-color-name} & {
+                .header-button {
+                    &:hover,
+                    &.active:after {
+                        background-color: $accent-color-modified;
+                    }
                 }
-
-                @include header-button-theme($bg-color-name, $accent-color-modified);
-            }
-
-            body.header-#{$bg-color-name}-#{$accent-color-name}-lighter & {
-                background-color: lighten($bg-color, 10%);
-                color: map-get($ui-sidebar-text-colors, $bg-color-name);
-
-                @include header-button-theme($bg-color-name, $accent-color-modified);
-            }
-
-            body.header-#{$bg-color-name}-#{$accent-color-name}-darker & {
-                background-color: darken($bg-color, 10%);
-                color: map-get($ui-sidebar-text-colors, $bg-color-name);
-
-                @include header-button-theme($bg-color-name, $accent-color-modified);
             }
         }
     }
+
 }

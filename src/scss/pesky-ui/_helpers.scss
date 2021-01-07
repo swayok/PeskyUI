@@ -1,0 +1,32 @@
+@each $accent-color-name, $accent-color in $ui-accents {
+    .ui-accent-bg-#{$accent-color-name} {
+        background-color: $accent-color !important;
+    }
+    .ui-accent-bg-#{$accent-color-name}-lighter {
+        background-color: lighten($accent-color, 10%) !important;
+    }
+    .ui-accent-bg-#{$accent-color-name}-darker {
+        background-color: darken($accent-color, 10%) !important;
+    }
+    .ui-accent-text-#{$accent-color-name} {
+        color: $accent-color !important;
+    }
+    .ui-accent-text-#{$accent-color-name}-lighter {
+        color: lighten($accent-color, 10%) !important;
+    }
+    .ui-accent-text-#{$accent-color-name}-darker {
+        color: darken($accent-color, 10%) !important;
+    }
+}
+
+@each $bg-color-name, $bg-color in $ui-bg-colors {
+    .ui-bg-#{$bg-color-name} {
+        background-color: $bg-color !important;
+    }
+    .ui-bg-#{$bg-color-name}-lighter {
+        background-color: lighten($bg-color, 10%) !important;
+    }
+    .ui-bg-#{$bg-color-name}-darker {
+        background-color: darken($bg-color, 10%) !important;
+    }
+}

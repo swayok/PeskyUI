@@ -1,5 +1,3 @@
-@use "sass:map";
-
 @mixin hover-linear-gradient($color) {
     background: linear-gradient(90deg, fade-out($color, 1) 0%, fade-out($color, 0.5) 75%, $color 100%);
 }
@@ -23,6 +21,19 @@
 
         .ss-scroll {
             border-radius: 0;
+        }
+    }
+
+    .nav-header {
+        font-size: .9rem;
+        padding: .5rem;
+        min-height: 30px;
+        line-height: 20px;
+        text-align: center;
+        text-transform: uppercase;
+
+        &:not(:first-of-type) {
+            padding: 1rem 1rem .5rem 1rem;
         }
     }
 
@@ -133,19 +144,6 @@
             }
         }
 
-        .nav-header {
-            font-size: .9rem;
-            padding: .5rem;
-            min-height: 30px;
-            line-height: 20px;
-            text-align: center;
-            text-transform: uppercase;
-
-            &:not(:first-of-type) {
-                padding: 1rem 1rem .5rem 1rem;
-            }
-        }
-
         .nav-link-title {
             display: inline-block;
             animation-name: fadeIn;
@@ -188,6 +186,73 @@
 }
 
 @each $bg-color-name, $bg-color in $ui-bg-colors {
+
+    body.sidebar-#{$bg-color-name} {
+        #left-sidebar,
+        #right-sidebar {
+            background-color: $bg-color;
+            color: map-get($ui-sidebar-text-colors, $bg-color-name);
+
+            .ss-scroll {
+                @if map-get($ui-is-dark-bg, $bg-color-name) {
+                    background-color: rgba(255, 255, 255, 0.4);
+                } @else {
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
+            }
+
+            ul.sidebar-menu {
+                .nav-item {
+                    > .nav-link {
+                        color: map-get($ui-sidebar-text-colors, $bg-color-name);
+
+                        @if map-get($ui-is-dark-bg, $bg-color-name) {
+                            @each $theme-color-name, $theme-color in $theme-colors {
+                                .badge-#{$theme-color-name} {
+                                    background-color: lighten($theme-color, 15%);
+                                }
+
+                                .nav-icon.text-#{$theme-color-name} {
+                                    color: lighten($theme-color, 20%) !important;
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+
+                .nav-header {
+                    color: map-get($ui-sidebar-text-colors, $bg-color-name);
+                }
+
+                .nav-submenu {
+                    @if map-get($ui-is-dark-bg, $bg-color-name) {
+                        background-color: lighten($bg-color, 10%);
+                    } @else {
+                        background-color: darken($bg-color, 10%);
+                    }
+                }
+            }
+        }
+
+        @if ($bg-color-name == 'white') {
+            #left-sidebar {
+                border-right: 1px solid darken($bg-color, 20%);
+            }
+            #right-sidebar {
+                border-left: 1px solid darken($bg-color, 20%);
+            }
+        } @else {
+            #left-sidebar {
+                border-right-width: 0;
+            }
+            #right-sidebar {
+                border-left-width: 0;
+            }
+        }
+    }
+
     @each $accent-color-name, $accent-color in $ui-accents {
 
         $accent-color-modified: $accent-color;
@@ -195,79 +260,24 @@
             $accent-color-modified: map-get($ui-accents-light-bg, $accent-color-name);
         }
 
-        body.sidebar-#{$bg-color-name}-#{$accent-color-name} {
+        body.accent-#{$accent-color-name}.sidebar-#{$bg-color-name} {
             #left-sidebar,
             #right-sidebar {
-                background-color: $bg-color;
-                color: map-get($ui-sidebar-text-colors, $bg-color-name);
-
-                .ss-scroll {
-                    @if map-get($ui-is-dark-bg, $bg-color-name) {
-                        background-color: rgba(255, 255, 255, 0.4);
-                    } @else {
-                        background-color: rgba(0, 0, 0, 0.2);
-                    }
-                }
-
                 ul.sidebar-menu {
                     .nav-item {
-                        > .nav-link {
-                            color: map-get($ui-sidebar-text-colors, $bg-color-name);
-
-                            &:hover {
-                                background-color: $accent-color-modified;
-                            }
-
-                            @if map-get($ui-is-dark-bg, $bg-color-name) {
-                                @each $theme-color-name, $theme-color in $theme-colors {
-                                    .badge-#{$theme-color-name} {
-                                        background-color: lighten($theme-color, 15%);
-                                    }
-
-                                    .nav-icon.text-#{$theme-color-name} {
-                                        color: lighten($theme-color, 20%) !important;
-                                    }
-                                }
-                            }
-                        }
-
-                        &.active {
-                            > .nav-link:after {
-                                @include hover-linear-gradient($accent-color-modified);
-                            }
+                        > .nav-link:hover {
+                            background-color: $accent-color-modified;
                         }
                     }
 
-                    .nav-header {
-                        color: map-get($ui-sidebar-text-colors, $bg-color-name);
-                    }
-
-                    .nav-submenu {
-                        @if map-get($ui-is-dark-bg, $bg-color-name) {
-                            background-color: lighten($bg-color, 10%);
-                        } @else {
-                            background-color: darken($bg-color, 10%);
+                    &.active {
+                        > .nav-link:after {
+                            @include hover-linear-gradient($accent-color-modified);
                         }
                     }
-                }
-            }
-
-            @if ($bg-color-name == 'white') {
-                #left-sidebar {
-                    border-right: 1px solid darken($bg-color, 20%);
-                }
-                #right-sidebar {
-                    border-left: 1px solid darken($bg-color, 20%);
-                }
-            } @else {
-                #left-sidebar {
-                    border-right-width: 0;
-                }
-                #right-sidebar {
-                    border-left-width: 0;
                 }
             }
         }
-
     }
 }
+

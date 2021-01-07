@@ -1,0 +1,159 @@
+<div class="nav-header pb-15 pt-15">
+    Accent color
+</div>
+<div
+    class="d-grid grid-columns-4 grid-rows-gap-2 grid-columns-gap-1 pl-10 pr-10"
+    id="accent-color-picker"
+>
+    <% window.LoadedData.uiColors.accents.forEach(function(color) { %>
+        <div
+            class="text-center flex-fill cursor-pointer color-picker-btn p-5 br-rad-6"
+            data-type="accent"
+            data-name="<%= color.color_name %>"
+        >
+            <div
+                class="d-inline-block w-25 h-25 br-rad-half ui-accent-bg-<%= color.color_name %>"
+            ></div>
+            <div class="fs-14"><%= color.title %></div>
+        </div>
+    <% }) %>
+</div>
+<div class="nav-header pt-20 pb-15">
+    Sidebar background color
+</div>
+<div
+    class="d-grid grid-columns-4 grid-rows-gap-2 grid-columns-gap-1 pl-10 pr-10"
+    id="sidebar-bg-color-picker"
+>
+    <% window.LoadedData.uiColors.backgrounds.forEach(function(color) { %>
+        <div
+            class="text-center flex-fill cursor-pointer color-picker-btn p-5 br-rad-6"
+            data-type="sidebar"
+            data-name="<%= color.color_name %>"
+        >
+            <div
+                class="d-inline-block w-25 h-25 br-rad-half ui-bg-<%= color.color_name %>"
+            ></div>
+            <div class="fs-14"><%= color.title %></div>
+        </div>
+    <% }) %>
+</div>
+<div class="nav-header pt-20 pb-15">
+    Header background color
+</div>
+<div
+    class="d-grid grid-columns-4 grid-rows-gap-2 grid-columns-gap-1 pl-10 pr-10"
+    id="header-bg-color-picker"
+>
+    <% window.LoadedData.uiColors.backgrounds.forEach(function(color) { %>
+        <div
+            class="text-center flex-fill cursor-pointer color-picker-btn p-5 br-rad-6"
+            data-type="header"
+            data-name="<%= color.color_name %>"
+        >
+            <div
+                class="d-inline-block w-25 h-25 br-rad-half ui-bg-<%= color.color_name %>"
+            ></div>
+            <div class="fs-14"><%= color.title %></div>
+        </div>
+    <% }) %>
+</div>
+<div class="nav-header pt-20 pb-15">
+    Header background color variant
+</div>
+<div class="text-center" id="header-bg-color-variant-picker">
+    <div class="btn-group btn-group-sm">
+        <button type="button" class="btn btn-success" data-name="">Normal</button>
+        <button type="button" class="btn btn-dark" data-name="lighter">Lighter</button>
+        <button type="button" class="btn btn-dark" data-name="darker">Darker</button>
+    </div>
+</div>
+
+<script type="application/javascript">
+    var containers = {
+        accent: $('#accent-color-picker'),
+        sidebar: $('#sidebar-bg-color-picker'),
+        header: $('#header-bg-color-picker'),
+    };
+    var colors = {
+        accent: window.LoadedData.uiColors.accents[0],
+        sidebar: window.LoadedData.uiColors.backgrounds[0],
+        header: window.LoadedData.uiColors.backgrounds[0],
+    };
+    var $headerBgsVariantsContainer = $('#header-bg-color-variant-picker');
+    var headerBgColorVariant = 'lighter';
+    
+    var compileClasses = function () {
+        var classes = 'accent-' + colors.accent + ' sidebar-' + colors.sidebar + ' header-' + colors.header;
+        if (headerBgColorVariant && headerBgColorVariant !== '') {
+            classes += ' header-' + headerBgColorVariant;
+        }
+        return classes;
+    }
+
+    var onColorSelect = function (type, oldColor, newColor) {
+        containers[type]
+            .find('.color-picker-btn')
+                .removeClass('ui-bg-white-darker text-dark')
+                .end()
+            .find('[data-name="' + newColor + '"]')
+                .addClass('ui-bg-white-darker text-dark');
+        $(document.body).removeClass(compileClasses());
+        colors[type] = newColor;
+        $(document.body).addClass(compileClasses());
+    }
+    
+    var onHeaderColorVariantSelect = function (newBgColorVariant) {
+        $headerBgsVariantsContainer
+            .find('button')
+                .removeClass('btn-success btn-dark')
+                .addClass('btn-dark')
+                .filter('[data-name="' + newBgColorVariant + '"]')
+                    .removeClass('btn-dark')
+                    .addClass('btn-success');
+        $(document.body).removeClass(compileClasses());
+        headerBgColorVariant = newBgColorVariant;
+        $(document.body).addClass(compileClasses());
+    }
+
+    var bodyClass = $(document.body).attr('class');
+    
+    var matches = bodyClass.match(/accent-([a-z0-9-]+)/);
+    if (matches !== null) {
+        colors.accent = matches[1];
+    }
+    onColorSelect('accent', colors.accent, colors.accent);
+    
+    matches = bodyClass.match(/sidebar-([a-z0-9-]+)/);
+    if (matches !== null) {
+        colors.sidebar = matches[1];
+    }
+    onColorSelect('sidebar', colors.sidebar, colors.sidebar);
+    
+    matches = bodyClass.match(/header-(lighter|darker)/);
+    if (matches !== null) {
+        headerBgColorVariant = matches[1];
+    }
+    onHeaderColorVariantSelect(headerBgColorVariant);
+    
+    matches = bodyClass.replace(/header-(lighter|darker)/, '').match(/header-([a-z0-9-]+)?/);
+    if (matches !== null) {
+        colors.header = matches[1];
+    }
+    onColorSelect('header', colors.header, colors.header);
+    
+    for (var type in containers) {
+        containers[type].on('click', '.color-picker-btn', function () {
+            var color = $(this).attr('data-name');
+            var type = $(this).attr('data-type');
+            onColorSelect(type, colors[type], color);
+            return false;
+        });
+    }
+    $headerBgsVariantsContainer.on('click', 'button', function () {
+        var newVariant = $(this).attr('data-name');
+        onHeaderColorVariantSelect(newVariant);
+        return false;
+    });
+
+</script>

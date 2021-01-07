@@ -1,0 +1,91 @@
+{
+    "accents": [
+        {
+            "color_name": "blue",
+            "title": "Blue"
+        },
+        {
+            "color_name": "indigo",
+            "title": "Indigo"
+        },
+        {
+            "color_name": "purple",
+            "title": "Purple"
+        },
+        {
+            "color_name": "pink",
+            "title": "Pink"
+        },
+        {
+            "color_name": "red",
+            "title": "Red"
+        },
+        {
+            "color_name": "orange",
+            "title": "Orange"
+        },
+        {
+            "color_name": "yellow",
+            "title": "Yellow"
+        },
+        {
+            "color_name": "green",
+            "title": "Green"
+        },
+        {
+            "color_name": "teal",
+            "title": "Teal"
+        },
+        {
+            "color_name": "cyan",
+            "title": "Cyan"
+        },
+        {
+            "color_name": "white",
+            "title": "White"
+        },
+        {
+            "color_name": "gray",
+            "title": "Gray"
+        },
+        {
+            "color_name": "gray-dark",
+            "title": "Dark gray"
+        }
+    ],
+    "backgrounds": [
+        {
+            "color_name": "gray",
+            "title": "Gray"
+        },
+        {
+            "color_name": "gray-dark",
+            "title": "Dark gray"
+        },
+        {
+            "color_name": "white",
+            "title": "White"
+        },
+        {
+            "color_name": "blue",
+            "title": "Dark blue"
+        },
+        {
+            "color_name": "green",
+            "title": "Dark green"
+        },
+        {
+            "color_name": "cyan",
+            "title": "Dark cyan"
+        },
+        {
+            "color_name": "yellow",
+            "title": "Dark yellow"
+        },
+        {
+            "color_name": "red",
+            "title": "Dark red"
+        }
+
+    ]
+}
