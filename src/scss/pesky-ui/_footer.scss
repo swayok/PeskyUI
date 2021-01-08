@@ -3,7 +3,68 @@
 #content-with-footer > footer {
     width: 100%;
     min-height: #{$footer-height};
-    background-color: #CCCCCC;
+    border-top: 1px solid $gray-400;
     line-height: 20px;
-    padding: 10px 15px 10px 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    .footer-block {
+        display: inline-block;
+        padding: 0 1rem;
+    }
+
+    @each $bg-color-name, $bg-color in $ui-bg-colors {
+
+        body.footer-#{$bg-color-name} & {
+            background-color: $bg-color;
+            color: map-get($ui-sidebar-text-colors, $bg-color-name);
+
+            @if ($bg-color-name == 'white') {
+                border-color: darken($bg-color, 20%);
+            } @else {
+                border-color: $bg-color;
+            }
+        }
+
+        body.footer-#{$bg-color-name}.footer-lighter & {
+            background-color: lighten($bg-color, 10%);
+
+            @if ($bg-color-name == 'white') {
+                border-color: darken($bg-color, 20%);
+            } @else {
+                border-color: lighten($bg-color, 10%);
+            }
+        }
+
+        body.footer-#{$bg-color-name}.footer-darker & {
+            background-color: darken($bg-color, 10%);
+            border-color: darken($bg-color, 10%);
+        }
+
+        @each $accent-color-name, $accent-color in $ui-accents {
+
+            $accent-color-modified: $accent-color;
+            @if (map-get($ui-is-dark-bg, $bg-color-name) == false) {
+                $accent-color-modified: map-get($ui-accents-light-bg, $accent-color-name);
+            }
+
+            body.accent-#{$accent-color-name}.footer-#{$bg-color-name} & {
+                a {
+                    @if map-get($ui-is-dark-bg, $bg-color-name) {
+                        color: lighten($accent-color-modified, 20%);
+                        &:hover {
+                            color: lighten($accent-color-modified, 10%);
+                        }
+                    } @else {
+                        color: $accent-color-modified;
+                        &:hover {
+                            color: lighten($accent-color-modified, 10%);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

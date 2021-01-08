@@ -63,9 +63,82 @@
 </div>
 <div class="text-center" id="header-bg-color-variant-picker">
     <div class="btn-group btn-group-sm">
-        <button type="button" class="btn btn-success" data-name="">Normal</button>
-        <button type="button" class="btn btn-dark" data-name="lighter">Lighter</button>
-        <button type="button" class="btn btn-dark" data-name="darker">Darker</button>
+        <button
+            class="btn btn-success"
+            data-name=""
+            data-type="header"
+            type="button"
+        >
+            Normal
+        </button>
+        <button
+            class="btn btn-dark"
+            data-name="lighter"
+            data-type="header"
+            type="button"
+        >
+            Lighter
+        </button>
+        <button
+            class="btn btn-dark"
+            data-name="darker"
+            data-type="header"
+            type="button"
+        >
+            Darker
+        </button>
+    </div>
+</div>
+
+<div class="nav-header pt-20 pb-15">
+    Footer background color
+</div>
+<div
+    class="d-grid grid-columns-4 grid-rows-gap-2 grid-columns-gap-1 pl-10 pr-10"
+    id="footer-bg-color-picker"
+>
+    <% window.LoadedData.uiColors.backgrounds.forEach(function(color) { %>
+    <div
+        class="text-center flex-fill cursor-pointer color-picker-btn p-5 br-rad-6"
+        data-type="footer"
+        data-name="<%= color.color_name %>"
+    >
+        <div
+            class="d-inline-block w-25 h-25 br-rad-half ui-bg-<%= color.color_name %>"
+        ></div>
+        <div class="fs-14"><%= color.title %></div>
+    </div>
+    <% }) %>
+</div>
+<div class="nav-header pt-20 pb-15">
+    Footer background color variant
+</div>
+<div class="text-center" id="footer-bg-color-variant-picker">
+    <div class="btn-group btn-group-sm">
+        <button
+            class="btn btn-success"
+            data-name=""
+            data-type="footer"
+            type="button"
+        >
+            Normal
+        </button>
+        <button
+            class="btn btn-dark"
+            data-name="lighter"
+            data-type="footer"
+            type="button"
+        >
+            Lighter
+        </button>
+        <button
+            class="btn btn-dark"
+            data-name="darker"
+            data-type="footer"
+            type="button"
+        >
+            Darker
+        </button>
     </div>
 </div>
 
@@ -74,37 +147,50 @@
         accent: $('#accent-color-picker'),
         sidebar: $('#sidebar-bg-color-picker'),
         header: $('#header-bg-color-picker'),
+        footer: $('#footer-bg-color-picker'),
     };
+    var variantContainers = {
+        header: $('#header-bg-color-variant-picker'),
+        footer: $('#footer-bg-color-variant-picker'),
+    }
     var colors = {
         accent: window.LoadedData.uiColors.accents[0].color_name,
         sidebar: window.LoadedData.uiColors.backgrounds[0].color_name,
         header: window.LoadedData.uiColors.backgrounds[0].color_name,
+        footer: window.LoadedData.uiColors.backgrounds[0].color_name,
     };
-    var $headerBgsVariantsContainer = $('#header-bg-color-variant-picker');
-    var headerBgColorVariant = 'lighter';
+    var colorVariants = {
+        header: 'lighter',
+        footer: 'lighter'
+    }
     
     var compileClasses = function () {
-        var classes = 'accent-' + colors.accent + ' sidebar-' + colors.sidebar + ' header-' + colors.header;
-        if (headerBgColorVariant && headerBgColorVariant !== '') {
-            classes += ' header-' + headerBgColorVariant;
+        var classes = '';
+        for (var prefix in colors) {
+            classes += prefix + '-' + colors[prefix] + ' ';
+        }
+        for (prefix in colorVariants) {
+            if (colorVariants[prefix] && colorVariants[prefix] !== '') {
+                classes += prefix + '-' + colorVariants[prefix] + ' ';
+            }
         }
         return classes;
     }
 
-    var onColorSelect = function (type, oldColor, newColor) {
+    var onColorSelect = function (type, newColor) {
         containers[type]
             .find('.color-picker-btn')
-                .removeClass('ui-bg-white-darker text-dark')
+                .removeClass('ui-bg-gray-lighter text-dark')
                 .end()
             .find('[data-name="' + newColor + '"]')
-                .addClass('ui-bg-white-darker text-dark');
+                .addClass('ui-bg-gray-lighter text-dark');
         $(document.body).removeClass(compileClasses());
         colors[type] = newColor;
         $(document.body).addClass(compileClasses());
     }
     
-    var onHeaderColorVariantSelect = function (newBgColorVariant) {
-        $headerBgsVariantsContainer
+    var onColorVariantSelect = function (type, newBgColorVariant) {
+        variantContainers[type]
             .find('button')
                 .removeClass('btn-success btn-dark')
                 .addClass('btn-dark')
@@ -112,48 +198,45 @@
                     .removeClass('btn-dark')
                     .addClass('btn-success');
         $(document.body).removeClass(compileClasses());
-        headerBgColorVariant = newBgColorVariant;
+        colorVariants[type] = newBgColorVariant;
         $(document.body).addClass(compileClasses());
     }
 
     var bodyClass = $(document.body).attr('class');
-    
-    var matches = bodyClass.match(/accent-([a-z0-9-]+)/);
-    if (matches !== null) {
-        colors.accent = matches[1];
-    }
-    onColorSelect('accent', colors.accent, colors.accent);
-    
-    matches = bodyClass.match(/sidebar-([a-z0-9-]+)/);
-    if (matches !== null) {
-        colors.sidebar = matches[1];
-    }
-    onColorSelect('sidebar', colors.sidebar, colors.sidebar);
-    
-    matches = bodyClass.match(/header-(lighter|darker)/);
-    if (matches !== null) {
-        headerBgColorVariant = matches[1];
-    }
-    onHeaderColorVariantSelect(headerBgColorVariant);
-    
-    matches = bodyClass.replace(/header-(lighter|darker)/, '').match(/header-([a-z0-9-]+)?/);
-    if (matches !== null) {
-        colors.header = matches[1];
-    }
-    onColorSelect('header', colors.header, colors.header);
-    
-    for (var type in containers) {
-        containers[type].on('click', '.color-picker-btn', function () {
-            var color = $(this).attr('data-name');
+    var matches, regexp;
+
+    for (type in colorVariants) {
+        // get starter value
+        regexp = new RegExp(type + '-(lighter|darker)');
+        matches = bodyClass.match(regexp);
+        if (matches !== null) {
+            colorVariants[type] = matches[1];
+        }
+        onColorVariantSelect(type, colorVariants[type]);
+        bodyClass = bodyClass.replace(regexp, '');
+        // init picker buttons
+        variantContainers[type].on('click', 'button', function () {
+            var newVariant = $(this).attr('data-name');
             var type = $(this).attr('data-type');
-            onColorSelect(type, colors[type], color);
+            onColorVariantSelect(type, newVariant);
             return false;
         });
     }
-    $headerBgsVariantsContainer.on('click', 'button', function () {
-        var newVariant = $(this).attr('data-name');
-        onHeaderColorVariantSelect(newVariant);
-        return false;
-    });
 
+    for (var type in containers) {
+        // get starter value
+        matches = bodyClass.match(new RegExp(type + '-([a-z0-9-]+)'));
+        if (matches !== null) {
+            colors[type] = matches[1];
+        }
+        onColorSelect(type, colors[type]);
+        // init picker buttons
+        containers[type].on('click', '.color-picker-btn', function () {
+            var color = $(this).attr('data-name');
+            var type = $(this).attr('data-type');
+            onColorSelect(type, color);
+            return false;
+        });
+    }
+    
 </script>

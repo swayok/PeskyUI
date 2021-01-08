@@ -51,6 +51,10 @@
         {
             "color_name": "gray-dark",
             "title": "Dark gray"
+        },
+        {
+            "color_name": "gray-light",
+            "title": "Light gray"
         }
     ],
     "backgrounds": [
@@ -61,6 +65,10 @@
         {
             "color_name": "gray-dark",
             "title": "Dark gray"
+        },
+        {
+            "color_name": "gray-light",
+            "title": "Light gray"
         },
         {
             "color_name": "white",

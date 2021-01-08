@@ -69,13 +69,13 @@
             @if ($bg-color-name == 'white') {
                 border-color: darken($bg-color, 20%);
             } @else {
-                border-color: $bg-color;
+                border-color: lighten($bg-color, 10%);
             }
         }
 
         body.header-#{$bg-color-name}.header-darker & {
             background-color: darken($bg-color, 10%);
-            border-color: darken($bg-color, 20%);
+            border-color: darken($bg-color, 10%);
         }
 
         @each $accent-color-name, $accent-color in $ui-accents {
@@ -86,9 +86,26 @@
             }
 
             body.accent-#{$accent-color-name}.header-#{$bg-color-name} & {
+                a {
+                    @if map-get($ui-is-dark-bg, $bg-color-name) {
+                        color: lighten($accent-color-modified, 20%);
+                        &:hover {
+                            color: lighten($accent-color-modified, 10%);
+                        }
+                    } @else {
+                        color: $accent-color-modified;
+                        &:hover {
+                            color: lighten($accent-color-modified, 10%);
+                        }
+                    }
+                }
+
                 .header-button {
+                    color: map-get($ui-sidebar-text-colors, $bg-color-name);
+
                     &:hover,
                     &.active:after {
+                        color: map-get($ui-sidebar-text-colors, $bg-color-name);
                         background-color: $accent-color-modified;
                     }
                 }

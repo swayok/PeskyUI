@@ -1240,7 +1240,8 @@ $ui-accents: (
     "cyan":         $cyan,
     "white":        $white,
     "gray":         $gray-600,
-    "gray-dark":    $gray-800
+    "gray-dark":    $gray-800,
+    "gray-light":    $gray-300
 );
 
 $ui-accents-light-bg: (
@@ -1257,6 +1258,7 @@ $ui-accents-light-bg: (
     "white":        darken($white, 40%),
     "gray":         lighten($gray-600, 40%),
     "gray-dark":    lighten($gray-800, 40%),
+    "gray-light":    lighten($gray-300, 40%),
 );
 
 $blue-bg: #003F8C;
@@ -1273,7 +1275,8 @@ $ui-bg-colors: (
     "red":          $red-bg,
     "white":        $white,
     "gray":         $gray-600,
-    "gray-dark":    $gray-800
+    "gray-dark":    $gray-800,
+    "gray-light":    $gray-300
 );
 
 $ui-sidebar-text-colors: (
@@ -1284,7 +1287,8 @@ $ui-sidebar-text-colors: (
     "red":          $gray-400,
     "white":        $gray-700,
     "gray":         $gray-300,
-    "gray-dark":    $gray-400
+    "gray-dark":    $gray-400,
+    "gray-light":    $gray-700
 );
 
 $ui-is-dark-bg: (
@@ -1295,5 +1299,6 @@ $ui-is-dark-bg: (
     "red":          true,
     "white":        false,
     "gray":         true,
-    "gray-dark":    true
+    "gray-dark":    true,
+    "gray-light":    false
 );
