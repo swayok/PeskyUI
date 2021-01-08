@@ -3,45 +3,6 @@ body {
   overflow: hidden;
 }
 
-#flex-layout {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: stretch;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-
-#flex-layout #content-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-  align-items: flex-start;
-  flex: 1;
-}
-
-#flex-layout #content-wrapper #content {
-  width: 100%;
-  flex: 1;
-}
-
-#flex-layout #content-wrapper > #content {
-  overflow: auto;
-}
-
-#flex-layout #content-wrapper > #content-with-footer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  flex: 1;
-  overflow: auto;
-}
-
-#flex-layout #content-wrapper > #content-with-footer > #content {
-  overflow: visible;
-}
-
 .ss-wrapper {
   overflow: hidden;
   width: 100%;
@@ -88,6 +49,63 @@ body {
 
 .ss-grabbed {
   user-select: none;
+}
+
+#flex-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#flex-layout #content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: flex-start;
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+#flex-layout #content-wrapper > #content,
+#flex-layout #content-wrapper > #content-new,
+#flex-layout #content-wrapper > #content-old {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  flex: 1;
+  overflow: auto;
+  transition: all linear 0.4s;
+  background-color: #F8F8F8;
+  color: #495057;
+}
+
+#flex-layout #content-wrapper > #content-old {
+  position: absolute;
+  left: 0;
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 2;
+}
+
+#flex-layout #content-wrapper > #content-old.hide {
+  transform: translateY(20vh);
+  opacity: 0;
+}
+
+#flex-layout #content-wrapper > #content-new {
+  transform: translateY(-20vh);
+  opacity: 0;
+  z-index: 1;
+}
+
+#flex-layout #content-wrapper > #content-new.show {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .ui-accent-bg-blue {
@@ -535,7 +553,6 @@ body {
 }
 
 #content-wrapper > header,
-#content-with-footer > header,
 #content > header {
   width: 100%;
   height: 50px;
@@ -544,14 +561,13 @@ body {
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
+  position: relative;
+  z-index: 5;
 }
 
 #content-wrapper > header .header-button,
 #content-wrapper > header .header-block,
 #content-wrapper > header .header-title,
-#content-with-footer > header .header-button,
-#content-with-footer > header .header-block,
-#content-with-footer > header .header-title,
 #content > header .header-button,
 #content > header .header-block,
 #content > header .header-title {
@@ -562,20 +578,17 @@ body {
 }
 
 #content-wrapper > header .header-button,
-#content-with-footer > header .header-button,
 #content > header .header-button {
   transition: background-color ease-in-out 0.2s;
   position: relative;
 }
 
 #content-wrapper > header .header-button:hover,
-#content-with-footer > header .header-button:hover,
 #content > header .header-button:hover {
   background-color: #f8f9fa;
 }
 
 #content-wrapper > header .header-button.active:after,
-#content-with-footer > header .header-button.active:after,
 #content > header .header-button.active:after {
   content: '';
   position: absolute;
@@ -587,7 +600,6 @@ body {
 }
 
 #content-wrapper > header .header-title,
-#content-with-footer > header .header-title,
 #content > header .header-title {
   font-size: 1.1rem;
   overflow: hidden;
@@ -596,7 +608,6 @@ body {
 }
 
 body.header-blue #content-wrapper > header, body.header-blue
-#content-with-footer > header, body.header-blue
 #content > header {
   background-color: #003F8C;
   color: #ced4da;
@@ -604,46 +615,38 @@ body.header-blue #content-wrapper > header, body.header-blue
 }
 
 body.header-blue #content-wrapper > header .header-button, body.header-blue
-#content-with-footer > header .header-button, body.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.header-blue.header-lighter #content-wrapper > header, body.header-blue.header-lighter
-#content-with-footer > header, body.header-blue.header-lighter
 #content > header {
   background-color: #0056bf;
   border-color: #0056bf;
 }
 
 body.header-blue.header-darker #content-wrapper > header, body.header-blue.header-darker
-#content-with-footer > header, body.header-blue.header-darker
 #content > header {
   background-color: #002859;
   border-color: #002859;
 }
 
 body.accent-blue.header-blue #content-wrapper > header a, body.accent-blue.header-blue
-#content-with-footer > header a, body.accent-blue.header-blue
 #content > header a {
   color: #66b0ff;
 }
 
 body.accent-blue.header-blue #content-wrapper > header a:hover, body.accent-blue.header-blue
-#content-with-footer > header a:hover, body.accent-blue.header-blue
 #content > header a:hover {
   color: #3395ff;
 }
 
 body.accent-blue.header-blue #content-wrapper > header .header-button, body.accent-blue.header-blue
-#content-with-footer > header .header-button, body.accent-blue.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-blue.header-blue #content-wrapper > header .header-button:hover, body.accent-blue.header-blue #content-wrapper > header .header-button.active:after, body.accent-blue.header-blue
-#content-with-footer > header .header-button:hover, body.accent-blue.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-blue.header-blue
 #content > header .header-button:hover, body.accent-blue.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -651,26 +654,21 @@ body.accent-blue.header-blue #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-indigo.header-blue #content-wrapper > header a, body.accent-indigo.header-blue
-#content-with-footer > header a, body.accent-indigo.header-blue
 #content > header a {
   color: #a471f7;
 }
 
 body.accent-indigo.header-blue #content-wrapper > header a:hover, body.accent-indigo.header-blue
-#content-with-footer > header a:hover, body.accent-indigo.header-blue
 #content > header a:hover {
   color: #8540f5;
 }
 
 body.accent-indigo.header-blue #content-wrapper > header .header-button, body.accent-indigo.header-blue
-#content-with-footer > header .header-button, body.accent-indigo.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-indigo.header-blue #content-wrapper > header .header-button:hover, body.accent-indigo.header-blue #content-wrapper > header .header-button.active:after, body.accent-indigo.header-blue
-#content-with-footer > header .header-button:hover, body.accent-indigo.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-indigo.header-blue
 #content > header .header-button:hover, body.accent-indigo.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -678,26 +676,21 @@ body.accent-indigo.header-blue #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-purple.header-blue #content-wrapper > header a, body.accent-purple.header-blue
-#content-with-footer > header a, body.accent-purple.header-blue
 #content > header a {
   color: #aa8fda;
 }
 
 body.accent-purple.header-blue #content-wrapper > header a:hover, body.accent-purple.header-blue
-#content-with-footer > header a:hover, body.accent-purple.header-blue
 #content > header a:hover {
   color: #8c68ce;
 }
 
 body.accent-purple.header-blue #content-wrapper > header .header-button, body.accent-purple.header-blue
-#content-with-footer > header .header-button, body.accent-purple.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-purple.header-blue #content-wrapper > header .header-button:hover, body.accent-purple.header-blue #content-wrapper > header .header-button.active:after, body.accent-purple.header-blue
-#content-with-footer > header .header-button:hover, body.accent-purple.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-purple.header-blue
 #content > header .header-button:hover, body.accent-purple.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -705,26 +698,21 @@ body.accent-purple.header-blue #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-pink.header-blue #content-wrapper > header a, body.accent-pink.header-blue
-#content-with-footer > header a, body.accent-pink.header-blue
 #content > header a {
   color: #f399c2;
 }
 
 body.accent-pink.header-blue #content-wrapper > header a:hover, body.accent-pink.header-blue
-#content-with-footer > header a:hover, body.accent-pink.header-blue
 #content > header a:hover {
   color: #ed6ca7;
 }
 
 body.accent-pink.header-blue #content-wrapper > header .header-button, body.accent-pink.header-blue
-#content-with-footer > header .header-button, body.accent-pink.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-pink.header-blue #content-wrapper > header .header-button:hover, body.accent-pink.header-blue #content-wrapper > header .header-button.active:after, body.accent-pink.header-blue
-#content-with-footer > header .header-button:hover, body.accent-pink.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-pink.header-blue
 #content > header .header-button:hover, body.accent-pink.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -732,26 +720,21 @@ body.accent-pink.header-blue #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-red.header-blue #content-wrapper > header a, body.accent-red.header-blue
-#content-with-footer > header a, body.accent-red.header-blue
 #content > header a {
   color: #eb8c95;
 }
 
 body.accent-red.header-blue #content-wrapper > header a:hover, body.accent-red.header-blue
-#content-with-footer > header a:hover, body.accent-red.header-blue
 #content > header a:hover {
   color: #e4606d;
 }
 
 body.accent-red.header-blue #content-wrapper > header .header-button, body.accent-red.header-blue
-#content-with-footer > header .header-button, body.accent-red.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-red.header-blue #content-wrapper > header .header-button:hover, body.accent-red.header-blue #content-wrapper > header .header-button.active:after, body.accent-red.header-blue
-#content-with-footer > header .header-button:hover, body.accent-red.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-red.header-blue
 #content > header .header-button:hover, body.accent-red.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -759,26 +742,21 @@ body.accent-red.header-blue #content-wrapper > header .header-button:hover, body
 }
 
 body.accent-orange.header-blue #content-wrapper > header a, body.accent-orange.header-blue
-#content-with-footer > header a, body.accent-orange.header-blue
 #content > header a {
   color: #feb679;
 }
 
 body.accent-orange.header-blue #content-wrapper > header a:hover, body.accent-orange.header-blue
-#content-with-footer > header a:hover, body.accent-orange.header-blue
 #content > header a:hover {
   color: #fd9a47;
 }
 
 body.accent-orange.header-blue #content-wrapper > header .header-button, body.accent-orange.header-blue
-#content-with-footer > header .header-button, body.accent-orange.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-orange.header-blue #content-wrapper > header .header-button:hover, body.accent-orange.header-blue #content-wrapper > header .header-button.active:after, body.accent-orange.header-blue
-#content-with-footer > header .header-button:hover, body.accent-orange.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-orange.header-blue
 #content > header .header-button:hover, body.accent-orange.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -786,26 +764,21 @@ body.accent-orange.header-blue #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-yellow.header-blue #content-wrapper > header a, body.accent-yellow.header-blue
-#content-with-footer > header a, body.accent-yellow.header-blue
 #content > header a {
   color: #ffdb6d;
 }
 
 body.accent-yellow.header-blue #content-wrapper > header a:hover, body.accent-yellow.header-blue
-#content-with-footer > header a:hover, body.accent-yellow.header-blue
 #content > header a:hover {
   color: #ffce3a;
 }
 
 body.accent-yellow.header-blue #content-wrapper > header .header-button, body.accent-yellow.header-blue
-#content-with-footer > header .header-button, body.accent-yellow.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-yellow.header-blue #content-wrapper > header .header-button:hover, body.accent-yellow.header-blue #content-wrapper > header .header-button.active:after, body.accent-yellow.header-blue
-#content-with-footer > header .header-button:hover, body.accent-yellow.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-yellow.header-blue
 #content > header .header-button:hover, body.accent-yellow.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -813,26 +786,21 @@ body.accent-yellow.header-blue #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-green.header-blue #content-wrapper > header a, body.accent-green.header-blue
-#content-with-footer > header a, body.accent-green.header-blue
 #content > header a {
   color: #5dd879;
 }
 
 body.accent-green.header-blue #content-wrapper > header a:hover, body.accent-green.header-blue
-#content-with-footer > header a:hover, body.accent-green.header-blue
 #content > header a:hover {
   color: #34ce57;
 }
 
 body.accent-green.header-blue #content-wrapper > header .header-button, body.accent-green.header-blue
-#content-with-footer > header .header-button, body.accent-green.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-green.header-blue #content-wrapper > header .header-button:hover, body.accent-green.header-blue #content-wrapper > header .header-button.active:after, body.accent-green.header-blue
-#content-with-footer > header .header-button:hover, body.accent-green.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-green.header-blue
 #content > header .header-button:hover, body.accent-green.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -840,26 +808,21 @@ body.accent-green.header-blue #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-teal.header-blue #content-wrapper > header a, body.accent-teal.header-blue
-#content-with-footer > header a, body.accent-teal.header-blue
 #content > header a {
   color: #68e7c1;
 }
 
 body.accent-teal.header-blue #content-wrapper > header a:hover, body.accent-teal.header-blue
-#content-with-footer > header a:hover, body.accent-teal.header-blue
 #content > header a:hover {
   color: #3ce0af;
 }
 
 body.accent-teal.header-blue #content-wrapper > header .header-button, body.accent-teal.header-blue
-#content-with-footer > header .header-button, body.accent-teal.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-teal.header-blue #content-wrapper > header .header-button:hover, body.accent-teal.header-blue #content-wrapper > header .header-button.active:after, body.accent-teal.header-blue
-#content-with-footer > header .header-button:hover, body.accent-teal.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-teal.header-blue
 #content > header .header-button:hover, body.accent-teal.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -867,26 +830,21 @@ body.accent-teal.header-blue #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-cyan.header-blue #content-wrapper > header a, body.accent-cyan.header-blue
-#content-with-footer > header a, body.accent-cyan.header-blue
 #content > header a {
   color: #4cd3e9;
 }
 
 body.accent-cyan.header-blue #content-wrapper > header a:hover, body.accent-cyan.header-blue
-#content-with-footer > header a:hover, body.accent-cyan.header-blue
 #content > header a:hover {
   color: #1fc8e3;
 }
 
 body.accent-cyan.header-blue #content-wrapper > header .header-button, body.accent-cyan.header-blue
-#content-with-footer > header .header-button, body.accent-cyan.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-cyan.header-blue #content-wrapper > header .header-button:hover, body.accent-cyan.header-blue #content-wrapper > header .header-button.active:after, body.accent-cyan.header-blue
-#content-with-footer > header .header-button:hover, body.accent-cyan.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-cyan.header-blue
 #content > header .header-button:hover, body.accent-cyan.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -894,26 +852,21 @@ body.accent-cyan.header-blue #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-white.header-blue #content-wrapper > header a, body.accent-white.header-blue
-#content-with-footer > header a, body.accent-white.header-blue
 #content > header a {
   color: white;
 }
 
 body.accent-white.header-blue #content-wrapper > header a:hover, body.accent-white.header-blue
-#content-with-footer > header a:hover, body.accent-white.header-blue
 #content > header a:hover {
   color: white;
 }
 
 body.accent-white.header-blue #content-wrapper > header .header-button, body.accent-white.header-blue
-#content-with-footer > header .header-button, body.accent-white.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-white.header-blue #content-wrapper > header .header-button:hover, body.accent-white.header-blue #content-wrapper > header .header-button.active:after, body.accent-white.header-blue
-#content-with-footer > header .header-button:hover, body.accent-white.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-white.header-blue
 #content > header .header-button:hover, body.accent-white.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -921,26 +874,21 @@ body.accent-white.header-blue #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-gray.header-blue #content-wrapper > header a, body.accent-gray.header-blue
-#content-with-footer > header a, body.accent-gray.header-blue
 #content > header a {
   color: #a1a8ae;
 }
 
 body.accent-gray.header-blue #content-wrapper > header a:hover, body.accent-gray.header-blue
-#content-with-footer > header a:hover, body.accent-gray.header-blue
 #content > header a:hover {
   color: #868e96;
 }
 
 body.accent-gray.header-blue #content-wrapper > header .header-button, body.accent-gray.header-blue
-#content-with-footer > header .header-button, body.accent-gray.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray.header-blue #content-wrapper > header .header-button:hover, body.accent-gray.header-blue #content-wrapper > header .header-button.active:after, body.accent-gray.header-blue
-#content-with-footer > header .header-button:hover, body.accent-gray.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-gray.header-blue
 #content > header .header-button:hover, body.accent-gray.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -948,26 +896,21 @@ body.accent-gray.header-blue #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-gray-dark.header-blue #content-wrapper > header a, body.accent-gray-dark.header-blue
-#content-with-footer > header a, body.accent-gray-dark.header-blue
 #content > header a {
   color: #626d78;
 }
 
 body.accent-gray-dark.header-blue #content-wrapper > header a:hover, body.accent-gray-dark.header-blue
-#content-with-footer > header a:hover, body.accent-gray-dark.header-blue
 #content > header a:hover {
   color: #4b545c;
 }
 
 body.accent-gray-dark.header-blue #content-wrapper > header .header-button, body.accent-gray-dark.header-blue
-#content-with-footer > header .header-button, body.accent-gray-dark.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-dark.header-blue #content-wrapper > header .header-button:hover, body.accent-gray-dark.header-blue #content-wrapper > header .header-button.active:after, body.accent-gray-dark.header-blue
-#content-with-footer > header .header-button:hover, body.accent-gray-dark.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-gray-dark.header-blue
 #content > header .header-button:hover, body.accent-gray-dark.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -975,26 +918,21 @@ body.accent-gray-dark.header-blue #content-wrapper > header .header-button:hover
 }
 
 body.accent-gray-light.header-blue #content-wrapper > header a, body.accent-gray-light.header-blue
-#content-with-footer > header a, body.accent-gray-light.header-blue
 #content > header a {
   color: white;
 }
 
 body.accent-gray-light.header-blue #content-wrapper > header a:hover, body.accent-gray-light.header-blue
-#content-with-footer > header a:hover, body.accent-gray-light.header-blue
 #content > header a:hover {
   color: #fbfcfc;
 }
 
 body.accent-gray-light.header-blue #content-wrapper > header .header-button, body.accent-gray-light.header-blue
-#content-with-footer > header .header-button, body.accent-gray-light.header-blue
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-light.header-blue #content-wrapper > header .header-button:hover, body.accent-gray-light.header-blue #content-wrapper > header .header-button.active:after, body.accent-gray-light.header-blue
-#content-with-footer > header .header-button:hover, body.accent-gray-light.header-blue
-#content-with-footer > header .header-button.active:after, body.accent-gray-light.header-blue
 #content > header .header-button:hover, body.accent-gray-light.header-blue
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1002,7 +940,6 @@ body.accent-gray-light.header-blue #content-wrapper > header .header-button:hove
 }
 
 body.header-green #content-wrapper > header, body.header-green
-#content-with-footer > header, body.header-green
 #content > header {
   background-color: #1B6F2D;
   color: #ced4da;
@@ -1010,46 +947,38 @@ body.header-green #content-wrapper > header, body.header-green
 }
 
 body.header-green #content-wrapper > header .header-button, body.header-green
-#content-with-footer > header .header-button, body.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.header-green.header-lighter #content-wrapper > header, body.header-green.header-lighter
-#content-with-footer > header, body.header-green.header-lighter
 #content > header {
   background-color: #25983e;
   border-color: #25983e;
 }
 
 body.header-green.header-darker #content-wrapper > header, body.header-green.header-darker
-#content-with-footer > header, body.header-green.header-darker
 #content > header {
   background-color: #11461c;
   border-color: #11461c;
 }
 
 body.accent-blue.header-green #content-wrapper > header a, body.accent-blue.header-green
-#content-with-footer > header a, body.accent-blue.header-green
 #content > header a {
   color: #66b0ff;
 }
 
 body.accent-blue.header-green #content-wrapper > header a:hover, body.accent-blue.header-green
-#content-with-footer > header a:hover, body.accent-blue.header-green
 #content > header a:hover {
   color: #3395ff;
 }
 
 body.accent-blue.header-green #content-wrapper > header .header-button, body.accent-blue.header-green
-#content-with-footer > header .header-button, body.accent-blue.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-blue.header-green #content-wrapper > header .header-button:hover, body.accent-blue.header-green #content-wrapper > header .header-button.active:after, body.accent-blue.header-green
-#content-with-footer > header .header-button:hover, body.accent-blue.header-green
-#content-with-footer > header .header-button.active:after, body.accent-blue.header-green
 #content > header .header-button:hover, body.accent-blue.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1057,26 +986,21 @@ body.accent-blue.header-green #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-indigo.header-green #content-wrapper > header a, body.accent-indigo.header-green
-#content-with-footer > header a, body.accent-indigo.header-green
 #content > header a {
   color: #a471f7;
 }
 
 body.accent-indigo.header-green #content-wrapper > header a:hover, body.accent-indigo.header-green
-#content-with-footer > header a:hover, body.accent-indigo.header-green
 #content > header a:hover {
   color: #8540f5;
 }
 
 body.accent-indigo.header-green #content-wrapper > header .header-button, body.accent-indigo.header-green
-#content-with-footer > header .header-button, body.accent-indigo.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-indigo.header-green #content-wrapper > header .header-button:hover, body.accent-indigo.header-green #content-wrapper > header .header-button.active:after, body.accent-indigo.header-green
-#content-with-footer > header .header-button:hover, body.accent-indigo.header-green
-#content-with-footer > header .header-button.active:after, body.accent-indigo.header-green
 #content > header .header-button:hover, body.accent-indigo.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1084,26 +1008,21 @@ body.accent-indigo.header-green #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-purple.header-green #content-wrapper > header a, body.accent-purple.header-green
-#content-with-footer > header a, body.accent-purple.header-green
 #content > header a {
   color: #aa8fda;
 }
 
 body.accent-purple.header-green #content-wrapper > header a:hover, body.accent-purple.header-green
-#content-with-footer > header a:hover, body.accent-purple.header-green
 #content > header a:hover {
   color: #8c68ce;
 }
 
 body.accent-purple.header-green #content-wrapper > header .header-button, body.accent-purple.header-green
-#content-with-footer > header .header-button, body.accent-purple.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-purple.header-green #content-wrapper > header .header-button:hover, body.accent-purple.header-green #content-wrapper > header .header-button.active:after, body.accent-purple.header-green
-#content-with-footer > header .header-button:hover, body.accent-purple.header-green
-#content-with-footer > header .header-button.active:after, body.accent-purple.header-green
 #content > header .header-button:hover, body.accent-purple.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1111,26 +1030,21 @@ body.accent-purple.header-green #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-pink.header-green #content-wrapper > header a, body.accent-pink.header-green
-#content-with-footer > header a, body.accent-pink.header-green
 #content > header a {
   color: #f399c2;
 }
 
 body.accent-pink.header-green #content-wrapper > header a:hover, body.accent-pink.header-green
-#content-with-footer > header a:hover, body.accent-pink.header-green
 #content > header a:hover {
   color: #ed6ca7;
 }
 
 body.accent-pink.header-green #content-wrapper > header .header-button, body.accent-pink.header-green
-#content-with-footer > header .header-button, body.accent-pink.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-pink.header-green #content-wrapper > header .header-button:hover, body.accent-pink.header-green #content-wrapper > header .header-button.active:after, body.accent-pink.header-green
-#content-with-footer > header .header-button:hover, body.accent-pink.header-green
-#content-with-footer > header .header-button.active:after, body.accent-pink.header-green
 #content > header .header-button:hover, body.accent-pink.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1138,26 +1052,21 @@ body.accent-pink.header-green #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-red.header-green #content-wrapper > header a, body.accent-red.header-green
-#content-with-footer > header a, body.accent-red.header-green
 #content > header a {
   color: #eb8c95;
 }
 
 body.accent-red.header-green #content-wrapper > header a:hover, body.accent-red.header-green
-#content-with-footer > header a:hover, body.accent-red.header-green
 #content > header a:hover {
   color: #e4606d;
 }
 
 body.accent-red.header-green #content-wrapper > header .header-button, body.accent-red.header-green
-#content-with-footer > header .header-button, body.accent-red.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-red.header-green #content-wrapper > header .header-button:hover, body.accent-red.header-green #content-wrapper > header .header-button.active:after, body.accent-red.header-green
-#content-with-footer > header .header-button:hover, body.accent-red.header-green
-#content-with-footer > header .header-button.active:after, body.accent-red.header-green
 #content > header .header-button:hover, body.accent-red.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1165,26 +1074,21 @@ body.accent-red.header-green #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-orange.header-green #content-wrapper > header a, body.accent-orange.header-green
-#content-with-footer > header a, body.accent-orange.header-green
 #content > header a {
   color: #feb679;
 }
 
 body.accent-orange.header-green #content-wrapper > header a:hover, body.accent-orange.header-green
-#content-with-footer > header a:hover, body.accent-orange.header-green
 #content > header a:hover {
   color: #fd9a47;
 }
 
 body.accent-orange.header-green #content-wrapper > header .header-button, body.accent-orange.header-green
-#content-with-footer > header .header-button, body.accent-orange.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-orange.header-green #content-wrapper > header .header-button:hover, body.accent-orange.header-green #content-wrapper > header .header-button.active:after, body.accent-orange.header-green
-#content-with-footer > header .header-button:hover, body.accent-orange.header-green
-#content-with-footer > header .header-button.active:after, body.accent-orange.header-green
 #content > header .header-button:hover, body.accent-orange.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1192,26 +1096,21 @@ body.accent-orange.header-green #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-yellow.header-green #content-wrapper > header a, body.accent-yellow.header-green
-#content-with-footer > header a, body.accent-yellow.header-green
 #content > header a {
   color: #ffdb6d;
 }
 
 body.accent-yellow.header-green #content-wrapper > header a:hover, body.accent-yellow.header-green
-#content-with-footer > header a:hover, body.accent-yellow.header-green
 #content > header a:hover {
   color: #ffce3a;
 }
 
 body.accent-yellow.header-green #content-wrapper > header .header-button, body.accent-yellow.header-green
-#content-with-footer > header .header-button, body.accent-yellow.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-yellow.header-green #content-wrapper > header .header-button:hover, body.accent-yellow.header-green #content-wrapper > header .header-button.active:after, body.accent-yellow.header-green
-#content-with-footer > header .header-button:hover, body.accent-yellow.header-green
-#content-with-footer > header .header-button.active:after, body.accent-yellow.header-green
 #content > header .header-button:hover, body.accent-yellow.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1219,26 +1118,21 @@ body.accent-yellow.header-green #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-green.header-green #content-wrapper > header a, body.accent-green.header-green
-#content-with-footer > header a, body.accent-green.header-green
 #content > header a {
   color: #5dd879;
 }
 
 body.accent-green.header-green #content-wrapper > header a:hover, body.accent-green.header-green
-#content-with-footer > header a:hover, body.accent-green.header-green
 #content > header a:hover {
   color: #34ce57;
 }
 
 body.accent-green.header-green #content-wrapper > header .header-button, body.accent-green.header-green
-#content-with-footer > header .header-button, body.accent-green.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-green.header-green #content-wrapper > header .header-button:hover, body.accent-green.header-green #content-wrapper > header .header-button.active:after, body.accent-green.header-green
-#content-with-footer > header .header-button:hover, body.accent-green.header-green
-#content-with-footer > header .header-button.active:after, body.accent-green.header-green
 #content > header .header-button:hover, body.accent-green.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1246,26 +1140,21 @@ body.accent-green.header-green #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-teal.header-green #content-wrapper > header a, body.accent-teal.header-green
-#content-with-footer > header a, body.accent-teal.header-green
 #content > header a {
   color: #68e7c1;
 }
 
 body.accent-teal.header-green #content-wrapper > header a:hover, body.accent-teal.header-green
-#content-with-footer > header a:hover, body.accent-teal.header-green
 #content > header a:hover {
   color: #3ce0af;
 }
 
 body.accent-teal.header-green #content-wrapper > header .header-button, body.accent-teal.header-green
-#content-with-footer > header .header-button, body.accent-teal.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-teal.header-green #content-wrapper > header .header-button:hover, body.accent-teal.header-green #content-wrapper > header .header-button.active:after, body.accent-teal.header-green
-#content-with-footer > header .header-button:hover, body.accent-teal.header-green
-#content-with-footer > header .header-button.active:after, body.accent-teal.header-green
 #content > header .header-button:hover, body.accent-teal.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1273,26 +1162,21 @@ body.accent-teal.header-green #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-cyan.header-green #content-wrapper > header a, body.accent-cyan.header-green
-#content-with-footer > header a, body.accent-cyan.header-green
 #content > header a {
   color: #4cd3e9;
 }
 
 body.accent-cyan.header-green #content-wrapper > header a:hover, body.accent-cyan.header-green
-#content-with-footer > header a:hover, body.accent-cyan.header-green
 #content > header a:hover {
   color: #1fc8e3;
 }
 
 body.accent-cyan.header-green #content-wrapper > header .header-button, body.accent-cyan.header-green
-#content-with-footer > header .header-button, body.accent-cyan.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-cyan.header-green #content-wrapper > header .header-button:hover, body.accent-cyan.header-green #content-wrapper > header .header-button.active:after, body.accent-cyan.header-green
-#content-with-footer > header .header-button:hover, body.accent-cyan.header-green
-#content-with-footer > header .header-button.active:after, body.accent-cyan.header-green
 #content > header .header-button:hover, body.accent-cyan.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1300,26 +1184,21 @@ body.accent-cyan.header-green #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-white.header-green #content-wrapper > header a, body.accent-white.header-green
-#content-with-footer > header a, body.accent-white.header-green
 #content > header a {
   color: white;
 }
 
 body.accent-white.header-green #content-wrapper > header a:hover, body.accent-white.header-green
-#content-with-footer > header a:hover, body.accent-white.header-green
 #content > header a:hover {
   color: white;
 }
 
 body.accent-white.header-green #content-wrapper > header .header-button, body.accent-white.header-green
-#content-with-footer > header .header-button, body.accent-white.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-white.header-green #content-wrapper > header .header-button:hover, body.accent-white.header-green #content-wrapper > header .header-button.active:after, body.accent-white.header-green
-#content-with-footer > header .header-button:hover, body.accent-white.header-green
-#content-with-footer > header .header-button.active:after, body.accent-white.header-green
 #content > header .header-button:hover, body.accent-white.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1327,26 +1206,21 @@ body.accent-white.header-green #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-gray.header-green #content-wrapper > header a, body.accent-gray.header-green
-#content-with-footer > header a, body.accent-gray.header-green
 #content > header a {
   color: #a1a8ae;
 }
 
 body.accent-gray.header-green #content-wrapper > header a:hover, body.accent-gray.header-green
-#content-with-footer > header a:hover, body.accent-gray.header-green
 #content > header a:hover {
   color: #868e96;
 }
 
 body.accent-gray.header-green #content-wrapper > header .header-button, body.accent-gray.header-green
-#content-with-footer > header .header-button, body.accent-gray.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray.header-green #content-wrapper > header .header-button:hover, body.accent-gray.header-green #content-wrapper > header .header-button.active:after, body.accent-gray.header-green
-#content-with-footer > header .header-button:hover, body.accent-gray.header-green
-#content-with-footer > header .header-button.active:after, body.accent-gray.header-green
 #content > header .header-button:hover, body.accent-gray.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1354,26 +1228,21 @@ body.accent-gray.header-green #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-gray-dark.header-green #content-wrapper > header a, body.accent-gray-dark.header-green
-#content-with-footer > header a, body.accent-gray-dark.header-green
 #content > header a {
   color: #626d78;
 }
 
 body.accent-gray-dark.header-green #content-wrapper > header a:hover, body.accent-gray-dark.header-green
-#content-with-footer > header a:hover, body.accent-gray-dark.header-green
 #content > header a:hover {
   color: #4b545c;
 }
 
 body.accent-gray-dark.header-green #content-wrapper > header .header-button, body.accent-gray-dark.header-green
-#content-with-footer > header .header-button, body.accent-gray-dark.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-dark.header-green #content-wrapper > header .header-button:hover, body.accent-gray-dark.header-green #content-wrapper > header .header-button.active:after, body.accent-gray-dark.header-green
-#content-with-footer > header .header-button:hover, body.accent-gray-dark.header-green
-#content-with-footer > header .header-button.active:after, body.accent-gray-dark.header-green
 #content > header .header-button:hover, body.accent-gray-dark.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1381,26 +1250,21 @@ body.accent-gray-dark.header-green #content-wrapper > header .header-button:hove
 }
 
 body.accent-gray-light.header-green #content-wrapper > header a, body.accent-gray-light.header-green
-#content-with-footer > header a, body.accent-gray-light.header-green
 #content > header a {
   color: white;
 }
 
 body.accent-gray-light.header-green #content-wrapper > header a:hover, body.accent-gray-light.header-green
-#content-with-footer > header a:hover, body.accent-gray-light.header-green
 #content > header a:hover {
   color: #fbfcfc;
 }
 
 body.accent-gray-light.header-green #content-wrapper > header .header-button, body.accent-gray-light.header-green
-#content-with-footer > header .header-button, body.accent-gray-light.header-green
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-light.header-green #content-wrapper > header .header-button:hover, body.accent-gray-light.header-green #content-wrapper > header .header-button.active:after, body.accent-gray-light.header-green
-#content-with-footer > header .header-button:hover, body.accent-gray-light.header-green
-#content-with-footer > header .header-button.active:after, body.accent-gray-light.header-green
 #content > header .header-button:hover, body.accent-gray-light.header-green
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1408,7 +1272,6 @@ body.accent-gray-light.header-green #content-wrapper > header .header-button:hov
 }
 
 body.header-cyan #content-wrapper > header, body.header-cyan
-#content-with-footer > header, body.header-cyan
 #content > header {
   background-color: #0B636E;
   color: #ced4da;
@@ -1416,46 +1279,38 @@ body.header-cyan #content-wrapper > header, body.header-cyan
 }
 
 body.header-cyan #content-wrapper > header .header-button, body.header-cyan
-#content-with-footer > header .header-button, body.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.header-cyan.header-lighter #content-wrapper > header, body.header-cyan.header-lighter
-#content-with-footer > header, body.header-cyan.header-lighter
 #content > header {
   background-color: #108d9c;
   border-color: #108d9c;
 }
 
 body.header-cyan.header-darker #content-wrapper > header, body.header-cyan.header-darker
-#content-with-footer > header, body.header-cyan.header-darker
 #content > header {
   background-color: #063940;
   border-color: #063940;
 }
 
 body.accent-blue.header-cyan #content-wrapper > header a, body.accent-blue.header-cyan
-#content-with-footer > header a, body.accent-blue.header-cyan
 #content > header a {
   color: #66b0ff;
 }
 
 body.accent-blue.header-cyan #content-wrapper > header a:hover, body.accent-blue.header-cyan
-#content-with-footer > header a:hover, body.accent-blue.header-cyan
 #content > header a:hover {
   color: #3395ff;
 }
 
 body.accent-blue.header-cyan #content-wrapper > header .header-button, body.accent-blue.header-cyan
-#content-with-footer > header .header-button, body.accent-blue.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-blue.header-cyan #content-wrapper > header .header-button:hover, body.accent-blue.header-cyan #content-wrapper > header .header-button.active:after, body.accent-blue.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-blue.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-blue.header-cyan
 #content > header .header-button:hover, body.accent-blue.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1463,26 +1318,21 @@ body.accent-blue.header-cyan #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-indigo.header-cyan #content-wrapper > header a, body.accent-indigo.header-cyan
-#content-with-footer > header a, body.accent-indigo.header-cyan
 #content > header a {
   color: #a471f7;
 }
 
 body.accent-indigo.header-cyan #content-wrapper > header a:hover, body.accent-indigo.header-cyan
-#content-with-footer > header a:hover, body.accent-indigo.header-cyan
 #content > header a:hover {
   color: #8540f5;
 }
 
 body.accent-indigo.header-cyan #content-wrapper > header .header-button, body.accent-indigo.header-cyan
-#content-with-footer > header .header-button, body.accent-indigo.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-indigo.header-cyan #content-wrapper > header .header-button:hover, body.accent-indigo.header-cyan #content-wrapper > header .header-button.active:after, body.accent-indigo.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-indigo.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-indigo.header-cyan
 #content > header .header-button:hover, body.accent-indigo.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1490,26 +1340,21 @@ body.accent-indigo.header-cyan #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-purple.header-cyan #content-wrapper > header a, body.accent-purple.header-cyan
-#content-with-footer > header a, body.accent-purple.header-cyan
 #content > header a {
   color: #aa8fda;
 }
 
 body.accent-purple.header-cyan #content-wrapper > header a:hover, body.accent-purple.header-cyan
-#content-with-footer > header a:hover, body.accent-purple.header-cyan
 #content > header a:hover {
   color: #8c68ce;
 }
 
 body.accent-purple.header-cyan #content-wrapper > header .header-button, body.accent-purple.header-cyan
-#content-with-footer > header .header-button, body.accent-purple.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-purple.header-cyan #content-wrapper > header .header-button:hover, body.accent-purple.header-cyan #content-wrapper > header .header-button.active:after, body.accent-purple.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-purple.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-purple.header-cyan
 #content > header .header-button:hover, body.accent-purple.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1517,26 +1362,21 @@ body.accent-purple.header-cyan #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-pink.header-cyan #content-wrapper > header a, body.accent-pink.header-cyan
-#content-with-footer > header a, body.accent-pink.header-cyan
 #content > header a {
   color: #f399c2;
 }
 
 body.accent-pink.header-cyan #content-wrapper > header a:hover, body.accent-pink.header-cyan
-#content-with-footer > header a:hover, body.accent-pink.header-cyan
 #content > header a:hover {
   color: #ed6ca7;
 }
 
 body.accent-pink.header-cyan #content-wrapper > header .header-button, body.accent-pink.header-cyan
-#content-with-footer > header .header-button, body.accent-pink.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-pink.header-cyan #content-wrapper > header .header-button:hover, body.accent-pink.header-cyan #content-wrapper > header .header-button.active:after, body.accent-pink.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-pink.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-pink.header-cyan
 #content > header .header-button:hover, body.accent-pink.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1544,26 +1384,21 @@ body.accent-pink.header-cyan #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-red.header-cyan #content-wrapper > header a, body.accent-red.header-cyan
-#content-with-footer > header a, body.accent-red.header-cyan
 #content > header a {
   color: #eb8c95;
 }
 
 body.accent-red.header-cyan #content-wrapper > header a:hover, body.accent-red.header-cyan
-#content-with-footer > header a:hover, body.accent-red.header-cyan
 #content > header a:hover {
   color: #e4606d;
 }
 
 body.accent-red.header-cyan #content-wrapper > header .header-button, body.accent-red.header-cyan
-#content-with-footer > header .header-button, body.accent-red.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-red.header-cyan #content-wrapper > header .header-button:hover, body.accent-red.header-cyan #content-wrapper > header .header-button.active:after, body.accent-red.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-red.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-red.header-cyan
 #content > header .header-button:hover, body.accent-red.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1571,26 +1406,21 @@ body.accent-red.header-cyan #content-wrapper > header .header-button:hover, body
 }
 
 body.accent-orange.header-cyan #content-wrapper > header a, body.accent-orange.header-cyan
-#content-with-footer > header a, body.accent-orange.header-cyan
 #content > header a {
   color: #feb679;
 }
 
 body.accent-orange.header-cyan #content-wrapper > header a:hover, body.accent-orange.header-cyan
-#content-with-footer > header a:hover, body.accent-orange.header-cyan
 #content > header a:hover {
   color: #fd9a47;
 }
 
 body.accent-orange.header-cyan #content-wrapper > header .header-button, body.accent-orange.header-cyan
-#content-with-footer > header .header-button, body.accent-orange.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-orange.header-cyan #content-wrapper > header .header-button:hover, body.accent-orange.header-cyan #content-wrapper > header .header-button.active:after, body.accent-orange.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-orange.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-orange.header-cyan
 #content > header .header-button:hover, body.accent-orange.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1598,26 +1428,21 @@ body.accent-orange.header-cyan #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-yellow.header-cyan #content-wrapper > header a, body.accent-yellow.header-cyan
-#content-with-footer > header a, body.accent-yellow.header-cyan
 #content > header a {
   color: #ffdb6d;
 }
 
 body.accent-yellow.header-cyan #content-wrapper > header a:hover, body.accent-yellow.header-cyan
-#content-with-footer > header a:hover, body.accent-yellow.header-cyan
 #content > header a:hover {
   color: #ffce3a;
 }
 
 body.accent-yellow.header-cyan #content-wrapper > header .header-button, body.accent-yellow.header-cyan
-#content-with-footer > header .header-button, body.accent-yellow.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-yellow.header-cyan #content-wrapper > header .header-button:hover, body.accent-yellow.header-cyan #content-wrapper > header .header-button.active:after, body.accent-yellow.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-yellow.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-yellow.header-cyan
 #content > header .header-button:hover, body.accent-yellow.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1625,26 +1450,21 @@ body.accent-yellow.header-cyan #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-green.header-cyan #content-wrapper > header a, body.accent-green.header-cyan
-#content-with-footer > header a, body.accent-green.header-cyan
 #content > header a {
   color: #5dd879;
 }
 
 body.accent-green.header-cyan #content-wrapper > header a:hover, body.accent-green.header-cyan
-#content-with-footer > header a:hover, body.accent-green.header-cyan
 #content > header a:hover {
   color: #34ce57;
 }
 
 body.accent-green.header-cyan #content-wrapper > header .header-button, body.accent-green.header-cyan
-#content-with-footer > header .header-button, body.accent-green.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-green.header-cyan #content-wrapper > header .header-button:hover, body.accent-green.header-cyan #content-wrapper > header .header-button.active:after, body.accent-green.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-green.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-green.header-cyan
 #content > header .header-button:hover, body.accent-green.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1652,26 +1472,21 @@ body.accent-green.header-cyan #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-teal.header-cyan #content-wrapper > header a, body.accent-teal.header-cyan
-#content-with-footer > header a, body.accent-teal.header-cyan
 #content > header a {
   color: #68e7c1;
 }
 
 body.accent-teal.header-cyan #content-wrapper > header a:hover, body.accent-teal.header-cyan
-#content-with-footer > header a:hover, body.accent-teal.header-cyan
 #content > header a:hover {
   color: #3ce0af;
 }
 
 body.accent-teal.header-cyan #content-wrapper > header .header-button, body.accent-teal.header-cyan
-#content-with-footer > header .header-button, body.accent-teal.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-teal.header-cyan #content-wrapper > header .header-button:hover, body.accent-teal.header-cyan #content-wrapper > header .header-button.active:after, body.accent-teal.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-teal.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-teal.header-cyan
 #content > header .header-button:hover, body.accent-teal.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1679,26 +1494,21 @@ body.accent-teal.header-cyan #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-cyan.header-cyan #content-wrapper > header a, body.accent-cyan.header-cyan
-#content-with-footer > header a, body.accent-cyan.header-cyan
 #content > header a {
   color: #4cd3e9;
 }
 
 body.accent-cyan.header-cyan #content-wrapper > header a:hover, body.accent-cyan.header-cyan
-#content-with-footer > header a:hover, body.accent-cyan.header-cyan
 #content > header a:hover {
   color: #1fc8e3;
 }
 
 body.accent-cyan.header-cyan #content-wrapper > header .header-button, body.accent-cyan.header-cyan
-#content-with-footer > header .header-button, body.accent-cyan.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-cyan.header-cyan #content-wrapper > header .header-button:hover, body.accent-cyan.header-cyan #content-wrapper > header .header-button.active:after, body.accent-cyan.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-cyan.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-cyan.header-cyan
 #content > header .header-button:hover, body.accent-cyan.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1706,26 +1516,21 @@ body.accent-cyan.header-cyan #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-white.header-cyan #content-wrapper > header a, body.accent-white.header-cyan
-#content-with-footer > header a, body.accent-white.header-cyan
 #content > header a {
   color: white;
 }
 
 body.accent-white.header-cyan #content-wrapper > header a:hover, body.accent-white.header-cyan
-#content-with-footer > header a:hover, body.accent-white.header-cyan
 #content > header a:hover {
   color: white;
 }
 
 body.accent-white.header-cyan #content-wrapper > header .header-button, body.accent-white.header-cyan
-#content-with-footer > header .header-button, body.accent-white.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-white.header-cyan #content-wrapper > header .header-button:hover, body.accent-white.header-cyan #content-wrapper > header .header-button.active:after, body.accent-white.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-white.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-white.header-cyan
 #content > header .header-button:hover, body.accent-white.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1733,26 +1538,21 @@ body.accent-white.header-cyan #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-gray.header-cyan #content-wrapper > header a, body.accent-gray.header-cyan
-#content-with-footer > header a, body.accent-gray.header-cyan
 #content > header a {
   color: #a1a8ae;
 }
 
 body.accent-gray.header-cyan #content-wrapper > header a:hover, body.accent-gray.header-cyan
-#content-with-footer > header a:hover, body.accent-gray.header-cyan
 #content > header a:hover {
   color: #868e96;
 }
 
 body.accent-gray.header-cyan #content-wrapper > header .header-button, body.accent-gray.header-cyan
-#content-with-footer > header .header-button, body.accent-gray.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray.header-cyan #content-wrapper > header .header-button:hover, body.accent-gray.header-cyan #content-wrapper > header .header-button.active:after, body.accent-gray.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-gray.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-gray.header-cyan
 #content > header .header-button:hover, body.accent-gray.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1760,26 +1560,21 @@ body.accent-gray.header-cyan #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-gray-dark.header-cyan #content-wrapper > header a, body.accent-gray-dark.header-cyan
-#content-with-footer > header a, body.accent-gray-dark.header-cyan
 #content > header a {
   color: #626d78;
 }
 
 body.accent-gray-dark.header-cyan #content-wrapper > header a:hover, body.accent-gray-dark.header-cyan
-#content-with-footer > header a:hover, body.accent-gray-dark.header-cyan
 #content > header a:hover {
   color: #4b545c;
 }
 
 body.accent-gray-dark.header-cyan #content-wrapper > header .header-button, body.accent-gray-dark.header-cyan
-#content-with-footer > header .header-button, body.accent-gray-dark.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-dark.header-cyan #content-wrapper > header .header-button:hover, body.accent-gray-dark.header-cyan #content-wrapper > header .header-button.active:after, body.accent-gray-dark.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-gray-dark.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-gray-dark.header-cyan
 #content > header .header-button:hover, body.accent-gray-dark.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1787,26 +1582,21 @@ body.accent-gray-dark.header-cyan #content-wrapper > header .header-button:hover
 }
 
 body.accent-gray-light.header-cyan #content-wrapper > header a, body.accent-gray-light.header-cyan
-#content-with-footer > header a, body.accent-gray-light.header-cyan
 #content > header a {
   color: white;
 }
 
 body.accent-gray-light.header-cyan #content-wrapper > header a:hover, body.accent-gray-light.header-cyan
-#content-with-footer > header a:hover, body.accent-gray-light.header-cyan
 #content > header a:hover {
   color: #fbfcfc;
 }
 
 body.accent-gray-light.header-cyan #content-wrapper > header .header-button, body.accent-gray-light.header-cyan
-#content-with-footer > header .header-button, body.accent-gray-light.header-cyan
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-light.header-cyan #content-wrapper > header .header-button:hover, body.accent-gray-light.header-cyan #content-wrapper > header .header-button.active:after, body.accent-gray-light.header-cyan
-#content-with-footer > header .header-button:hover, body.accent-gray-light.header-cyan
-#content-with-footer > header .header-button.active:after, body.accent-gray-light.header-cyan
 #content > header .header-button:hover, body.accent-gray-light.header-cyan
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1814,7 +1604,6 @@ body.accent-gray-light.header-cyan #content-wrapper > header .header-button:hove
 }
 
 body.header-yellow #content-wrapper > header, body.header-yellow
-#content-with-footer > header, body.header-yellow
 #content > header {
   background-color: #765904;
   color: #ced4da;
@@ -1822,46 +1611,38 @@ body.header-yellow #content-wrapper > header, body.header-yellow
 }
 
 body.header-yellow #content-wrapper > header .header-button, body.header-yellow
-#content-with-footer > header .header-button, body.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.header-yellow.header-lighter #content-wrapper > header, body.header-yellow.header-lighter
-#content-with-footer > header, body.header-yellow.header-lighter
 #content > header {
   background-color: #a77e06;
   border-color: #a77e06;
 }
 
 body.header-yellow.header-darker #content-wrapper > header, body.header-yellow.header-darker
-#content-with-footer > header, body.header-yellow.header-darker
 #content > header {
   background-color: #453402;
   border-color: #453402;
 }
 
 body.accent-blue.header-yellow #content-wrapper > header a, body.accent-blue.header-yellow
-#content-with-footer > header a, body.accent-blue.header-yellow
 #content > header a {
   color: #66b0ff;
 }
 
 body.accent-blue.header-yellow #content-wrapper > header a:hover, body.accent-blue.header-yellow
-#content-with-footer > header a:hover, body.accent-blue.header-yellow
 #content > header a:hover {
   color: #3395ff;
 }
 
 body.accent-blue.header-yellow #content-wrapper > header .header-button, body.accent-blue.header-yellow
-#content-with-footer > header .header-button, body.accent-blue.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-blue.header-yellow #content-wrapper > header .header-button:hover, body.accent-blue.header-yellow #content-wrapper > header .header-button.active:after, body.accent-blue.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-blue.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-blue.header-yellow
 #content > header .header-button:hover, body.accent-blue.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1869,26 +1650,21 @@ body.accent-blue.header-yellow #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-indigo.header-yellow #content-wrapper > header a, body.accent-indigo.header-yellow
-#content-with-footer > header a, body.accent-indigo.header-yellow
 #content > header a {
   color: #a471f7;
 }
 
 body.accent-indigo.header-yellow #content-wrapper > header a:hover, body.accent-indigo.header-yellow
-#content-with-footer > header a:hover, body.accent-indigo.header-yellow
 #content > header a:hover {
   color: #8540f5;
 }
 
 body.accent-indigo.header-yellow #content-wrapper > header .header-button, body.accent-indigo.header-yellow
-#content-with-footer > header .header-button, body.accent-indigo.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-indigo.header-yellow #content-wrapper > header .header-button:hover, body.accent-indigo.header-yellow #content-wrapper > header .header-button.active:after, body.accent-indigo.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-indigo.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-indigo.header-yellow
 #content > header .header-button:hover, body.accent-indigo.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1896,26 +1672,21 @@ body.accent-indigo.header-yellow #content-wrapper > header .header-button:hover,
 }
 
 body.accent-purple.header-yellow #content-wrapper > header a, body.accent-purple.header-yellow
-#content-with-footer > header a, body.accent-purple.header-yellow
 #content > header a {
   color: #aa8fda;
 }
 
 body.accent-purple.header-yellow #content-wrapper > header a:hover, body.accent-purple.header-yellow
-#content-with-footer > header a:hover, body.accent-purple.header-yellow
 #content > header a:hover {
   color: #8c68ce;
 }
 
 body.accent-purple.header-yellow #content-wrapper > header .header-button, body.accent-purple.header-yellow
-#content-with-footer > header .header-button, body.accent-purple.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-purple.header-yellow #content-wrapper > header .header-button:hover, body.accent-purple.header-yellow #content-wrapper > header .header-button.active:after, body.accent-purple.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-purple.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-purple.header-yellow
 #content > header .header-button:hover, body.accent-purple.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1923,26 +1694,21 @@ body.accent-purple.header-yellow #content-wrapper > header .header-button:hover,
 }
 
 body.accent-pink.header-yellow #content-wrapper > header a, body.accent-pink.header-yellow
-#content-with-footer > header a, body.accent-pink.header-yellow
 #content > header a {
   color: #f399c2;
 }
 
 body.accent-pink.header-yellow #content-wrapper > header a:hover, body.accent-pink.header-yellow
-#content-with-footer > header a:hover, body.accent-pink.header-yellow
 #content > header a:hover {
   color: #ed6ca7;
 }
 
 body.accent-pink.header-yellow #content-wrapper > header .header-button, body.accent-pink.header-yellow
-#content-with-footer > header .header-button, body.accent-pink.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-pink.header-yellow #content-wrapper > header .header-button:hover, body.accent-pink.header-yellow #content-wrapper > header .header-button.active:after, body.accent-pink.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-pink.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-pink.header-yellow
 #content > header .header-button:hover, body.accent-pink.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1950,26 +1716,21 @@ body.accent-pink.header-yellow #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-red.header-yellow #content-wrapper > header a, body.accent-red.header-yellow
-#content-with-footer > header a, body.accent-red.header-yellow
 #content > header a {
   color: #eb8c95;
 }
 
 body.accent-red.header-yellow #content-wrapper > header a:hover, body.accent-red.header-yellow
-#content-with-footer > header a:hover, body.accent-red.header-yellow
 #content > header a:hover {
   color: #e4606d;
 }
 
 body.accent-red.header-yellow #content-wrapper > header .header-button, body.accent-red.header-yellow
-#content-with-footer > header .header-button, body.accent-red.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-red.header-yellow #content-wrapper > header .header-button:hover, body.accent-red.header-yellow #content-wrapper > header .header-button.active:after, body.accent-red.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-red.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-red.header-yellow
 #content > header .header-button:hover, body.accent-red.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -1977,26 +1738,21 @@ body.accent-red.header-yellow #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-orange.header-yellow #content-wrapper > header a, body.accent-orange.header-yellow
-#content-with-footer > header a, body.accent-orange.header-yellow
 #content > header a {
   color: #feb679;
 }
 
 body.accent-orange.header-yellow #content-wrapper > header a:hover, body.accent-orange.header-yellow
-#content-with-footer > header a:hover, body.accent-orange.header-yellow
 #content > header a:hover {
   color: #fd9a47;
 }
 
 body.accent-orange.header-yellow #content-wrapper > header .header-button, body.accent-orange.header-yellow
-#content-with-footer > header .header-button, body.accent-orange.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-orange.header-yellow #content-wrapper > header .header-button:hover, body.accent-orange.header-yellow #content-wrapper > header .header-button.active:after, body.accent-orange.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-orange.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-orange.header-yellow
 #content > header .header-button:hover, body.accent-orange.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2004,26 +1760,21 @@ body.accent-orange.header-yellow #content-wrapper > header .header-button:hover,
 }
 
 body.accent-yellow.header-yellow #content-wrapper > header a, body.accent-yellow.header-yellow
-#content-with-footer > header a, body.accent-yellow.header-yellow
 #content > header a {
   color: #ffdb6d;
 }
 
 body.accent-yellow.header-yellow #content-wrapper > header a:hover, body.accent-yellow.header-yellow
-#content-with-footer > header a:hover, body.accent-yellow.header-yellow
 #content > header a:hover {
   color: #ffce3a;
 }
 
 body.accent-yellow.header-yellow #content-wrapper > header .header-button, body.accent-yellow.header-yellow
-#content-with-footer > header .header-button, body.accent-yellow.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-yellow.header-yellow #content-wrapper > header .header-button:hover, body.accent-yellow.header-yellow #content-wrapper > header .header-button.active:after, body.accent-yellow.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-yellow.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-yellow.header-yellow
 #content > header .header-button:hover, body.accent-yellow.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2031,26 +1782,21 @@ body.accent-yellow.header-yellow #content-wrapper > header .header-button:hover,
 }
 
 body.accent-green.header-yellow #content-wrapper > header a, body.accent-green.header-yellow
-#content-with-footer > header a, body.accent-green.header-yellow
 #content > header a {
   color: #5dd879;
 }
 
 body.accent-green.header-yellow #content-wrapper > header a:hover, body.accent-green.header-yellow
-#content-with-footer > header a:hover, body.accent-green.header-yellow
 #content > header a:hover {
   color: #34ce57;
 }
 
 body.accent-green.header-yellow #content-wrapper > header .header-button, body.accent-green.header-yellow
-#content-with-footer > header .header-button, body.accent-green.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-green.header-yellow #content-wrapper > header .header-button:hover, body.accent-green.header-yellow #content-wrapper > header .header-button.active:after, body.accent-green.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-green.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-green.header-yellow
 #content > header .header-button:hover, body.accent-green.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2058,26 +1804,21 @@ body.accent-green.header-yellow #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-teal.header-yellow #content-wrapper > header a, body.accent-teal.header-yellow
-#content-with-footer > header a, body.accent-teal.header-yellow
 #content > header a {
   color: #68e7c1;
 }
 
 body.accent-teal.header-yellow #content-wrapper > header a:hover, body.accent-teal.header-yellow
-#content-with-footer > header a:hover, body.accent-teal.header-yellow
 #content > header a:hover {
   color: #3ce0af;
 }
 
 body.accent-teal.header-yellow #content-wrapper > header .header-button, body.accent-teal.header-yellow
-#content-with-footer > header .header-button, body.accent-teal.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-teal.header-yellow #content-wrapper > header .header-button:hover, body.accent-teal.header-yellow #content-wrapper > header .header-button.active:after, body.accent-teal.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-teal.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-teal.header-yellow
 #content > header .header-button:hover, body.accent-teal.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2085,26 +1826,21 @@ body.accent-teal.header-yellow #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-cyan.header-yellow #content-wrapper > header a, body.accent-cyan.header-yellow
-#content-with-footer > header a, body.accent-cyan.header-yellow
 #content > header a {
   color: #4cd3e9;
 }
 
 body.accent-cyan.header-yellow #content-wrapper > header a:hover, body.accent-cyan.header-yellow
-#content-with-footer > header a:hover, body.accent-cyan.header-yellow
 #content > header a:hover {
   color: #1fc8e3;
 }
 
 body.accent-cyan.header-yellow #content-wrapper > header .header-button, body.accent-cyan.header-yellow
-#content-with-footer > header .header-button, body.accent-cyan.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-cyan.header-yellow #content-wrapper > header .header-button:hover, body.accent-cyan.header-yellow #content-wrapper > header .header-button.active:after, body.accent-cyan.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-cyan.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-cyan.header-yellow
 #content > header .header-button:hover, body.accent-cyan.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2112,26 +1848,21 @@ body.accent-cyan.header-yellow #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-white.header-yellow #content-wrapper > header a, body.accent-white.header-yellow
-#content-with-footer > header a, body.accent-white.header-yellow
 #content > header a {
   color: white;
 }
 
 body.accent-white.header-yellow #content-wrapper > header a:hover, body.accent-white.header-yellow
-#content-with-footer > header a:hover, body.accent-white.header-yellow
 #content > header a:hover {
   color: white;
 }
 
 body.accent-white.header-yellow #content-wrapper > header .header-button, body.accent-white.header-yellow
-#content-with-footer > header .header-button, body.accent-white.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-white.header-yellow #content-wrapper > header .header-button:hover, body.accent-white.header-yellow #content-wrapper > header .header-button.active:after, body.accent-white.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-white.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-white.header-yellow
 #content > header .header-button:hover, body.accent-white.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2139,26 +1870,21 @@ body.accent-white.header-yellow #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-gray.header-yellow #content-wrapper > header a, body.accent-gray.header-yellow
-#content-with-footer > header a, body.accent-gray.header-yellow
 #content > header a {
   color: #a1a8ae;
 }
 
 body.accent-gray.header-yellow #content-wrapper > header a:hover, body.accent-gray.header-yellow
-#content-with-footer > header a:hover, body.accent-gray.header-yellow
 #content > header a:hover {
   color: #868e96;
 }
 
 body.accent-gray.header-yellow #content-wrapper > header .header-button, body.accent-gray.header-yellow
-#content-with-footer > header .header-button, body.accent-gray.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray.header-yellow #content-wrapper > header .header-button:hover, body.accent-gray.header-yellow #content-wrapper > header .header-button.active:after, body.accent-gray.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-gray.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-gray.header-yellow
 #content > header .header-button:hover, body.accent-gray.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2166,26 +1892,21 @@ body.accent-gray.header-yellow #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-gray-dark.header-yellow #content-wrapper > header a, body.accent-gray-dark.header-yellow
-#content-with-footer > header a, body.accent-gray-dark.header-yellow
 #content > header a {
   color: #626d78;
 }
 
 body.accent-gray-dark.header-yellow #content-wrapper > header a:hover, body.accent-gray-dark.header-yellow
-#content-with-footer > header a:hover, body.accent-gray-dark.header-yellow
 #content > header a:hover {
   color: #4b545c;
 }
 
 body.accent-gray-dark.header-yellow #content-wrapper > header .header-button, body.accent-gray-dark.header-yellow
-#content-with-footer > header .header-button, body.accent-gray-dark.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-dark.header-yellow #content-wrapper > header .header-button:hover, body.accent-gray-dark.header-yellow #content-wrapper > header .header-button.active:after, body.accent-gray-dark.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-gray-dark.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-gray-dark.header-yellow
 #content > header .header-button:hover, body.accent-gray-dark.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2193,26 +1914,21 @@ body.accent-gray-dark.header-yellow #content-wrapper > header .header-button:hov
 }
 
 body.accent-gray-light.header-yellow #content-wrapper > header a, body.accent-gray-light.header-yellow
-#content-with-footer > header a, body.accent-gray-light.header-yellow
 #content > header a {
   color: white;
 }
 
 body.accent-gray-light.header-yellow #content-wrapper > header a:hover, body.accent-gray-light.header-yellow
-#content-with-footer > header a:hover, body.accent-gray-light.header-yellow
 #content > header a:hover {
   color: #fbfcfc;
 }
 
 body.accent-gray-light.header-yellow #content-wrapper > header .header-button, body.accent-gray-light.header-yellow
-#content-with-footer > header .header-button, body.accent-gray-light.header-yellow
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-light.header-yellow #content-wrapper > header .header-button:hover, body.accent-gray-light.header-yellow #content-wrapper > header .header-button.active:after, body.accent-gray-light.header-yellow
-#content-with-footer > header .header-button:hover, body.accent-gray-light.header-yellow
-#content-with-footer > header .header-button.active:after, body.accent-gray-light.header-yellow
 #content > header .header-button:hover, body.accent-gray-light.header-yellow
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2220,7 +1936,6 @@ body.accent-gray-light.header-yellow #content-wrapper > header .header-button:ho
 }
 
 body.header-red #content-wrapper > header, body.header-red
-#content-with-footer > header, body.header-red
 #content > header {
   background-color: #7B1825;
   color: #ced4da;
@@ -2228,46 +1943,38 @@ body.header-red #content-wrapper > header, body.header-red
 }
 
 body.header-red #content-wrapper > header .header-button, body.header-red
-#content-with-footer > header .header-button, body.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.header-red.header-lighter #content-wrapper > header, body.header-red.header-lighter
-#content-with-footer > header, body.header-red.header-lighter
 #content > header {
   background-color: #a62032;
   border-color: #a62032;
 }
 
 body.header-red.header-darker #content-wrapper > header, body.header-red.header-darker
-#content-with-footer > header, body.header-red.header-darker
 #content > header {
   background-color: #501018;
   border-color: #501018;
 }
 
 body.accent-blue.header-red #content-wrapper > header a, body.accent-blue.header-red
-#content-with-footer > header a, body.accent-blue.header-red
 #content > header a {
   color: #66b0ff;
 }
 
 body.accent-blue.header-red #content-wrapper > header a:hover, body.accent-blue.header-red
-#content-with-footer > header a:hover, body.accent-blue.header-red
 #content > header a:hover {
   color: #3395ff;
 }
 
 body.accent-blue.header-red #content-wrapper > header .header-button, body.accent-blue.header-red
-#content-with-footer > header .header-button, body.accent-blue.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-blue.header-red #content-wrapper > header .header-button:hover, body.accent-blue.header-red #content-wrapper > header .header-button.active:after, body.accent-blue.header-red
-#content-with-footer > header .header-button:hover, body.accent-blue.header-red
-#content-with-footer > header .header-button.active:after, body.accent-blue.header-red
 #content > header .header-button:hover, body.accent-blue.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2275,26 +1982,21 @@ body.accent-blue.header-red #content-wrapper > header .header-button:hover, body
 }
 
 body.accent-indigo.header-red #content-wrapper > header a, body.accent-indigo.header-red
-#content-with-footer > header a, body.accent-indigo.header-red
 #content > header a {
   color: #a471f7;
 }
 
 body.accent-indigo.header-red #content-wrapper > header a:hover, body.accent-indigo.header-red
-#content-with-footer > header a:hover, body.accent-indigo.header-red
 #content > header a:hover {
   color: #8540f5;
 }
 
 body.accent-indigo.header-red #content-wrapper > header .header-button, body.accent-indigo.header-red
-#content-with-footer > header .header-button, body.accent-indigo.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-indigo.header-red #content-wrapper > header .header-button:hover, body.accent-indigo.header-red #content-wrapper > header .header-button.active:after, body.accent-indigo.header-red
-#content-with-footer > header .header-button:hover, body.accent-indigo.header-red
-#content-with-footer > header .header-button.active:after, body.accent-indigo.header-red
 #content > header .header-button:hover, body.accent-indigo.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2302,26 +2004,21 @@ body.accent-indigo.header-red #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-purple.header-red #content-wrapper > header a, body.accent-purple.header-red
-#content-with-footer > header a, body.accent-purple.header-red
 #content > header a {
   color: #aa8fda;
 }
 
 body.accent-purple.header-red #content-wrapper > header a:hover, body.accent-purple.header-red
-#content-with-footer > header a:hover, body.accent-purple.header-red
 #content > header a:hover {
   color: #8c68ce;
 }
 
 body.accent-purple.header-red #content-wrapper > header .header-button, body.accent-purple.header-red
-#content-with-footer > header .header-button, body.accent-purple.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-purple.header-red #content-wrapper > header .header-button:hover, body.accent-purple.header-red #content-wrapper > header .header-button.active:after, body.accent-purple.header-red
-#content-with-footer > header .header-button:hover, body.accent-purple.header-red
-#content-with-footer > header .header-button.active:after, body.accent-purple.header-red
 #content > header .header-button:hover, body.accent-purple.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2329,26 +2026,21 @@ body.accent-purple.header-red #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-pink.header-red #content-wrapper > header a, body.accent-pink.header-red
-#content-with-footer > header a, body.accent-pink.header-red
 #content > header a {
   color: #f399c2;
 }
 
 body.accent-pink.header-red #content-wrapper > header a:hover, body.accent-pink.header-red
-#content-with-footer > header a:hover, body.accent-pink.header-red
 #content > header a:hover {
   color: #ed6ca7;
 }
 
 body.accent-pink.header-red #content-wrapper > header .header-button, body.accent-pink.header-red
-#content-with-footer > header .header-button, body.accent-pink.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-pink.header-red #content-wrapper > header .header-button:hover, body.accent-pink.header-red #content-wrapper > header .header-button.active:after, body.accent-pink.header-red
-#content-with-footer > header .header-button:hover, body.accent-pink.header-red
-#content-with-footer > header .header-button.active:after, body.accent-pink.header-red
 #content > header .header-button:hover, body.accent-pink.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2356,26 +2048,21 @@ body.accent-pink.header-red #content-wrapper > header .header-button:hover, body
 }
 
 body.accent-red.header-red #content-wrapper > header a, body.accent-red.header-red
-#content-with-footer > header a, body.accent-red.header-red
 #content > header a {
   color: #eb8c95;
 }
 
 body.accent-red.header-red #content-wrapper > header a:hover, body.accent-red.header-red
-#content-with-footer > header a:hover, body.accent-red.header-red
 #content > header a:hover {
   color: #e4606d;
 }
 
 body.accent-red.header-red #content-wrapper > header .header-button, body.accent-red.header-red
-#content-with-footer > header .header-button, body.accent-red.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-red.header-red #content-wrapper > header .header-button:hover, body.accent-red.header-red #content-wrapper > header .header-button.active:after, body.accent-red.header-red
-#content-with-footer > header .header-button:hover, body.accent-red.header-red
-#content-with-footer > header .header-button.active:after, body.accent-red.header-red
 #content > header .header-button:hover, body.accent-red.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2383,26 +2070,21 @@ body.accent-red.header-red #content-wrapper > header .header-button:hover, body.
 }
 
 body.accent-orange.header-red #content-wrapper > header a, body.accent-orange.header-red
-#content-with-footer > header a, body.accent-orange.header-red
 #content > header a {
   color: #feb679;
 }
 
 body.accent-orange.header-red #content-wrapper > header a:hover, body.accent-orange.header-red
-#content-with-footer > header a:hover, body.accent-orange.header-red
 #content > header a:hover {
   color: #fd9a47;
 }
 
 body.accent-orange.header-red #content-wrapper > header .header-button, body.accent-orange.header-red
-#content-with-footer > header .header-button, body.accent-orange.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-orange.header-red #content-wrapper > header .header-button:hover, body.accent-orange.header-red #content-wrapper > header .header-button.active:after, body.accent-orange.header-red
-#content-with-footer > header .header-button:hover, body.accent-orange.header-red
-#content-with-footer > header .header-button.active:after, body.accent-orange.header-red
 #content > header .header-button:hover, body.accent-orange.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2410,26 +2092,21 @@ body.accent-orange.header-red #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-yellow.header-red #content-wrapper > header a, body.accent-yellow.header-red
-#content-with-footer > header a, body.accent-yellow.header-red
 #content > header a {
   color: #ffdb6d;
 }
 
 body.accent-yellow.header-red #content-wrapper > header a:hover, body.accent-yellow.header-red
-#content-with-footer > header a:hover, body.accent-yellow.header-red
 #content > header a:hover {
   color: #ffce3a;
 }
 
 body.accent-yellow.header-red #content-wrapper > header .header-button, body.accent-yellow.header-red
-#content-with-footer > header .header-button, body.accent-yellow.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-yellow.header-red #content-wrapper > header .header-button:hover, body.accent-yellow.header-red #content-wrapper > header .header-button.active:after, body.accent-yellow.header-red
-#content-with-footer > header .header-button:hover, body.accent-yellow.header-red
-#content-with-footer > header .header-button.active:after, body.accent-yellow.header-red
 #content > header .header-button:hover, body.accent-yellow.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2437,26 +2114,21 @@ body.accent-yellow.header-red #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-green.header-red #content-wrapper > header a, body.accent-green.header-red
-#content-with-footer > header a, body.accent-green.header-red
 #content > header a {
   color: #5dd879;
 }
 
 body.accent-green.header-red #content-wrapper > header a:hover, body.accent-green.header-red
-#content-with-footer > header a:hover, body.accent-green.header-red
 #content > header a:hover {
   color: #34ce57;
 }
 
 body.accent-green.header-red #content-wrapper > header .header-button, body.accent-green.header-red
-#content-with-footer > header .header-button, body.accent-green.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-green.header-red #content-wrapper > header .header-button:hover, body.accent-green.header-red #content-wrapper > header .header-button.active:after, body.accent-green.header-red
-#content-with-footer > header .header-button:hover, body.accent-green.header-red
-#content-with-footer > header .header-button.active:after, body.accent-green.header-red
 #content > header .header-button:hover, body.accent-green.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2464,26 +2136,21 @@ body.accent-green.header-red #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-teal.header-red #content-wrapper > header a, body.accent-teal.header-red
-#content-with-footer > header a, body.accent-teal.header-red
 #content > header a {
   color: #68e7c1;
 }
 
 body.accent-teal.header-red #content-wrapper > header a:hover, body.accent-teal.header-red
-#content-with-footer > header a:hover, body.accent-teal.header-red
 #content > header a:hover {
   color: #3ce0af;
 }
 
 body.accent-teal.header-red #content-wrapper > header .header-button, body.accent-teal.header-red
-#content-with-footer > header .header-button, body.accent-teal.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-teal.header-red #content-wrapper > header .header-button:hover, body.accent-teal.header-red #content-wrapper > header .header-button.active:after, body.accent-teal.header-red
-#content-with-footer > header .header-button:hover, body.accent-teal.header-red
-#content-with-footer > header .header-button.active:after, body.accent-teal.header-red
 #content > header .header-button:hover, body.accent-teal.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2491,26 +2158,21 @@ body.accent-teal.header-red #content-wrapper > header .header-button:hover, body
 }
 
 body.accent-cyan.header-red #content-wrapper > header a, body.accent-cyan.header-red
-#content-with-footer > header a, body.accent-cyan.header-red
 #content > header a {
   color: #4cd3e9;
 }
 
 body.accent-cyan.header-red #content-wrapper > header a:hover, body.accent-cyan.header-red
-#content-with-footer > header a:hover, body.accent-cyan.header-red
 #content > header a:hover {
   color: #1fc8e3;
 }
 
 body.accent-cyan.header-red #content-wrapper > header .header-button, body.accent-cyan.header-red
-#content-with-footer > header .header-button, body.accent-cyan.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-cyan.header-red #content-wrapper > header .header-button:hover, body.accent-cyan.header-red #content-wrapper > header .header-button.active:after, body.accent-cyan.header-red
-#content-with-footer > header .header-button:hover, body.accent-cyan.header-red
-#content-with-footer > header .header-button.active:after, body.accent-cyan.header-red
 #content > header .header-button:hover, body.accent-cyan.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2518,26 +2180,21 @@ body.accent-cyan.header-red #content-wrapper > header .header-button:hover, body
 }
 
 body.accent-white.header-red #content-wrapper > header a, body.accent-white.header-red
-#content-with-footer > header a, body.accent-white.header-red
 #content > header a {
   color: white;
 }
 
 body.accent-white.header-red #content-wrapper > header a:hover, body.accent-white.header-red
-#content-with-footer > header a:hover, body.accent-white.header-red
 #content > header a:hover {
   color: white;
 }
 
 body.accent-white.header-red #content-wrapper > header .header-button, body.accent-white.header-red
-#content-with-footer > header .header-button, body.accent-white.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-white.header-red #content-wrapper > header .header-button:hover, body.accent-white.header-red #content-wrapper > header .header-button.active:after, body.accent-white.header-red
-#content-with-footer > header .header-button:hover, body.accent-white.header-red
-#content-with-footer > header .header-button.active:after, body.accent-white.header-red
 #content > header .header-button:hover, body.accent-white.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2545,26 +2202,21 @@ body.accent-white.header-red #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-gray.header-red #content-wrapper > header a, body.accent-gray.header-red
-#content-with-footer > header a, body.accent-gray.header-red
 #content > header a {
   color: #a1a8ae;
 }
 
 body.accent-gray.header-red #content-wrapper > header a:hover, body.accent-gray.header-red
-#content-with-footer > header a:hover, body.accent-gray.header-red
 #content > header a:hover {
   color: #868e96;
 }
 
 body.accent-gray.header-red #content-wrapper > header .header-button, body.accent-gray.header-red
-#content-with-footer > header .header-button, body.accent-gray.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray.header-red #content-wrapper > header .header-button:hover, body.accent-gray.header-red #content-wrapper > header .header-button.active:after, body.accent-gray.header-red
-#content-with-footer > header .header-button:hover, body.accent-gray.header-red
-#content-with-footer > header .header-button.active:after, body.accent-gray.header-red
 #content > header .header-button:hover, body.accent-gray.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2572,26 +2224,21 @@ body.accent-gray.header-red #content-wrapper > header .header-button:hover, body
 }
 
 body.accent-gray-dark.header-red #content-wrapper > header a, body.accent-gray-dark.header-red
-#content-with-footer > header a, body.accent-gray-dark.header-red
 #content > header a {
   color: #626d78;
 }
 
 body.accent-gray-dark.header-red #content-wrapper > header a:hover, body.accent-gray-dark.header-red
-#content-with-footer > header a:hover, body.accent-gray-dark.header-red
 #content > header a:hover {
   color: #4b545c;
 }
 
 body.accent-gray-dark.header-red #content-wrapper > header .header-button, body.accent-gray-dark.header-red
-#content-with-footer > header .header-button, body.accent-gray-dark.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-dark.header-red #content-wrapper > header .header-button:hover, body.accent-gray-dark.header-red #content-wrapper > header .header-button.active:after, body.accent-gray-dark.header-red
-#content-with-footer > header .header-button:hover, body.accent-gray-dark.header-red
-#content-with-footer > header .header-button.active:after, body.accent-gray-dark.header-red
 #content > header .header-button:hover, body.accent-gray-dark.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2599,26 +2246,21 @@ body.accent-gray-dark.header-red #content-wrapper > header .header-button:hover,
 }
 
 body.accent-gray-light.header-red #content-wrapper > header a, body.accent-gray-light.header-red
-#content-with-footer > header a, body.accent-gray-light.header-red
 #content > header a {
   color: white;
 }
 
 body.accent-gray-light.header-red #content-wrapper > header a:hover, body.accent-gray-light.header-red
-#content-with-footer > header a:hover, body.accent-gray-light.header-red
 #content > header a:hover {
   color: #fbfcfc;
 }
 
 body.accent-gray-light.header-red #content-wrapper > header .header-button, body.accent-gray-light.header-red
-#content-with-footer > header .header-button, body.accent-gray-light.header-red
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-light.header-red #content-wrapper > header .header-button:hover, body.accent-gray-light.header-red #content-wrapper > header .header-button.active:after, body.accent-gray-light.header-red
-#content-with-footer > header .header-button:hover, body.accent-gray-light.header-red
-#content-with-footer > header .header-button.active:after, body.accent-gray-light.header-red
 #content > header .header-button:hover, body.accent-gray-light.header-red
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -2626,7 +2268,6 @@ body.accent-gray-light.header-red #content-wrapper > header .header-button:hover
 }
 
 body.header-white #content-wrapper > header, body.header-white
-#content-with-footer > header, body.header-white
 #content > header {
   background-color: #fff;
   color: #495057;
@@ -2634,46 +2275,38 @@ body.header-white #content-wrapper > header, body.header-white
 }
 
 body.header-white #content-wrapper > header .header-button, body.header-white
-#content-with-footer > header .header-button, body.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.header-white.header-lighter #content-wrapper > header, body.header-white.header-lighter
-#content-with-footer > header, body.header-white.header-lighter
 #content > header {
   background-color: white;
   border-color: #cccccc;
 }
 
 body.header-white.header-darker #content-wrapper > header, body.header-white.header-darker
-#content-with-footer > header, body.header-white.header-darker
 #content > header {
   background-color: #e6e6e6;
   border-color: #e6e6e6;
 }
 
 body.accent-blue.header-white #content-wrapper > header a, body.accent-blue.header-white
-#content-with-footer > header a, body.accent-blue.header-white
 #content > header a {
   color: #cce5ff;
 }
 
 body.accent-blue.header-white #content-wrapper > header a:hover, body.accent-blue.header-white
-#content-with-footer > header a:hover, body.accent-blue.header-white
 #content > header a:hover {
   color: white;
 }
 
 body.accent-blue.header-white #content-wrapper > header .header-button, body.accent-blue.header-white
-#content-with-footer > header .header-button, body.accent-blue.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-blue.header-white #content-wrapper > header .header-button:hover, body.accent-blue.header-white #content-wrapper > header .header-button.active:after, body.accent-blue.header-white
-#content-with-footer > header .header-button:hover, body.accent-blue.header-white
-#content-with-footer > header .header-button.active:after, body.accent-blue.header-white
 #content > header .header-button:hover, body.accent-blue.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2681,26 +2314,21 @@ body.accent-blue.header-white #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-indigo.header-white #content-wrapper > header a, body.accent-indigo.header-white
-#content-with-footer > header a, body.accent-indigo.header-white
 #content > header a {
   color: #e2d1fd;
 }
 
 body.accent-indigo.header-white #content-wrapper > header a:hover, body.accent-indigo.header-white
-#content-with-footer > header a:hover, body.accent-indigo.header-white
 #content > header a:hover {
   color: white;
 }
 
 body.accent-indigo.header-white #content-wrapper > header .header-button, body.accent-indigo.header-white
-#content-with-footer > header .header-button, body.accent-indigo.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-indigo.header-white #content-wrapper > header .header-button:hover, body.accent-indigo.header-white #content-wrapper > header .header-button.active:after, body.accent-indigo.header-white
-#content-with-footer > header .header-button:hover, body.accent-indigo.header-white
-#content-with-footer > header .header-button.active:after, body.accent-indigo.header-white
 #content > header .header-button:hover, body.accent-indigo.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2708,26 +2336,21 @@ body.accent-indigo.header-white #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-purple.header-white #content-wrapper > header a, body.accent-purple.header-white
-#content-with-footer > header a, body.accent-purple.header-white
 #content > header a {
   color: #e4dcf3;
 }
 
 body.accent-purple.header-white #content-wrapper > header a:hover, body.accent-purple.header-white
-#content-with-footer > header a:hover, body.accent-purple.header-white
 #content > header a:hover {
   color: white;
 }
 
 body.accent-purple.header-white #content-wrapper > header .header-button, body.accent-purple.header-white
-#content-with-footer > header .header-button, body.accent-purple.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-purple.header-white #content-wrapper > header .header-button:hover, body.accent-purple.header-white #content-wrapper > header .header-button.active:after, body.accent-purple.header-white
-#content-with-footer > header .header-button:hover, body.accent-purple.header-white
-#content-with-footer > header .header-button.active:after, body.accent-purple.header-white
 #content > header .header-button:hover, body.accent-purple.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2735,26 +2358,21 @@ body.accent-purple.header-white #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-pink.header-white #content-wrapper > header a, body.accent-pink.header-white
-#content-with-footer > header a, body.accent-pink.header-white
 #content > header a {
   color: #fef4f9;
 }
 
 body.accent-pink.header-white #content-wrapper > header a:hover, body.accent-pink.header-white
-#content-with-footer > header a:hover, body.accent-pink.header-white
 #content > header a:hover {
   color: white;
 }
 
 body.accent-pink.header-white #content-wrapper > header .header-button, body.accent-pink.header-white
-#content-with-footer > header .header-button, body.accent-pink.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-pink.header-white #content-wrapper > header .header-button:hover, body.accent-pink.header-white #content-wrapper > header .header-button.active:after, body.accent-pink.header-white
-#content-with-footer > header .header-button:hover, body.accent-pink.header-white
-#content-with-footer > header .header-button.active:after, body.accent-pink.header-white
 #content > header .header-button:hover, body.accent-pink.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2762,26 +2380,21 @@ body.accent-pink.header-white #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-red.header-white #content-wrapper > header a, body.accent-red.header-white
-#content-with-footer > header a, body.accent-red.header-white
 #content > header a {
   color: #fae3e5;
 }
 
 body.accent-red.header-white #content-wrapper > header a:hover, body.accent-red.header-white
-#content-with-footer > header a:hover, body.accent-red.header-white
 #content > header a:hover {
   color: white;
 }
 
 body.accent-red.header-white #content-wrapper > header .header-button, body.accent-red.header-white
-#content-with-footer > header .header-button, body.accent-red.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-red.header-white #content-wrapper > header .header-button:hover, body.accent-red.header-white #content-wrapper > header .header-button.active:after, body.accent-red.header-white
-#content-with-footer > header .header-button:hover, body.accent-red.header-white
-#content-with-footer > header .header-button.active:after, body.accent-red.header-white
 #content > header .header-button:hover, body.accent-red.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2789,26 +2402,21 @@ body.accent-red.header-white #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-orange.header-white #content-wrapper > header a, body.accent-orange.header-white
-#content-with-footer > header a, body.accent-orange.header-white
 #content > header a {
   color: #ffedde;
 }
 
 body.accent-orange.header-white #content-wrapper > header a:hover, body.accent-orange.header-white
-#content-with-footer > header a:hover, body.accent-orange.header-white
 #content > header a:hover {
   color: white;
 }
 
 body.accent-orange.header-white #content-wrapper > header .header-button, body.accent-orange.header-white
-#content-with-footer > header .header-button, body.accent-orange.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-orange.header-white #content-wrapper > header .header-button:hover, body.accent-orange.header-white #content-wrapper > header .header-button.active:after, body.accent-orange.header-white
-#content-with-footer > header .header-button:hover, body.accent-orange.header-white
-#content-with-footer > header .header-button.active:after, body.accent-orange.header-white
 #content > header .header-button:hover, body.accent-orange.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2816,26 +2424,21 @@ body.accent-orange.header-white #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-yellow.header-white #content-wrapper > header a, body.accent-yellow.header-white
-#content-with-footer > header a, body.accent-yellow.header-white
 #content > header a {
   color: #fff4d3;
 }
 
 body.accent-yellow.header-white #content-wrapper > header a:hover, body.accent-yellow.header-white
-#content-with-footer > header a:hover, body.accent-yellow.header-white
 #content > header a:hover {
   color: white;
 }
 
 body.accent-yellow.header-white #content-wrapper > header .header-button, body.accent-yellow.header-white
-#content-with-footer > header .header-button, body.accent-yellow.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-yellow.header-white #content-wrapper > header .header-button:hover, body.accent-yellow.header-white #content-wrapper > header .header-button.active:after, body.accent-yellow.header-white
-#content-with-footer > header .header-button:hover, body.accent-yellow.header-white
-#content-with-footer > header .header-button.active:after, body.accent-yellow.header-white
 #content > header .header-button:hover, body.accent-yellow.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2843,26 +2446,21 @@ body.accent-yellow.header-white #content-wrapper > header .header-button:hover, 
 }
 
 body.accent-green.header-white #content-wrapper > header a, body.accent-green.header-white
-#content-with-footer > header a, body.accent-green.header-white
 #content > header a {
   color: #afecbd;
 }
 
 body.accent-green.header-white #content-wrapper > header a:hover, body.accent-green.header-white
-#content-with-footer > header a:hover, body.accent-green.header-white
 #content > header a:hover {
   color: #d8f6df;
 }
 
 body.accent-green.header-white #content-wrapper > header .header-button, body.accent-green.header-white
-#content-with-footer > header .header-button, body.accent-green.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-green.header-white #content-wrapper > header .header-button:hover, body.accent-green.header-white #content-wrapper > header .header-button.active:after, body.accent-green.header-white
-#content-with-footer > header .header-button:hover, body.accent-green.header-white
-#content-with-footer > header .header-button.active:after, body.accent-green.header-white
 #content > header .header-button:hover, body.accent-green.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2870,26 +2468,21 @@ body.accent-green.header-white #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-teal.header-white #content-wrapper > header a, body.accent-teal.header-white
-#content-with-footer > header a, body.accent-teal.header-white
 #content > header a {
   color: #c0f5e5;
 }
 
 body.accent-teal.header-white #content-wrapper > header a:hover, body.accent-teal.header-white
-#content-with-footer > header a:hover, body.accent-teal.header-white
 #content > header a:hover {
   color: #ecfcf7;
 }
 
 body.accent-teal.header-white #content-wrapper > header .header-button, body.accent-teal.header-white
-#content-with-footer > header .header-button, body.accent-teal.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-teal.header-white #content-wrapper > header .header-button:hover, body.accent-teal.header-white #content-wrapper > header .header-button.active:after, body.accent-teal.header-white
-#content-with-footer > header .header-button:hover, body.accent-teal.header-white
-#content-with-footer > header .header-button.active:after, body.accent-teal.header-white
 #content > header .header-button:hover, body.accent-teal.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2897,26 +2490,21 @@ body.accent-teal.header-white #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-cyan.header-white #content-wrapper > header a, body.accent-cyan.header-white
-#content-with-footer > header a, body.accent-cyan.header-white
 #content > header a {
   color: #a7e9f4;
 }
 
 body.accent-cyan.header-white #content-wrapper > header a:hover, body.accent-cyan.header-white
-#content-with-footer > header a:hover, body.accent-cyan.header-white
 #content > header a:hover {
   color: #d4f5fa;
 }
 
 body.accent-cyan.header-white #content-wrapper > header .header-button, body.accent-cyan.header-white
-#content-with-footer > header .header-button, body.accent-cyan.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-cyan.header-white #content-wrapper > header .header-button:hover, body.accent-cyan.header-white #content-wrapper > header .header-button.active:after, body.accent-cyan.header-white
-#content-with-footer > header .header-button:hover, body.accent-cyan.header-white
-#content-with-footer > header .header-button.active:after, body.accent-cyan.header-white
 #content > header .header-button:hover, body.accent-cyan.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2924,26 +2512,21 @@ body.accent-cyan.header-white #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-white.header-white #content-wrapper > header a, body.accent-white.header-white
-#content-with-footer > header a, body.accent-white.header-white
 #content > header a {
   color: #999999;
 }
 
 body.accent-white.header-white #content-wrapper > header a:hover, body.accent-white.header-white
-#content-with-footer > header a:hover, body.accent-white.header-white
 #content > header a:hover {
   color: #b3b3b3;
 }
 
 body.accent-white.header-white #content-wrapper > header .header-button, body.accent-white.header-white
-#content-with-footer > header .header-button, body.accent-white.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-white.header-white #content-wrapper > header .header-button:hover, body.accent-white.header-white #content-wrapper > header .header-button.active:after, body.accent-white.header-white
-#content-with-footer > header .header-button:hover, body.accent-white.header-white
-#content-with-footer > header .header-button.active:after, body.accent-white.header-white
 #content > header .header-button:hover, body.accent-white.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2951,26 +2534,21 @@ body.accent-white.header-white #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-gray.header-white #content-wrapper > header a, body.accent-gray.header-white
-#content-with-footer > header a, body.accent-gray.header-white
 #content > header a {
   color: #d8dbdd;
 }
 
 body.accent-gray.header-white #content-wrapper > header a:hover, body.accent-gray.header-white
-#content-with-footer > header a:hover, body.accent-gray.header-white
 #content > header a:hover {
   color: #f3f4f5;
 }
 
 body.accent-gray.header-white #content-wrapper > header .header-button, body.accent-gray.header-white
-#content-with-footer > header .header-button, body.accent-gray.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-gray.header-white #content-wrapper > header .header-button:hover, body.accent-gray.header-white #content-wrapper > header .header-button.active:after, body.accent-gray.header-white
-#content-with-footer > header .header-button:hover, body.accent-gray.header-white
-#content-with-footer > header .header-button.active:after, body.accent-gray.header-white
 #content > header .header-button:hover, body.accent-gray.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -2978,26 +2556,21 @@ body.accent-gray.header-white #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-gray-dark.header-white #content-wrapper > header a, body.accent-gray-dark.header-white
-#content-with-footer > header a, body.accent-gray-dark.header-white
 #content > header a {
   color: #96a0aa;
 }
 
 body.accent-gray-dark.header-white #content-wrapper > header a:hover, body.accent-gray-dark.header-white
-#content-with-footer > header a:hover, body.accent-gray-dark.header-white
 #content > header a:hover {
   color: #b2bac1;
 }
 
 body.accent-gray-dark.header-white #content-wrapper > header .header-button, body.accent-gray-dark.header-white
-#content-with-footer > header .header-button, body.accent-gray-dark.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-gray-dark.header-white #content-wrapper > header .header-button:hover, body.accent-gray-dark.header-white #content-wrapper > header .header-button.active:after, body.accent-gray-dark.header-white
-#content-with-footer > header .header-button:hover, body.accent-gray-dark.header-white
-#content-with-footer > header .header-button.active:after, body.accent-gray-dark.header-white
 #content > header .header-button:hover, body.accent-gray-dark.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -3005,26 +2578,21 @@ body.accent-gray-dark.header-white #content-wrapper > header .header-button:hove
 }
 
 body.accent-gray-light.header-white #content-wrapper > header a, body.accent-gray-light.header-white
-#content-with-footer > header a, body.accent-gray-light.header-white
 #content > header a {
   color: white;
 }
 
 body.accent-gray-light.header-white #content-wrapper > header a:hover, body.accent-gray-light.header-white
-#content-with-footer > header a:hover, body.accent-gray-light.header-white
 #content > header a:hover {
   color: white;
 }
 
 body.accent-gray-light.header-white #content-wrapper > header .header-button, body.accent-gray-light.header-white
-#content-with-footer > header .header-button, body.accent-gray-light.header-white
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-gray-light.header-white #content-wrapper > header .header-button:hover, body.accent-gray-light.header-white #content-wrapper > header .header-button.active:after, body.accent-gray-light.header-white
-#content-with-footer > header .header-button:hover, body.accent-gray-light.header-white
-#content-with-footer > header .header-button.active:after, body.accent-gray-light.header-white
 #content > header .header-button:hover, body.accent-gray-light.header-white
 #content > header .header-button.active:after {
   color: #495057;
@@ -3032,7 +2600,6 @@ body.accent-gray-light.header-white #content-wrapper > header .header-button:hov
 }
 
 body.header-gray #content-wrapper > header, body.header-gray
-#content-with-footer > header, body.header-gray
 #content > header {
   background-color: #6c757d;
   color: #dee2e6;
@@ -3040,46 +2607,38 @@ body.header-gray #content-wrapper > header, body.header-gray
 }
 
 body.header-gray #content-wrapper > header .header-button, body.header-gray
-#content-with-footer > header .header-button, body.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.header-gray.header-lighter #content-wrapper > header, body.header-gray.header-lighter
-#content-with-footer > header, body.header-gray.header-lighter
 #content > header {
   background-color: #868e96;
   border-color: #868e96;
 }
 
 body.header-gray.header-darker #content-wrapper > header, body.header-gray.header-darker
-#content-with-footer > header, body.header-gray.header-darker
 #content > header {
   background-color: #545b62;
   border-color: #545b62;
 }
 
 body.accent-blue.header-gray #content-wrapper > header a, body.accent-blue.header-gray
-#content-with-footer > header a, body.accent-blue.header-gray
 #content > header a {
   color: #66b0ff;
 }
 
 body.accent-blue.header-gray #content-wrapper > header a:hover, body.accent-blue.header-gray
-#content-with-footer > header a:hover, body.accent-blue.header-gray
 #content > header a:hover {
   color: #3395ff;
 }
 
 body.accent-blue.header-gray #content-wrapper > header .header-button, body.accent-blue.header-gray
-#content-with-footer > header .header-button, body.accent-blue.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-blue.header-gray #content-wrapper > header .header-button:hover, body.accent-blue.header-gray #content-wrapper > header .header-button.active:after, body.accent-blue.header-gray
-#content-with-footer > header .header-button:hover, body.accent-blue.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-blue.header-gray
 #content > header .header-button:hover, body.accent-blue.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3087,26 +2646,21 @@ body.accent-blue.header-gray #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-indigo.header-gray #content-wrapper > header a, body.accent-indigo.header-gray
-#content-with-footer > header a, body.accent-indigo.header-gray
 #content > header a {
   color: #a471f7;
 }
 
 body.accent-indigo.header-gray #content-wrapper > header a:hover, body.accent-indigo.header-gray
-#content-with-footer > header a:hover, body.accent-indigo.header-gray
 #content > header a:hover {
   color: #8540f5;
 }
 
 body.accent-indigo.header-gray #content-wrapper > header .header-button, body.accent-indigo.header-gray
-#content-with-footer > header .header-button, body.accent-indigo.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-indigo.header-gray #content-wrapper > header .header-button:hover, body.accent-indigo.header-gray #content-wrapper > header .header-button.active:after, body.accent-indigo.header-gray
-#content-with-footer > header .header-button:hover, body.accent-indigo.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-indigo.header-gray
 #content > header .header-button:hover, body.accent-indigo.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3114,26 +2668,21 @@ body.accent-indigo.header-gray #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-purple.header-gray #content-wrapper > header a, body.accent-purple.header-gray
-#content-with-footer > header a, body.accent-purple.header-gray
 #content > header a {
   color: #aa8fda;
 }
 
 body.accent-purple.header-gray #content-wrapper > header a:hover, body.accent-purple.header-gray
-#content-with-footer > header a:hover, body.accent-purple.header-gray
 #content > header a:hover {
   color: #8c68ce;
 }
 
 body.accent-purple.header-gray #content-wrapper > header .header-button, body.accent-purple.header-gray
-#content-with-footer > header .header-button, body.accent-purple.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-purple.header-gray #content-wrapper > header .header-button:hover, body.accent-purple.header-gray #content-wrapper > header .header-button.active:after, body.accent-purple.header-gray
-#content-with-footer > header .header-button:hover, body.accent-purple.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-purple.header-gray
 #content > header .header-button:hover, body.accent-purple.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3141,26 +2690,21 @@ body.accent-purple.header-gray #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-pink.header-gray #content-wrapper > header a, body.accent-pink.header-gray
-#content-with-footer > header a, body.accent-pink.header-gray
 #content > header a {
   color: #f399c2;
 }
 
 body.accent-pink.header-gray #content-wrapper > header a:hover, body.accent-pink.header-gray
-#content-with-footer > header a:hover, body.accent-pink.header-gray
 #content > header a:hover {
   color: #ed6ca7;
 }
 
 body.accent-pink.header-gray #content-wrapper > header .header-button, body.accent-pink.header-gray
-#content-with-footer > header .header-button, body.accent-pink.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-pink.header-gray #content-wrapper > header .header-button:hover, body.accent-pink.header-gray #content-wrapper > header .header-button.active:after, body.accent-pink.header-gray
-#content-with-footer > header .header-button:hover, body.accent-pink.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-pink.header-gray
 #content > header .header-button:hover, body.accent-pink.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3168,26 +2712,21 @@ body.accent-pink.header-gray #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-red.header-gray #content-wrapper > header a, body.accent-red.header-gray
-#content-with-footer > header a, body.accent-red.header-gray
 #content > header a {
   color: #eb8c95;
 }
 
 body.accent-red.header-gray #content-wrapper > header a:hover, body.accent-red.header-gray
-#content-with-footer > header a:hover, body.accent-red.header-gray
 #content > header a:hover {
   color: #e4606d;
 }
 
 body.accent-red.header-gray #content-wrapper > header .header-button, body.accent-red.header-gray
-#content-with-footer > header .header-button, body.accent-red.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-red.header-gray #content-wrapper > header .header-button:hover, body.accent-red.header-gray #content-wrapper > header .header-button.active:after, body.accent-red.header-gray
-#content-with-footer > header .header-button:hover, body.accent-red.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-red.header-gray
 #content > header .header-button:hover, body.accent-red.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3195,26 +2734,21 @@ body.accent-red.header-gray #content-wrapper > header .header-button:hover, body
 }
 
 body.accent-orange.header-gray #content-wrapper > header a, body.accent-orange.header-gray
-#content-with-footer > header a, body.accent-orange.header-gray
 #content > header a {
   color: #feb679;
 }
 
 body.accent-orange.header-gray #content-wrapper > header a:hover, body.accent-orange.header-gray
-#content-with-footer > header a:hover, body.accent-orange.header-gray
 #content > header a:hover {
   color: #fd9a47;
 }
 
 body.accent-orange.header-gray #content-wrapper > header .header-button, body.accent-orange.header-gray
-#content-with-footer > header .header-button, body.accent-orange.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-orange.header-gray #content-wrapper > header .header-button:hover, body.accent-orange.header-gray #content-wrapper > header .header-button.active:after, body.accent-orange.header-gray
-#content-with-footer > header .header-button:hover, body.accent-orange.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-orange.header-gray
 #content > header .header-button:hover, body.accent-orange.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3222,26 +2756,21 @@ body.accent-orange.header-gray #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-yellow.header-gray #content-wrapper > header a, body.accent-yellow.header-gray
-#content-with-footer > header a, body.accent-yellow.header-gray
 #content > header a {
   color: #ffdb6d;
 }
 
 body.accent-yellow.header-gray #content-wrapper > header a:hover, body.accent-yellow.header-gray
-#content-with-footer > header a:hover, body.accent-yellow.header-gray
 #content > header a:hover {
   color: #ffce3a;
 }
 
 body.accent-yellow.header-gray #content-wrapper > header .header-button, body.accent-yellow.header-gray
-#content-with-footer > header .header-button, body.accent-yellow.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-yellow.header-gray #content-wrapper > header .header-button:hover, body.accent-yellow.header-gray #content-wrapper > header .header-button.active:after, body.accent-yellow.header-gray
-#content-with-footer > header .header-button:hover, body.accent-yellow.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-yellow.header-gray
 #content > header .header-button:hover, body.accent-yellow.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3249,26 +2778,21 @@ body.accent-yellow.header-gray #content-wrapper > header .header-button:hover, b
 }
 
 body.accent-green.header-gray #content-wrapper > header a, body.accent-green.header-gray
-#content-with-footer > header a, body.accent-green.header-gray
 #content > header a {
   color: #5dd879;
 }
 
 body.accent-green.header-gray #content-wrapper > header a:hover, body.accent-green.header-gray
-#content-with-footer > header a:hover, body.accent-green.header-gray
 #content > header a:hover {
   color: #34ce57;
 }
 
 body.accent-green.header-gray #content-wrapper > header .header-button, body.accent-green.header-gray
-#content-with-footer > header .header-button, body.accent-green.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-green.header-gray #content-wrapper > header .header-button:hover, body.accent-green.header-gray #content-wrapper > header .header-button.active:after, body.accent-green.header-gray
-#content-with-footer > header .header-button:hover, body.accent-green.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-green.header-gray
 #content > header .header-button:hover, body.accent-green.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3276,26 +2800,21 @@ body.accent-green.header-gray #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-teal.header-gray #content-wrapper > header a, body.accent-teal.header-gray
-#content-with-footer > header a, body.accent-teal.header-gray
 #content > header a {
   color: #68e7c1;
 }
 
 body.accent-teal.header-gray #content-wrapper > header a:hover, body.accent-teal.header-gray
-#content-with-footer > header a:hover, body.accent-teal.header-gray
 #content > header a:hover {
   color: #3ce0af;
 }
 
 body.accent-teal.header-gray #content-wrapper > header .header-button, body.accent-teal.header-gray
-#content-with-footer > header .header-button, body.accent-teal.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-teal.header-gray #content-wrapper > header .header-button:hover, body.accent-teal.header-gray #content-wrapper > header .header-button.active:after, body.accent-teal.header-gray
-#content-with-footer > header .header-button:hover, body.accent-teal.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-teal.header-gray
 #content > header .header-button:hover, body.accent-teal.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3303,26 +2822,21 @@ body.accent-teal.header-gray #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-cyan.header-gray #content-wrapper > header a, body.accent-cyan.header-gray
-#content-with-footer > header a, body.accent-cyan.header-gray
 #content > header a {
   color: #4cd3e9;
 }
 
 body.accent-cyan.header-gray #content-wrapper > header a:hover, body.accent-cyan.header-gray
-#content-with-footer > header a:hover, body.accent-cyan.header-gray
 #content > header a:hover {
   color: #1fc8e3;
 }
 
 body.accent-cyan.header-gray #content-wrapper > header .header-button, body.accent-cyan.header-gray
-#content-with-footer > header .header-button, body.accent-cyan.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-cyan.header-gray #content-wrapper > header .header-button:hover, body.accent-cyan.header-gray #content-wrapper > header .header-button.active:after, body.accent-cyan.header-gray
-#content-with-footer > header .header-button:hover, body.accent-cyan.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-cyan.header-gray
 #content > header .header-button:hover, body.accent-cyan.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3330,26 +2844,21 @@ body.accent-cyan.header-gray #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-white.header-gray #content-wrapper > header a, body.accent-white.header-gray
-#content-with-footer > header a, body.accent-white.header-gray
 #content > header a {
   color: white;
 }
 
 body.accent-white.header-gray #content-wrapper > header a:hover, body.accent-white.header-gray
-#content-with-footer > header a:hover, body.accent-white.header-gray
 #content > header a:hover {
   color: white;
 }
 
 body.accent-white.header-gray #content-wrapper > header .header-button, body.accent-white.header-gray
-#content-with-footer > header .header-button, body.accent-white.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-white.header-gray #content-wrapper > header .header-button:hover, body.accent-white.header-gray #content-wrapper > header .header-button.active:after, body.accent-white.header-gray
-#content-with-footer > header .header-button:hover, body.accent-white.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-white.header-gray
 #content > header .header-button:hover, body.accent-white.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3357,26 +2866,21 @@ body.accent-white.header-gray #content-wrapper > header .header-button:hover, bo
 }
 
 body.accent-gray.header-gray #content-wrapper > header a, body.accent-gray.header-gray
-#content-with-footer > header a, body.accent-gray.header-gray
 #content > header a {
   color: #a1a8ae;
 }
 
 body.accent-gray.header-gray #content-wrapper > header a:hover, body.accent-gray.header-gray
-#content-with-footer > header a:hover, body.accent-gray.header-gray
 #content > header a:hover {
   color: #868e96;
 }
 
 body.accent-gray.header-gray #content-wrapper > header .header-button, body.accent-gray.header-gray
-#content-with-footer > header .header-button, body.accent-gray.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-gray.header-gray #content-wrapper > header .header-button:hover, body.accent-gray.header-gray #content-wrapper > header .header-button.active:after, body.accent-gray.header-gray
-#content-with-footer > header .header-button:hover, body.accent-gray.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-gray.header-gray
 #content > header .header-button:hover, body.accent-gray.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3384,26 +2888,21 @@ body.accent-gray.header-gray #content-wrapper > header .header-button:hover, bod
 }
 
 body.accent-gray-dark.header-gray #content-wrapper > header a, body.accent-gray-dark.header-gray
-#content-with-footer > header a, body.accent-gray-dark.header-gray
 #content > header a {
   color: #626d78;
 }
 
 body.accent-gray-dark.header-gray #content-wrapper > header a:hover, body.accent-gray-dark.header-gray
-#content-with-footer > header a:hover, body.accent-gray-dark.header-gray
 #content > header a:hover {
   color: #4b545c;
 }
 
 body.accent-gray-dark.header-gray #content-wrapper > header .header-button, body.accent-gray-dark.header-gray
-#content-with-footer > header .header-button, body.accent-gray-dark.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-gray-dark.header-gray #content-wrapper > header .header-button:hover, body.accent-gray-dark.header-gray #content-wrapper > header .header-button.active:after, body.accent-gray-dark.header-gray
-#content-with-footer > header .header-button:hover, body.accent-gray-dark.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-gray-dark.header-gray
 #content > header .header-button:hover, body.accent-gray-dark.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3411,26 +2910,21 @@ body.accent-gray-dark.header-gray #content-wrapper > header .header-button:hover
 }
 
 body.accent-gray-light.header-gray #content-wrapper > header a, body.accent-gray-light.header-gray
-#content-with-footer > header a, body.accent-gray-light.header-gray
 #content > header a {
   color: white;
 }
 
 body.accent-gray-light.header-gray #content-wrapper > header a:hover, body.accent-gray-light.header-gray
-#content-with-footer > header a:hover, body.accent-gray-light.header-gray
 #content > header a:hover {
   color: #fbfcfc;
 }
 
 body.accent-gray-light.header-gray #content-wrapper > header .header-button, body.accent-gray-light.header-gray
-#content-with-footer > header .header-button, body.accent-gray-light.header-gray
 #content > header .header-button {
   color: #dee2e6;
 }
 
 body.accent-gray-light.header-gray #content-wrapper > header .header-button:hover, body.accent-gray-light.header-gray #content-wrapper > header .header-button.active:after, body.accent-gray-light.header-gray
-#content-with-footer > header .header-button:hover, body.accent-gray-light.header-gray
-#content-with-footer > header .header-button.active:after, body.accent-gray-light.header-gray
 #content > header .header-button:hover, body.accent-gray-light.header-gray
 #content > header .header-button.active:after {
   color: #dee2e6;
@@ -3438,7 +2932,6 @@ body.accent-gray-light.header-gray #content-wrapper > header .header-button:hove
 }
 
 body.header-gray-dark #content-wrapper > header, body.header-gray-dark
-#content-with-footer > header, body.header-gray-dark
 #content > header {
   background-color: #343a40;
   color: #ced4da;
@@ -3446,46 +2939,38 @@ body.header-gray-dark #content-wrapper > header, body.header-gray-dark
 }
 
 body.header-gray-dark #content-wrapper > header .header-button, body.header-gray-dark
-#content-with-footer > header .header-button, body.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.header-gray-dark.header-lighter #content-wrapper > header, body.header-gray-dark.header-lighter
-#content-with-footer > header, body.header-gray-dark.header-lighter
 #content > header {
   background-color: #4b545c;
   border-color: #4b545c;
 }
 
 body.header-gray-dark.header-darker #content-wrapper > header, body.header-gray-dark.header-darker
-#content-with-footer > header, body.header-gray-dark.header-darker
 #content > header {
   background-color: #1d2124;
   border-color: #1d2124;
 }
 
 body.accent-blue.header-gray-dark #content-wrapper > header a, body.accent-blue.header-gray-dark
-#content-with-footer > header a, body.accent-blue.header-gray-dark
 #content > header a {
   color: #66b0ff;
 }
 
 body.accent-blue.header-gray-dark #content-wrapper > header a:hover, body.accent-blue.header-gray-dark
-#content-with-footer > header a:hover, body.accent-blue.header-gray-dark
 #content > header a:hover {
   color: #3395ff;
 }
 
 body.accent-blue.header-gray-dark #content-wrapper > header .header-button, body.accent-blue.header-gray-dark
-#content-with-footer > header .header-button, body.accent-blue.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-blue.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-blue.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-blue.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-blue.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-blue.header-gray-dark
 #content > header .header-button:hover, body.accent-blue.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3493,26 +2978,21 @@ body.accent-blue.header-gray-dark #content-wrapper > header .header-button:hover
 }
 
 body.accent-indigo.header-gray-dark #content-wrapper > header a, body.accent-indigo.header-gray-dark
-#content-with-footer > header a, body.accent-indigo.header-gray-dark
 #content > header a {
   color: #a471f7;
 }
 
 body.accent-indigo.header-gray-dark #content-wrapper > header a:hover, body.accent-indigo.header-gray-dark
-#content-with-footer > header a:hover, body.accent-indigo.header-gray-dark
 #content > header a:hover {
   color: #8540f5;
 }
 
 body.accent-indigo.header-gray-dark #content-wrapper > header .header-button, body.accent-indigo.header-gray-dark
-#content-with-footer > header .header-button, body.accent-indigo.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-indigo.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-indigo.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-indigo.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-indigo.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-indigo.header-gray-dark
 #content > header .header-button:hover, body.accent-indigo.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3520,26 +3000,21 @@ body.accent-indigo.header-gray-dark #content-wrapper > header .header-button:hov
 }
 
 body.accent-purple.header-gray-dark #content-wrapper > header a, body.accent-purple.header-gray-dark
-#content-with-footer > header a, body.accent-purple.header-gray-dark
 #content > header a {
   color: #aa8fda;
 }
 
 body.accent-purple.header-gray-dark #content-wrapper > header a:hover, body.accent-purple.header-gray-dark
-#content-with-footer > header a:hover, body.accent-purple.header-gray-dark
 #content > header a:hover {
   color: #8c68ce;
 }
 
 body.accent-purple.header-gray-dark #content-wrapper > header .header-button, body.accent-purple.header-gray-dark
-#content-with-footer > header .header-button, body.accent-purple.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-purple.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-purple.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-purple.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-purple.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-purple.header-gray-dark
 #content > header .header-button:hover, body.accent-purple.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3547,26 +3022,21 @@ body.accent-purple.header-gray-dark #content-wrapper > header .header-button:hov
 }
 
 body.accent-pink.header-gray-dark #content-wrapper > header a, body.accent-pink.header-gray-dark
-#content-with-footer > header a, body.accent-pink.header-gray-dark
 #content > header a {
   color: #f399c2;
 }
 
 body.accent-pink.header-gray-dark #content-wrapper > header a:hover, body.accent-pink.header-gray-dark
-#content-with-footer > header a:hover, body.accent-pink.header-gray-dark
 #content > header a:hover {
   color: #ed6ca7;
 }
 
 body.accent-pink.header-gray-dark #content-wrapper > header .header-button, body.accent-pink.header-gray-dark
-#content-with-footer > header .header-button, body.accent-pink.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-pink.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-pink.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-pink.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-pink.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-pink.header-gray-dark
 #content > header .header-button:hover, body.accent-pink.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3574,26 +3044,21 @@ body.accent-pink.header-gray-dark #content-wrapper > header .header-button:hover
 }
 
 body.accent-red.header-gray-dark #content-wrapper > header a, body.accent-red.header-gray-dark
-#content-with-footer > header a, body.accent-red.header-gray-dark
 #content > header a {
   color: #eb8c95;
 }
 
 body.accent-red.header-gray-dark #content-wrapper > header a:hover, body.accent-red.header-gray-dark
-#content-with-footer > header a:hover, body.accent-red.header-gray-dark
 #content > header a:hover {
   color: #e4606d;
 }
 
 body.accent-red.header-gray-dark #content-wrapper > header .header-button, body.accent-red.header-gray-dark
-#content-with-footer > header .header-button, body.accent-red.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-red.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-red.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-red.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-red.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-red.header-gray-dark
 #content > header .header-button:hover, body.accent-red.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3601,26 +3066,21 @@ body.accent-red.header-gray-dark #content-wrapper > header .header-button:hover,
 }
 
 body.accent-orange.header-gray-dark #content-wrapper > header a, body.accent-orange.header-gray-dark
-#content-with-footer > header a, body.accent-orange.header-gray-dark
 #content > header a {
   color: #feb679;
 }
 
 body.accent-orange.header-gray-dark #content-wrapper > header a:hover, body.accent-orange.header-gray-dark
-#content-with-footer > header a:hover, body.accent-orange.header-gray-dark
 #content > header a:hover {
   color: #fd9a47;
 }
 
 body.accent-orange.header-gray-dark #content-wrapper > header .header-button, body.accent-orange.header-gray-dark
-#content-with-footer > header .header-button, body.accent-orange.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-orange.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-orange.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-orange.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-orange.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-orange.header-gray-dark
 #content > header .header-button:hover, body.accent-orange.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3628,26 +3088,21 @@ body.accent-orange.header-gray-dark #content-wrapper > header .header-button:hov
 }
 
 body.accent-yellow.header-gray-dark #content-wrapper > header a, body.accent-yellow.header-gray-dark
-#content-with-footer > header a, body.accent-yellow.header-gray-dark
 #content > header a {
   color: #ffdb6d;
 }
 
 body.accent-yellow.header-gray-dark #content-wrapper > header a:hover, body.accent-yellow.header-gray-dark
-#content-with-footer > header a:hover, body.accent-yellow.header-gray-dark
 #content > header a:hover {
   color: #ffce3a;
 }
 
 body.accent-yellow.header-gray-dark #content-wrapper > header .header-button, body.accent-yellow.header-gray-dark
-#content-with-footer > header .header-button, body.accent-yellow.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-yellow.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-yellow.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-yellow.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-yellow.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-yellow.header-gray-dark
 #content > header .header-button:hover, body.accent-yellow.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3655,26 +3110,21 @@ body.accent-yellow.header-gray-dark #content-wrapper > header .header-button:hov
 }
 
 body.accent-green.header-gray-dark #content-wrapper > header a, body.accent-green.header-gray-dark
-#content-with-footer > header a, body.accent-green.header-gray-dark
 #content > header a {
   color: #5dd879;
 }
 
 body.accent-green.header-gray-dark #content-wrapper > header a:hover, body.accent-green.header-gray-dark
-#content-with-footer > header a:hover, body.accent-green.header-gray-dark
 #content > header a:hover {
   color: #34ce57;
 }
 
 body.accent-green.header-gray-dark #content-wrapper > header .header-button, body.accent-green.header-gray-dark
-#content-with-footer > header .header-button, body.accent-green.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-green.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-green.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-green.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-green.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-green.header-gray-dark
 #content > header .header-button:hover, body.accent-green.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3682,26 +3132,21 @@ body.accent-green.header-gray-dark #content-wrapper > header .header-button:hove
 }
 
 body.accent-teal.header-gray-dark #content-wrapper > header a, body.accent-teal.header-gray-dark
-#content-with-footer > header a, body.accent-teal.header-gray-dark
 #content > header a {
   color: #68e7c1;
 }
 
 body.accent-teal.header-gray-dark #content-wrapper > header a:hover, body.accent-teal.header-gray-dark
-#content-with-footer > header a:hover, body.accent-teal.header-gray-dark
 #content > header a:hover {
   color: #3ce0af;
 }
 
 body.accent-teal.header-gray-dark #content-wrapper > header .header-button, body.accent-teal.header-gray-dark
-#content-with-footer > header .header-button, body.accent-teal.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-teal.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-teal.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-teal.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-teal.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-teal.header-gray-dark
 #content > header .header-button:hover, body.accent-teal.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3709,26 +3154,21 @@ body.accent-teal.header-gray-dark #content-wrapper > header .header-button:hover
 }
 
 body.accent-cyan.header-gray-dark #content-wrapper > header a, body.accent-cyan.header-gray-dark
-#content-with-footer > header a, body.accent-cyan.header-gray-dark
 #content > header a {
   color: #4cd3e9;
 }
 
 body.accent-cyan.header-gray-dark #content-wrapper > header a:hover, body.accent-cyan.header-gray-dark
-#content-with-footer > header a:hover, body.accent-cyan.header-gray-dark
 #content > header a:hover {
   color: #1fc8e3;
 }
 
 body.accent-cyan.header-gray-dark #content-wrapper > header .header-button, body.accent-cyan.header-gray-dark
-#content-with-footer > header .header-button, body.accent-cyan.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-cyan.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-cyan.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-cyan.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-cyan.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-cyan.header-gray-dark
 #content > header .header-button:hover, body.accent-cyan.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3736,26 +3176,21 @@ body.accent-cyan.header-gray-dark #content-wrapper > header .header-button:hover
 }
 
 body.accent-white.header-gray-dark #content-wrapper > header a, body.accent-white.header-gray-dark
-#content-with-footer > header a, body.accent-white.header-gray-dark
 #content > header a {
   color: white;
 }
 
 body.accent-white.header-gray-dark #content-wrapper > header a:hover, body.accent-white.header-gray-dark
-#content-with-footer > header a:hover, body.accent-white.header-gray-dark
 #content > header a:hover {
   color: white;
 }
 
 body.accent-white.header-gray-dark #content-wrapper > header .header-button, body.accent-white.header-gray-dark
-#content-with-footer > header .header-button, body.accent-white.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-white.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-white.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-white.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-white.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-white.header-gray-dark
 #content > header .header-button:hover, body.accent-white.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3763,26 +3198,21 @@ body.accent-white.header-gray-dark #content-wrapper > header .header-button:hove
 }
 
 body.accent-gray.header-gray-dark #content-wrapper > header a, body.accent-gray.header-gray-dark
-#content-with-footer > header a, body.accent-gray.header-gray-dark
 #content > header a {
   color: #a1a8ae;
 }
 
 body.accent-gray.header-gray-dark #content-wrapper > header a:hover, body.accent-gray.header-gray-dark
-#content-with-footer > header a:hover, body.accent-gray.header-gray-dark
 #content > header a:hover {
   color: #868e96;
 }
 
 body.accent-gray.header-gray-dark #content-wrapper > header .header-button, body.accent-gray.header-gray-dark
-#content-with-footer > header .header-button, body.accent-gray.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-gray.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-gray.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-gray.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-gray.header-gray-dark
 #content > header .header-button:hover, body.accent-gray.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3790,26 +3220,21 @@ body.accent-gray.header-gray-dark #content-wrapper > header .header-button:hover
 }
 
 body.accent-gray-dark.header-gray-dark #content-wrapper > header a, body.accent-gray-dark.header-gray-dark
-#content-with-footer > header a, body.accent-gray-dark.header-gray-dark
 #content > header a {
   color: #626d78;
 }
 
 body.accent-gray-dark.header-gray-dark #content-wrapper > header a:hover, body.accent-gray-dark.header-gray-dark
-#content-with-footer > header a:hover, body.accent-gray-dark.header-gray-dark
 #content > header a:hover {
   color: #4b545c;
 }
 
 body.accent-gray-dark.header-gray-dark #content-wrapper > header .header-button, body.accent-gray-dark.header-gray-dark
-#content-with-footer > header .header-button, body.accent-gray-dark.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-dark.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-gray-dark.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-gray-dark.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-gray-dark.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-gray-dark.header-gray-dark
 #content > header .header-button:hover, body.accent-gray-dark.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3817,26 +3242,21 @@ body.accent-gray-dark.header-gray-dark #content-wrapper > header .header-button:
 }
 
 body.accent-gray-light.header-gray-dark #content-wrapper > header a, body.accent-gray-light.header-gray-dark
-#content-with-footer > header a, body.accent-gray-light.header-gray-dark
 #content > header a {
   color: white;
 }
 
 body.accent-gray-light.header-gray-dark #content-wrapper > header a:hover, body.accent-gray-light.header-gray-dark
-#content-with-footer > header a:hover, body.accent-gray-light.header-gray-dark
 #content > header a:hover {
   color: #fbfcfc;
 }
 
 body.accent-gray-light.header-gray-dark #content-wrapper > header .header-button, body.accent-gray-light.header-gray-dark
-#content-with-footer > header .header-button, body.accent-gray-light.header-gray-dark
 #content > header .header-button {
   color: #ced4da;
 }
 
 body.accent-gray-light.header-gray-dark #content-wrapper > header .header-button:hover, body.accent-gray-light.header-gray-dark #content-wrapper > header .header-button.active:after, body.accent-gray-light.header-gray-dark
-#content-with-footer > header .header-button:hover, body.accent-gray-light.header-gray-dark
-#content-with-footer > header .header-button.active:after, body.accent-gray-light.header-gray-dark
 #content > header .header-button:hover, body.accent-gray-light.header-gray-dark
 #content > header .header-button.active:after {
   color: #ced4da;
@@ -3844,7 +3264,6 @@ body.accent-gray-light.header-gray-dark #content-wrapper > header .header-button
 }
 
 body.header-gray-light #content-wrapper > header, body.header-gray-light
-#content-with-footer > header, body.header-gray-light
 #content > header {
   background-color: #dee2e6;
   color: #495057;
@@ -3852,46 +3271,38 @@ body.header-gray-light #content-wrapper > header, body.header-gray-light
 }
 
 body.header-gray-light #content-wrapper > header .header-button, body.header-gray-light
-#content-with-footer > header .header-button, body.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.header-gray-light.header-lighter #content-wrapper > header, body.header-gray-light.header-lighter
-#content-with-footer > header, body.header-gray-light.header-lighter
 #content > header {
   background-color: #fbfcfc;
   border-color: #fbfcfc;
 }
 
 body.header-gray-light.header-darker #content-wrapper > header, body.header-gray-light.header-darker
-#content-with-footer > header, body.header-gray-light.header-darker
 #content > header {
   background-color: #c1c9d0;
   border-color: #c1c9d0;
 }
 
 body.accent-blue.header-gray-light #content-wrapper > header a, body.accent-blue.header-gray-light
-#content-with-footer > header a, body.accent-blue.header-gray-light
 #content > header a {
   color: #cce5ff;
 }
 
 body.accent-blue.header-gray-light #content-wrapper > header a:hover, body.accent-blue.header-gray-light
-#content-with-footer > header a:hover, body.accent-blue.header-gray-light
 #content > header a:hover {
   color: white;
 }
 
 body.accent-blue.header-gray-light #content-wrapper > header .header-button, body.accent-blue.header-gray-light
-#content-with-footer > header .header-button, body.accent-blue.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-blue.header-gray-light #content-wrapper > header .header-button:hover, body.accent-blue.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-blue.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-blue.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-blue.header-gray-light
 #content > header .header-button:hover, body.accent-blue.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -3899,26 +3310,21 @@ body.accent-blue.header-gray-light #content-wrapper > header .header-button:hove
 }
 
 body.accent-indigo.header-gray-light #content-wrapper > header a, body.accent-indigo.header-gray-light
-#content-with-footer > header a, body.accent-indigo.header-gray-light
 #content > header a {
   color: #e2d1fd;
 }
 
 body.accent-indigo.header-gray-light #content-wrapper > header a:hover, body.accent-indigo.header-gray-light
-#content-with-footer > header a:hover, body.accent-indigo.header-gray-light
 #content > header a:hover {
   color: white;
 }
 
 body.accent-indigo.header-gray-light #content-wrapper > header .header-button, body.accent-indigo.header-gray-light
-#content-with-footer > header .header-button, body.accent-indigo.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-indigo.header-gray-light #content-wrapper > header .header-button:hover, body.accent-indigo.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-indigo.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-indigo.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-indigo.header-gray-light
 #content > header .header-button:hover, body.accent-indigo.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -3926,26 +3332,21 @@ body.accent-indigo.header-gray-light #content-wrapper > header .header-button:ho
 }
 
 body.accent-purple.header-gray-light #content-wrapper > header a, body.accent-purple.header-gray-light
-#content-with-footer > header a, body.accent-purple.header-gray-light
 #content > header a {
   color: #e4dcf3;
 }
 
 body.accent-purple.header-gray-light #content-wrapper > header a:hover, body.accent-purple.header-gray-light
-#content-with-footer > header a:hover, body.accent-purple.header-gray-light
 #content > header a:hover {
   color: white;
 }
 
 body.accent-purple.header-gray-light #content-wrapper > header .header-button, body.accent-purple.header-gray-light
-#content-with-footer > header .header-button, body.accent-purple.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-purple.header-gray-light #content-wrapper > header .header-button:hover, body.accent-purple.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-purple.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-purple.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-purple.header-gray-light
 #content > header .header-button:hover, body.accent-purple.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -3953,26 +3354,21 @@ body.accent-purple.header-gray-light #content-wrapper > header .header-button:ho
 }
 
 body.accent-pink.header-gray-light #content-wrapper > header a, body.accent-pink.header-gray-light
-#content-with-footer > header a, body.accent-pink.header-gray-light
 #content > header a {
   color: #fef4f9;
 }
 
 body.accent-pink.header-gray-light #content-wrapper > header a:hover, body.accent-pink.header-gray-light
-#content-with-footer > header a:hover, body.accent-pink.header-gray-light
 #content > header a:hover {
   color: white;
 }
 
 body.accent-pink.header-gray-light #content-wrapper > header .header-button, body.accent-pink.header-gray-light
-#content-with-footer > header .header-button, body.accent-pink.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-pink.header-gray-light #content-wrapper > header .header-button:hover, body.accent-pink.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-pink.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-pink.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-pink.header-gray-light
 #content > header .header-button:hover, body.accent-pink.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -3980,26 +3376,21 @@ body.accent-pink.header-gray-light #content-wrapper > header .header-button:hove
 }
 
 body.accent-red.header-gray-light #content-wrapper > header a, body.accent-red.header-gray-light
-#content-with-footer > header a, body.accent-red.header-gray-light
 #content > header a {
   color: #fae3e5;
 }
 
 body.accent-red.header-gray-light #content-wrapper > header a:hover, body.accent-red.header-gray-light
-#content-with-footer > header a:hover, body.accent-red.header-gray-light
 #content > header a:hover {
   color: white;
 }
 
 body.accent-red.header-gray-light #content-wrapper > header .header-button, body.accent-red.header-gray-light
-#content-with-footer > header .header-button, body.accent-red.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-red.header-gray-light #content-wrapper > header .header-button:hover, body.accent-red.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-red.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-red.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-red.header-gray-light
 #content > header .header-button:hover, body.accent-red.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -4007,26 +3398,21 @@ body.accent-red.header-gray-light #content-wrapper > header .header-button:hover
 }
 
 body.accent-orange.header-gray-light #content-wrapper > header a, body.accent-orange.header-gray-light
-#content-with-footer > header a, body.accent-orange.header-gray-light
 #content > header a {
   color: #ffedde;
 }
 
 body.accent-orange.header-gray-light #content-wrapper > header a:hover, body.accent-orange.header-gray-light
-#content-with-footer > header a:hover, body.accent-orange.header-gray-light
 #content > header a:hover {
   color: white;
 }
 
 body.accent-orange.header-gray-light #content-wrapper > header .header-button, body.accent-orange.header-gray-light
-#content-with-footer > header .header-button, body.accent-orange.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-orange.header-gray-light #content-wrapper > header .header-button:hover, body.accent-orange.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-orange.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-orange.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-orange.header-gray-light
 #content > header .header-button:hover, body.accent-orange.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -4034,26 +3420,21 @@ body.accent-orange.header-gray-light #content-wrapper > header .header-button:ho
 }
 
 body.accent-yellow.header-gray-light #content-wrapper > header a, body.accent-yellow.header-gray-light
-#content-with-footer > header a, body.accent-yellow.header-gray-light
 #content > header a {
   color: #fff4d3;
 }
 
 body.accent-yellow.header-gray-light #content-wrapper > header a:hover, body.accent-yellow.header-gray-light
-#content-with-footer > header a:hover, body.accent-yellow.header-gray-light
 #content > header a:hover {
   color: white;
 }
 
 body.accent-yellow.header-gray-light #content-wrapper > header .header-button, body.accent-yellow.header-gray-light
-#content-with-footer > header .header-button, body.accent-yellow.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-yellow.header-gray-light #content-wrapper > header .header-button:hover, body.accent-yellow.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-yellow.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-yellow.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-yellow.header-gray-light
 #content > header .header-button:hover, body.accent-yellow.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -4061,26 +3442,21 @@ body.accent-yellow.header-gray-light #content-wrapper > header .header-button:ho
 }
 
 body.accent-green.header-gray-light #content-wrapper > header a, body.accent-green.header-gray-light
-#content-with-footer > header a, body.accent-green.header-gray-light
 #content > header a {
   color: #afecbd;
 }
 
 body.accent-green.header-gray-light #content-wrapper > header a:hover, body.accent-green.header-gray-light
-#content-with-footer > header a:hover, body.accent-green.header-gray-light
 #content > header a:hover {
   color: #d8f6df;
 }
 
 body.accent-green.header-gray-light #content-wrapper > header .header-button, body.accent-green.header-gray-light
-#content-with-footer > header .header-button, body.accent-green.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-green.header-gray-light #content-wrapper > header .header-button:hover, body.accent-green.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-green.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-green.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-green.header-gray-light
 #content > header .header-button:hover, body.accent-green.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -4088,26 +3464,21 @@ body.accent-green.header-gray-light #content-wrapper > header .header-button:hov
 }
 
 body.accent-teal.header-gray-light #content-wrapper > header a, body.accent-teal.header-gray-light
-#content-with-footer > header a, body.accent-teal.header-gray-light
 #content > header a {
   color: #c0f5e5;
 }
 
 body.accent-teal.header-gray-light #content-wrapper > header a:hover, body.accent-teal.header-gray-light
-#content-with-footer > header a:hover, body.accent-teal.header-gray-light
 #content > header a:hover {
   color: #ecfcf7;
 }
 
 body.accent-teal.header-gray-light #content-wrapper > header .header-button, body.accent-teal.header-gray-light
-#content-with-footer > header .header-button, body.accent-teal.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-teal.header-gray-light #content-wrapper > header .header-button:hover, body.accent-teal.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-teal.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-teal.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-teal.header-gray-light
 #content > header .header-button:hover, body.accent-teal.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -4115,26 +3486,21 @@ body.accent-teal.header-gray-light #content-wrapper > header .header-button:hove
 }
 
 body.accent-cyan.header-gray-light #content-wrapper > header a, body.accent-cyan.header-gray-light
-#content-with-footer > header a, body.accent-cyan.header-gray-light
 #content > header a {
   color: #a7e9f4;
 }
 
 body.accent-cyan.header-gray-light #content-wrapper > header a:hover, body.accent-cyan.header-gray-light
-#content-with-footer > header a:hover, body.accent-cyan.header-gray-light
 #content > header a:hover {
   color: #d4f5fa;
 }
 
 body.accent-cyan.header-gray-light #content-wrapper > header .header-button, body.accent-cyan.header-gray-light
-#content-with-footer > header .header-button, body.accent-cyan.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-cyan.header-gray-light #content-wrapper > header .header-button:hover, body.accent-cyan.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-cyan.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-cyan.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-cyan.header-gray-light
 #content > header .header-button:hover, body.accent-cyan.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -4142,26 +3508,21 @@ body.accent-cyan.header-gray-light #content-wrapper > header .header-button:hove
 }
 
 body.accent-white.header-gray-light #content-wrapper > header a, body.accent-white.header-gray-light
-#content-with-footer > header a, body.accent-white.header-gray-light
 #content > header a {
   color: #999999;
 }
 
 body.accent-white.header-gray-light #content-wrapper > header a:hover, body.accent-white.header-gray-light
-#content-with-footer > header a:hover, body.accent-white.header-gray-light
 #content > header a:hover {
   color: #b3b3b3;
 }
 
 body.accent-white.header-gray-light #content-wrapper > header .header-button, body.accent-white.header-gray-light
-#content-with-footer > header .header-button, body.accent-white.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-white.header-gray-light #content-wrapper > header .header-button:hover, body.accent-white.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-white.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-white.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-white.header-gray-light
 #content > header .header-button:hover, body.accent-white.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -4169,26 +3530,21 @@ body.accent-white.header-gray-light #content-wrapper > header .header-button:hov
 }
 
 body.accent-gray.header-gray-light #content-wrapper > header a, body.accent-gray.header-gray-light
-#content-with-footer > header a, body.accent-gray.header-gray-light
 #content > header a {
   color: #d8dbdd;
 }
 
 body.accent-gray.header-gray-light #content-wrapper > header a:hover, body.accent-gray.header-gray-light
-#content-with-footer > header a:hover, body.accent-gray.header-gray-light
 #content > header a:hover {
   color: #f3f4f5;
 }
 
 body.accent-gray.header-gray-light #content-wrapper > header .header-button, body.accent-gray.header-gray-light
-#content-with-footer > header .header-button, body.accent-gray.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-gray.header-gray-light #content-wrapper > header .header-button:hover, body.accent-gray.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-gray.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-gray.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-gray.header-gray-light
 #content > header .header-button:hover, body.accent-gray.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -4196,26 +3552,21 @@ body.accent-gray.header-gray-light #content-wrapper > header .header-button:hove
 }
 
 body.accent-gray-dark.header-gray-light #content-wrapper > header a, body.accent-gray-dark.header-gray-light
-#content-with-footer > header a, body.accent-gray-dark.header-gray-light
 #content > header a {
   color: #96a0aa;
 }
 
 body.accent-gray-dark.header-gray-light #content-wrapper > header a:hover, body.accent-gray-dark.header-gray-light
-#content-with-footer > header a:hover, body.accent-gray-dark.header-gray-light
 #content > header a:hover {
   color: #b2bac1;
 }
 
 body.accent-gray-dark.header-gray-light #content-wrapper > header .header-button, body.accent-gray-dark.header-gray-light
-#content-with-footer > header .header-button, body.accent-gray-dark.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-gray-dark.header-gray-light #content-wrapper > header .header-button:hover, body.accent-gray-dark.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-gray-dark.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-gray-dark.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-gray-dark.header-gray-light
 #content > header .header-button:hover, body.accent-gray-dark.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
@@ -4223,30 +3574,137 @@ body.accent-gray-dark.header-gray-light #content-wrapper > header .header-button
 }
 
 body.accent-gray-light.header-gray-light #content-wrapper > header a, body.accent-gray-light.header-gray-light
-#content-with-footer > header a, body.accent-gray-light.header-gray-light
 #content > header a {
   color: white;
 }
 
 body.accent-gray-light.header-gray-light #content-wrapper > header a:hover, body.accent-gray-light.header-gray-light
-#content-with-footer > header a:hover, body.accent-gray-light.header-gray-light
 #content > header a:hover {
   color: white;
 }
 
 body.accent-gray-light.header-gray-light #content-wrapper > header .header-button, body.accent-gray-light.header-gray-light
-#content-with-footer > header .header-button, body.accent-gray-light.header-gray-light
 #content > header .header-button {
   color: #495057;
 }
 
 body.accent-gray-light.header-gray-light #content-wrapper > header .header-button:hover, body.accent-gray-light.header-gray-light #content-wrapper > header .header-button.active:after, body.accent-gray-light.header-gray-light
-#content-with-footer > header .header-button:hover, body.accent-gray-light.header-gray-light
-#content-with-footer > header .header-button.active:after, body.accent-gray-light.header-gray-light
 #content > header .header-button:hover, body.accent-gray-light.header-gray-light
 #content > header .header-button.active:after {
   color: #495057;
   background-color: white;
+}
+
+body.accent-blue a {
+  color: #007bff;
+}
+
+body.accent-blue a:hover {
+  color: #3395ff;
+}
+
+body.accent-indigo a {
+  color: #6610f2;
+}
+
+body.accent-indigo a:hover {
+  color: #8540f5;
+}
+
+body.accent-purple a {
+  color: #6f42c1;
+}
+
+body.accent-purple a:hover {
+  color: #8c68ce;
+}
+
+body.accent-pink a {
+  color: #e83e8c;
+}
+
+body.accent-pink a:hover {
+  color: #ed6ca7;
+}
+
+body.accent-red a {
+  color: #dc3545;
+}
+
+body.accent-red a:hover {
+  color: #e4606d;
+}
+
+body.accent-orange a {
+  color: #fd7e14;
+}
+
+body.accent-orange a:hover {
+  color: #fd9a47;
+}
+
+body.accent-yellow a {
+  color: #ffc107;
+}
+
+body.accent-yellow a:hover {
+  color: #ffce3a;
+}
+
+body.accent-green a {
+  color: #28a745;
+}
+
+body.accent-green a:hover {
+  color: #34ce57;
+}
+
+body.accent-teal a {
+  color: #20c997;
+}
+
+body.accent-teal a:hover {
+  color: #3ce0af;
+}
+
+body.accent-cyan a {
+  color: #17a2b8;
+}
+
+body.accent-cyan a:hover {
+  color: #1fc8e3;
+}
+
+body.accent-white a {
+  color: #007bff;
+}
+
+body.accent-white a:hover {
+  color: #0062cc;
+}
+
+body.accent-gray a {
+  color: #007bff;
+}
+
+body.accent-gray a:hover {
+  color: #3395ff;
+}
+
+body.accent-gray-dark a {
+  color: #007bff;
+}
+
+body.accent-gray-dark a:hover {
+  color: #3395ff;
+}
+
+body.accent-gray-light a {
+  color: #007bff;
+}
+
+body.accent-gray-light a:hover {
+  color: #3395ff;
 }
 
 #content-wrapper > footer,
@@ -4260,6 +3718,8 @@ body.accent-gray-light.header-gray-light #content-wrapper > header .header-butto
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
+  z-index: 5;
 }
 
 #content-wrapper > footer .footer-block,

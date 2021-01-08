@@ -20,7 +20,7 @@ it = {
     <li class="nav-header"><%~ it.header %></li>
 <% } else { %>
     <% var hasChildren = it.children && it.children.length > 0; %>
-    <li class="nav-item <%= hasChildren ? 'has-submenu' : '' %>">
+    <li class="nav-item <%= it.class || '' %> <%= hasChildren ? 'has-submenu ' : '' %>">
         <a
             href="<%= it.url || 'javascript: void(0)' %>"
             class="nav-link"

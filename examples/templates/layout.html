@@ -2,7 +2,9 @@
     <%~ include('sidebar-left', {menuItems: it.sidebarLeftMenuItems}) %>
     <div id="content-wrapper">
         <%~ include('topbar') %>
-        <%~ include('content') %>
+        <div id="content">
+            <%~ include('content') %>
+        </div>
         <%~ include('footer') %>
     </div>
     <%~ include('sidebar-right') %>

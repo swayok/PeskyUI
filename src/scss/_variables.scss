@@ -1205,6 +1205,10 @@ $paddings-helpers-vertical-steps-count:         16;
 
 $transition-speed:                  0.2s !default;
 $transition-fn:                     ease-in-out !default;
+$content-transition-speed:          0.4s !default;
+$content-transition-fn:             linear !default;
+$content-bg:                        #F8F8F8;
+$content-text-color:                $gray-700;
 
 // Header
 
@@ -1241,7 +1245,7 @@ $ui-accents: (
     "white":        $white,
     "gray":         $gray-600,
     "gray-dark":    $gray-800,
-    "gray-light":    $gray-300
+    "gray-light":   $gray-300
 );
 
 $ui-accents-light-bg: (
@@ -1258,7 +1262,24 @@ $ui-accents-light-bg: (
     "white":        darken($white, 40%),
     "gray":         lighten($gray-600, 40%),
     "gray-dark":    lighten($gray-800, 40%),
-    "gray-light":    lighten($gray-300, 40%),
+    "gray-light":   lighten($gray-300, 40%),
+);
+
+$ui-accents-content-links: (
+    "blue":         $blue,
+    "indigo":       $indigo,
+    "purple":       $purple,
+    "pink":         $pink,
+    "red":          $red,
+    "orange":       $orange,
+    "yellow":       $yellow,
+    "green":        $green,
+    "teal":         $teal,
+    "cyan":         $cyan,
+    "white":        $blue,
+    "gray":         $blue,
+    "gray-dark":    $blue,
+    "gray-light":   $blue
 );
 
 $blue-bg: #003F8C;

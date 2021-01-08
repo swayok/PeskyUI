@@ -13,6 +13,37 @@
 
     var $__default = /*#__PURE__*/_interopDefaultLegacy($);
 
+    class Sidebar {
+      constructor(selector, togglerSelector) {
+        this.$element = $__default['default'](selector);
+        $__default['default'](document.body).on('click', togglerSelector, () => {
+          this.toggle();
+          return false;
+        });
+        this.$element.on('click', '.close-sidebar', () => {
+          this.hide();
+          return false;
+        });
+      }
+
+      toggle() {
+        if (this.$element.hasClass('closed')) {
+          this.show();
+        } else {
+          this.hide();
+        }
+      }
+
+      show() {
+        this.$element.removeClass('closed').addClass('opened');
+      }
+
+      hide() {
+        this.$element.addClass('closed').removeClass('opened');
+      }
+
+    }
+
     class PeskyUI {
       static get defaultInitializers() {}
 
@@ -21,7 +52,13 @@
           //< array of functions to call in constructor (strings - call PeskyUI methods, functions - call custom methods
           initializers: PeskyUI.defaultInitializers,
           leftSidebarSelector: '#left-sidebar',
-          rightSidebarSelector: '#right-sidebar'
+          leftSidebarTogglerSelector: '.sidebar-left-toggle',
+          rightSidebarSelector: '#right-sidebar',
+          rightSidebarTogglerSelector: '.sidebar-right-toggle',
+          headerSelector: '#app > header, #content-wrapper > header, #content > header',
+          footerSelector: '#app > footer, #content-wrapper > footer, #content > footer',
+          contentId: 'content',
+          contentTransitionDuration: 400
         };
       }
 
@@ -44,61 +81,73 @@
       }
 
       getLeftSidebar() {
-        return $__default['default'](this.options.leftSidebarSelector);
+        if (!this.leftSidebar) {
+          this.leftSidebar = new Sidebar(this.options.leftSidebarSelector, this.options.leftSidebarTogglerSelector);
+        }
+
+        return this.leftSidebar;
       }
 
       initLeftSidebar() {
-        $__default['default'](document.body).on('click', '.sidebar-left-toggle', () => {
-          this.toggleLeftSidebar();
-          return false;
-        });
-        this.getLeftSidebar().on('click', '.close-sidebar', () => {
-          this.hideLeftSidebar();
-          return false;
-        });
-      }
-
-      toggleLeftSidebar() {
-        this.getLeftSidebar().toggleClass('closed').toggleClass('opened');
-      }
-
-      showLeftSidebar() {
-        this.getLeftSidebar().removeClass('closed').addClass('opened');
-      }
-
-      hideLeftSidebar() {
-        this.getLeftSidebar().addClass('closed').removeClass('opened');
-      }
-
-      initLeftSidebarMenu(menuId) {
-        $__default['default'](menuId).NestedMenu();
+        this.getLeftSidebar();
       }
 
       getRightSidebar() {
-        return $__default['default'](this.options.rightSidebarSelector);
+        if (!this.rightSidebar) {
+          this.rightSidebar = new Sidebar(this.options.rightSidebarSelector, this.options.rightSidebarTogglerSelector);
+        }
+
+        return this.rightSidebar;
       }
 
       initRightSidebar() {
-        $__default['default'](document.body).on('click', '.sidebar-right-toggle', () => {
-          this.toggleRightSidebar();
-          return false;
+        this.getRightSidebar();
+      }
+
+      initSidebarNestedMenu(menuSelector) {
+        $__default['default'](menuSelector).NestedMenu();
+      }
+
+      getContent() {
+        return $__default['default']('#' + this.options.contentId);
+      }
+
+      showPreloader($el) {
+        $el.addClass('loading');
+      }
+
+      hidePreloader($el) {
+        $el.removeClass('loading');
+      }
+
+      switchContent(newContentJqueryPromise) {
+        const $oldContent = this.getContent();
+        this.showPreloader($oldContent);
+        newContentJqueryPromise.done(newContent => {
+          const $newContent = $__default['default']('<div></div>').append(newContent).attr('id', this.options.contentId + '-new').css('height', $oldContent.height());
+          $oldContent.css({
+            height: $oldContent.height(),
+            top: $oldContent.offset().top
+          }).attr('id', this.options.contentId + '-old').after($newContent);
+          setTimeout(() => {
+            $oldContent.addClass('hide');
+            $newContent.addClass('show');
+          }, 100);
+          setTimeout(() => {
+            $oldContent.remove();
+            $newContent.css('height', 'auto').attr('id', this.options.contentId).removeClass('show');
+          }, this.options.contentTransitionDuration + 100);
+        }).fail(() => {
+          this.hidePreloader($oldContent);
         });
-        this.getRightSidebar().on('click', '.close-sidebar', () => {
-          this.hideRightSidebar();
-          return false;
-        });
       }
 
-      toggleRightSidebar() {
-        this.getRightSidebar().toggleClass('closed opened');
+      getHeader() {
+        return $__default['default'](this.options.headerSelector);
       }
 
-      showRightSidebar() {
-        this.getRightSidebar().removeClass('closed').addClass('opened');
-      }
-
-      hideRightSidebar() {
-        this.getRightSidebar().addClass('closed').removeClass('opened');
+      getFooter() {
+        return $__default['default'](this.options.footerSelector);
       }
 
       uuid4() {
@@ -224,6 +273,13 @@
 
         _initSubmenus() {
           this._element.find(Selector.NESTED_MENU).slideUp();
+
+          this._element.find(Selector.LI + Selector.OPEN).each((i, el) => {
+            let $li = $(el);
+            let $nestedMenu = $li.find('> ' + Selector.NESTED_MENU);
+            let $parentLi = $li.find('> ' + Selector.LINK).parents(Selector.LI).first();
+            this.expand($nestedMenu, $parentLi);
+          });
         } // Static
 
 
@@ -260,6 +316,7 @@
 
     exports.NestedMenu = NestedMenu;
     exports.PeskyUI = PeskyUI;
+    exports.Sidebar = Sidebar;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

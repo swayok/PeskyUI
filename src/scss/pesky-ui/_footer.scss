@@ -9,6 +9,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    position: relative;
+    z-index: 5;
 
     .footer-block {
         display: inline-block;

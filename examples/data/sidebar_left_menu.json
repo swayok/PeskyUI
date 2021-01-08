@@ -2,11 +2,13 @@
     {
         "icon_class": "mdi mdi-monitor-dashboard",
         "title": "Dashboard",
+        "class": "menu-open",
         "children": [
             {
                 "icon_class": "mdi mdi-circle-outline",
                 "url": "/pages/dashboard1.html",
-                "title": "Dashboard v1"
+                "title": "Dashboard v1",
+                "class": "active"
             },
             {
                 "icon_class": "mdi mdi-circle-outline",

@@ -7,50 +7,9 @@ body {
     overflow: hidden;
 }
 
-#flex-layout {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-
-    #content-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: stretch;
-        align-items: flex-start;
-        flex: 1;
-
-        #content {
-            width: 100%;
-            flex: 1;
-        }
-
-        > #content {
-            overflow: auto;
-        }
-
-        > #content-with-footer {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            flex: 1;
-            overflow: auto;
-
-            > #content {
-                overflow: visible;
-            }
-
-        }
-
-    }
-
-}
-
 @import 'vendor/simple-scrollbar';
 
+@import 'pesky-ui/layout';
 @import 'pesky-ui/helpers';
 @import 'pesky-ui/header';
 @import 'pesky-ui/footer';

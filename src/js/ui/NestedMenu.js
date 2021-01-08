@@ -117,6 +117,12 @@ const NestedMenu = (($) => {
 
         _initSubmenus() {
             this._element.find(Selector.NESTED_MENU).slideUp();
+            this._element.find(Selector.LI + Selector.OPEN).each((i, el) => {
+                let $li = $(el);
+                let $nestedMenu = $li.find('> ' + Selector.NESTED_MENU);
+                let $parentLi = $li.find('> ' + Selector.LINK).parents(Selector.LI).first();
+                this.expand($nestedMenu, $parentLi);
+            });
         }
 
         // Static

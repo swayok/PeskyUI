@@ -1,5 +1,4 @@
 #content-wrapper > header,
-#content-with-footer > header,
 #content > header {
     width: 100%;
     height: $header-height;
@@ -8,6 +7,8 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
+    position: relative;
+    z-index: 5;
 
     $header-item-height: $header-height - 1px;
 
@@ -113,4 +114,20 @@
         }
     }
 
+}
+
+@each $accent-color-name, $accent-color in $ui-accents-content-links {
+    body.accent-#{$accent-color-name} {
+        a {
+            color: $accent-color;
+
+            &:hover {
+                @if ($accent-color-name == 'white') {
+                    color: darken($accent-color, 10%);
+                } @else {
+                    color: lighten($accent-color, 10%);
+                }
+            }
+        }
+    }
 }

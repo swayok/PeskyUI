@@ -19,5 +19,24 @@ it = {
 </ul>
 
 <script type="application/javascript">
-    PeskyUI.initLeftSidebarMenu('#<%= menuId %>');
+    var $menu = $('#<%= menuId %>')
+    PeskyUI.initSidebarNestedMenu($menu);
+    var isMainContent = true;
+    $menu.on('click', 'a.nav-link[href]', function () {
+        var $link = $(this);
+        var url = $link.attr('href');
+        if (url === '#' || url.match(/javascript:\s*void\(0\)/) !== null) {
+            return; // Not a valid URL
+        }
+        $menu.find('.nav-item.active').removeClass('active');
+        $link.closest('.nav-item').addClass('active');
+        if (isMainContent) {
+            isMainContent = false;
+            PeskyUI.switchContent($.get('/pages/dashboard2.html'));
+        } else {
+            isMainContent = true;
+            PeskyUI.switchContent($.get('/pages/dashboard.html'));
+        }
+        return false;
+    });
 </script>

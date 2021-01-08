@@ -5,17 +5,17 @@ $(function () {
         //async: true,
     });
     $.when(
-            $.get('templates/layout.html'),
-            $.get('templates/sidebar_left.html'),
-            $.get('templates/sidebar_right.html'),
-            $.get('templates/content.html'),
-            $.get('templates/topbar.html'),
-            $.get('templates/footer.html'),
-            $.get('templates/sidebar_left_menu.html'),
-            $.get('templates/sidebar_left_menu_item.html'),
-            $.getJSON('data/sidebar_left_menu.json'),
-            $.get('templates/sidebar_right_ui_colors_picker.html'),
-            $.getJSON('data/ui_colors.json'),
+            $.get('/templates/layout.html'),
+            $.get('/templates/sidebar_left.html'),
+            $.get('/templates/sidebar_right.html'),
+            $.get('/pages/dashboard.html'),
+            $.get('/templates/topbar.html'),
+            $.get('/templates/footer.html'),
+            $.get('/templates/sidebar_left_menu.html'),
+            $.get('/templates/sidebar_left_menu_item.html'),
+            $.getJSON('/data/sidebar_left_menu.json'),
+            $.get('/templates/sidebar_right_ui_colors_picker.html'),
+            $.getJSON('/data/ui_colors.json'),
         )
         .done(async function (
             layout,
